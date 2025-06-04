@@ -129,6 +129,10 @@
     color: var(--foreground-inputs-odds);
 }
 
+.personalized-search-label {
+    opacity: 1;
+}
+
 .search-box i.fa-close {
     cursor: pointer;
     position: absolute;

@@ -1,28 +1,19 @@
 <div id="cupom" #cupom>
     <div class="conteudo">
-        <ng-container *ngFor="let item of aposta.itens">
+        <ng-container *ngIf="aposta.item">
             <div id="jogo-table">
                 <div class="jogo-horario">
                     <p style="margin: 0">{{aposta.horario | moment: 'DD/MM'}}</p>
                     <p style="margin: 0">{{aposta.horario | moment: 'HH:mm'}}</p>
                 </div>
                 <div class="item">
-                    <p style="margin: 0" class="campeonato">
-                        {{item.odd.desafio.categoria.nome}}
-                    </p>
                     <p class="nome">
-                        {{item.odd.desafio.nome}}
+                        {{aposta.item.name}}
                     </p>
                     <p class="cotacao">
-                        Resposta:
-                        {{item.odd_nome}}
-                        ({{item.cotacao}})
+                        ({{aposta.item.value}})
                     </p>
-                    <p class="jogo-resultado">
-                        <span *ngIf="item.removido; else resultado">cancelado</span>
-                        <ng-template #resultado>{{item.resultado}}</ng-template>
-                    </p>
-                </div>    
+                </div>
             </div>
         </ng-container>
         <div class="valores">

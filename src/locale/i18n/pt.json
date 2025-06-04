@@ -328,7 +328,8 @@
     "bet": {
         "sportsBetting": "Apostas esportivas",
         "casinoBetting": "Apostas cassino",
-        "incomeTaxOnPrize": "Imposto de renda sobre prêmio"
+        "incomeTaxOnPrize": "Imposto de renda sobre prêmio",
+        "onlyOneEvent": "Só é permitido apostar em 1 evento por vez."
     },
     "dias": {
         "ontem": "Ontem",

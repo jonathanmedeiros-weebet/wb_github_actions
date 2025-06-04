@@ -1,9 +1,10 @@
 .pre-bilhete {
-    width: 380px;
+    width: 270px;
     text-align: center;
     padding: 0;
     height: 100%;
-    background-color: transparent;
+    background-color: var(--sidebars);
+    color: var(--foreground-sidebars);
 }
 
 .bilhete-container {
@@ -11,100 +12,10 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-
-    overflow: scroll;
-}
-
-.campinho {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background-color: var(--sidebars);
-    color: var(--foreground-sidebars);
-}
-
-.campinho .campinho-toogle{
-    border-radius: 5px 5px 0 0;
-    font-size: 14px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.campinho .campinho-toogle i{
-    cursor: pointer;
-}
-
-.campinho .campinho-toogle .options {
-    display: flex;
-    gap: 10px;
-}
-
-
-.campinho .campinho-toogle a {
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.campinho .campinho-toogle a svg {
-    width: 26px;
-    height: 26px;
-    fill: var(--foreground-sidebars);
-    stroke: var(--foreground-sidebars);
-}
-
-.campinho .campinho-toogle a:hover, .campinho .campinho-toogle a.active {
-    color: var(--highlight);
-}
-
-.campinho .campinho-toogle a:hover svg, .campinho .campinho-toogle a.active svg {
-    fill: var(--highlight);
-    stroke: var(--highlight);
-}
-
-.no-login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    height: 215px;
-}
-
-.iframe-responsive {
-    max-width: 100%;
-    padding-top: 64%;
-    position: relative;
-    width: 100%;
-}
-
-.iframe-responsive.stream {
-    padding-top: 57%;
-}
-
-.iframe-responsive iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.blihete {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    /*margin: 5px 5px 5px 0;*/
-    /*border-radius: 5px;*/
-    background-color: var(--sidebars);
-    color: var(--foreground-sidebars);
 }
 
 .titulo {
-    padding: 10px 20px;
+    padding: 10px 0;
     color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
@@ -130,7 +41,7 @@
 }
 
 .acoes-bilhete a.disabled {
-    opacity: 0.5;
+    color: rgba(255, 255, 255, 0.5);
     pointer-events: none;
     cursor: not-allowed;
 }
@@ -152,22 +63,18 @@
     line-height: 14px;
 }
 
-.pre-bilhete-esportes {
+.pre-bilhete-desafio {
     flex-grow: 1;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .footer-bilhete {
     border-top: 2px solid rgba(241, 241, 241, .05);
 }
 
-.personalized-ticket-label {
-    opacity: 1;
-}
-
 .div-inputs {
     padding: 20px 15px 8px 15px;
-    /*border-radius: 0.25rem;*/
-    /*margin-bottom: 15px;*/
 }
 
 .informations {
@@ -178,23 +85,6 @@
     padding: 0 0 10px;
 }
 
-.submit-buttons {
-    padding: 0 15px 0 15px;
-}
-
-#aposta-deslogado .buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.live-odd {
-    display: inline-block;
-    background-color: red;
-    color: white;
-    padding: 5px;
-}
-
 .pre-bilhete .valor,
 .pre-bilhete .possivel-ganho,
 .pre-bilhete .cotacao {
@@ -202,57 +92,35 @@
     font-weight: bolder;
 }
 
-.div-jogos-selecionados {
+.div-desafios-selecionados {
     padding: 0 15px;
     margin: 0;
     overflow: scroll;
     overflow-x: hidden;
 }
 
-.div-jogos-selecionados h3 {
-    color: var(--foreground-highlight);
-}
-
-.div-jogos-selecionados h3 {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    font-size: 16px;
-}
-
-.div-jogos-selecionados h3::before {
-    content: '';
-    display: block;
-    height: 2px;
-    width: 20px;
-    background: var(--highlight);
-    top: 23px;
-    left: 108px;
-    position: relative;
-}
-
-.jogo-selecionado {
+.desafio-selecionado {
     padding: 15px 0;
     border-top: 1px dashed var(--highlight);
     text-align: left;
     position: relative;
 }
 
-.jogo-selecionado:first-of-type {
+.desafio-selecionado:first-of-type {
     border-top: none;
     padding-top: 0;
 }
 
-.jogo-selecionado > div:not(.remover-item) {
+.desafio-selecionado > div:not(.remover-item) {
     color: var(--foreground-sidebars);
 }
 
-.jogo-selecionado .horario,
-.jogo-selecionado .odd-bilhete .valor {
+.desafio-selecionado .horario,
+.desafio-selecionado .odd-bilhete .valor {
     color: var(--foreground-sidebars);
 }
 
-.jogo-selecionado .odd-bilhete {
+.desafio-selecionado .odd-bilhete {
     font-weight: bold;
     font-size: 1.1rem;
     padding: 2px 0;
@@ -262,7 +130,7 @@
     font-size: 0.9rem;
 }
 
-.div-jogos-selecionados .remover-item {
+.div-desafios-selecionados .remover-item {
     position: absolute;
     top: 0;
     right: 0;
@@ -280,13 +148,9 @@
     font-weight: bold;
 }
 
-#aposta-deslogado {
-    padding: 20px;
-}
-
 #aposta-deslogado .active {
-    color: #35cd96;
-    border-bottom: 2px solid #35cd96;
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
 }
 
 #aposta-deslogado .aposta-item {
@@ -294,8 +158,8 @@
     align-items: center;
     justify-content: space-between;
     margin: 15px 0;
+    padding: 5px 0 15px;
     border-bottom: 1px dashed var(--highlight);
-    padding: 5px 5px 20px;
 }
 
 #aposta-deslogado .aposta-item:last-child {
@@ -318,51 +182,12 @@
     font-size: 1rem;
 }
 
-.jogo-selecionado-inner {
+.desafio-selecionado-inner{
     padding-right: 20px;
-}
-
-.check-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.check-group input,
-.check-group label {
-    margin: 0;
-}
-
-.mensagem-mudanca {
-    box-sizing: border-box;
-    border-radius: 0.25rem;
-    background-color: var(--game);
-    margin-bottom: 15px;
-    padding: 15px;
-}
-
-#aceitar-mudancas {
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
-}
-
-.mudou {
-    border: 1px solid var(--highlight);
-}
-
-.alteracoes-odds, .utilizar-bonus {
-    text-align: left;
-    color: var(--foreground-sidebars);
 }
 
 input {
     font-size: 12px;
-}
-
-h4 {
-    font-size: 14px;
-    font-weight: 400;
-    margin: 15px 0;
 }
 
 .input-icon {
@@ -395,7 +220,6 @@ h4 {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
-    /*padding: 5px 0;*/
 }
 
 .valores button {
@@ -417,7 +241,6 @@ h4 {
 }
 
 .valores.fadeIn {
-    /*animation-delay: 500ms;*/
     animation-name: openValores;
     animation-duration: 500ms;
     animation-fill-mode: both;
@@ -428,10 +251,6 @@ h4 {
     animation-name: closeValores;
     animation-duration: 500ms;
     animation-fill-mode: both;
-}
-
-.modal-footer {
-    background-color: #0a0a0a;
 }
 
 .tabs {
@@ -445,22 +264,32 @@ h4 {
 
 .tabs .tab {
     border-radius: 4px;
-    padding: 10px;
     text-align: center;
     flex: 1;
     background: var(--game);
     color: var(--foreground-game);
     cursor: pointer;
     text-decoration: none;
-
+    height: 38px;
 }
 
-#aposta-deslogado .tabs .tab.active,
-.tabs .tab.active {
+#aposta-deslogado .tabs .active,
+.tabs .active {
     border: 0;
     background: var(--highlight);
     color: var(--foreground-highlight);
     border-radius: 4px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#aposta-deslogado {
+    padding: 20px;
 }
 
 @keyframes openValores {
@@ -482,16 +311,6 @@ h4 {
 }
 
 @media only screen and (max-width: 1024px) {
-
-    .iframe-responsive {
-        max-width: 100%;
-        padding-top: 64%;
-        position: relative;
-        width: 100%;
-        margin-bottom: 5px;
-        margin-top: 5px;
-    }
-
     section.pre-bilhete {
         height: 0 !important;
         overflow: hidden;
@@ -505,48 +324,13 @@ h4 {
         font-size: 18px;
     }
 
-    .valores button {
-        width: auto;
-    }
-
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;
         position: fixed !important;
     }
 
-    #aposta-deslogado {
-        background-color: var(--sidebars);
-        color: var(--foreground-sidebars);
-        display: flex;
-        flex-direction: column;
-    }
-
-    .lista-apostas {
-        flex: 1;
-    }
-
-    .tabs {
-        display: flex;
-        border: 0;
-        background: var(--game);
-        color: var(--foreground-game);
-        border-radius: 4px;
-    }
-
-    .tabs .tab {
-        padding: 10px;
-        text-align: center;
-        flex: 1;
-        background: var(--game);
-        color: var(--foreground-game);
-    }
-
-    #aposta-deslogado .tabs .tab.active,
-    .tabs .tab.active {
-        border: 0;
-        background: var(--highlight);
-        color: var(--foreground-highlight);
-        border-radius: 4px;
+    .valores button {
+        width: auto;
     }
 
     @keyframes openValores {
@@ -565,17 +349,5 @@ h4 {
         100% {
             height: 0;
         }
-    }
-}
-
-@media (min-width: 1025px) {
-    section.pre-bilhete {
-        /*position: absolute;*/
-        /*top: 46px;*/
-        /*right: 0;*/
-    }
-
-    .hide-desktop {
-        display: none;
     }
 }

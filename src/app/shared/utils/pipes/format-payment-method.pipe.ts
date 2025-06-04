@@ -35,6 +35,10 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'LisboaPAY';
             case 'paybrokers':
                 return 'Paybrokers';
+            case 'onz':
+                return 'Onz';
+            case 'voluti':
+                return 'Voluti';
 		}
 
         return "";
