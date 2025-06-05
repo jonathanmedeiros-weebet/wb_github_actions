@@ -5,15 +5,9 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 32px;
-    padding: 32px;
-
     height: 100%;
     position: fixed;
     overflow-x: hidden;
-
-    &__footer {
-        margin-top: 16px;
-    }
 
     &__header {
         display: flex;
@@ -27,47 +21,34 @@
         gap: 24px;
     }
 
-    &__icon {
-        &--left {
-            display: flex;
-            width: 48px;
-            height: 48px;
-            padding: 2px;
-            justify-content: center;
-            align-items: center;
-
-            border-radius: 70px;
-            border: 5px solid rgba(var(--highlight-rgb), .1);
-            background: rgba(var(--highlight-rgb), .3);
-        }
-        &--left i {
-            color: var(--highlight);
-            border: 2px solid var(--highlight);
-            padding: 10px;
-            height: 10px;
-            width: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50px;
-        }
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+        gap: 16px;
     }
 
-    &__btn-close {
+    &__body,
+    &__footer {
+        padding: 0 32px 32px 32px;
+    }
+
+    &__btn-logout {
         margin: 0;
         padding: 0;
         border: none;
         outline: none;
         cursor: pointer;
-        
-        background-color: var(--header);
-        color: var(--highlight);
-        height: 32px;
-        width: 32px;
+        width: 100%;
         display: flex;
+        height: 40px;
         justify-content: center;
         align-items: center;
-        font-size: 16px;
+        align-self: stretch;
+        border-radius: 4px;
+        background: var(--background);
+        color: var(--highlight);
+        border: 1px solid var(--highlight);
     }
 
     &__title {
@@ -92,7 +73,6 @@
         border: none;
         outline: none;
         cursor: pointer;
-
         width: 100%;
         display: flex;
         height: 40px;
@@ -103,31 +83,21 @@
         background: var(--highlight);
         color: var(--foreground-highlight);
     }
-}
 
-.verification-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    &__item {
+    &__banner {
+        width: 100%;
+        outline: none;
+        min-height: 175px;
         display: flex;
-        align-items: center;
-        gap: 6px;
-        color: rgba(var(--foreground-rgb), .7);
 
-        &--verified {
-            color: var(--highlight)
-        }
-
-        &--verified svg g path {
-            fill: var(--highlight);
+        &-mobile {
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
     }
-    &__item svg path {
-        fill: rgba(var(--foreground-rgb), .7);
-    }
-    
 }
 
 @media screen and (min-width: 667px) {
@@ -135,5 +105,13 @@
         height: auto;
         max-width: 500px;
         position: relative;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .account-verification-alert {
+        &__body, &__footer {
+            padding: 0 16px 16px 16px;
+        }
     }
 }

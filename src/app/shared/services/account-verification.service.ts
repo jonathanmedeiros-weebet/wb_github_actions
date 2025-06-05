@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AccountVerificationAlertComponent } from '../layout/modals/account-verification-alert/account-verification-alert.component';
+import { AccountVerificationAlertComponent } from '../layout/modals/account-verification/account-verification-alert/account-verification-alert.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../config';
 import { HttpClient } from '@angular/common/http';
@@ -9,8 +9,8 @@ import { HeadersService } from './utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
 import { VerifyEmailOrPhoneComponent } from '../layout/modals/verify-email-or-phone/verify-email-or-phone.component';
 import { ClienteService } from './clientes/cliente.service';
-import { VerificationTypes } from '../enums';
-import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verified-success/account-verified-success.component';
+import { AccountVerificationTypes } from '../enums';
+import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verification/account-verified-success/account-verified-success.component';
 import { TermsAcceptedComponent } from '../layout/modals/terms-accepted/terms-accepted.component';
 import { ParametrosLocaisService } from './parametros-locais.service';
 import { Router } from '@angular/router';
@@ -27,11 +27,12 @@ interface VerificationAccountResponse {
   verified_steps: VerifiedSteps;
   balance: string;
   new_customer: boolean;
-  terms_accepted: boolean
+  terms_accepted: boolean;
+  address_verified?: boolean
 }
 
 interface EmailOrPhoneVerificationStepParams {
-  type: VerificationTypes,
+  type: AccountVerificationTypes,
   value: string
 }
 
@@ -50,11 +51,13 @@ export const ACCOUNT_VERIFICATION_SESSION = 'av';
 })
 export class AccountVerificationService {
 
-  public newCustomer = new BehaviorSubject<boolean>(false);
-  public balance = new BehaviorSubject<number>(0);
-  public accountVerified = new BehaviorSubject<boolean>(false);
+  public newCustomer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public balance: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public accountVerified: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public verifiedSteps: BehaviorSubject<VerifiedSteps> = new BehaviorSubject<VerifiedSteps>(verifiedStepsDefault);
-  public terms_accepted = new BehaviorSubject<boolean>(false);
+  public terms_accepted: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public addressVerified: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public firstRequestCompleted: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private modalService: NgbModal,
@@ -67,43 +70,57 @@ export class AccountVerificationService {
   ) {
     let accountVerificationStorage: VerificationAccountResponse | string | null = sessionStorage.getItem(ACCOUNT_VERIFICATION_SESSION);
     if (Boolean(accountVerificationStorage)) {
+      this.firstRequestCompleted.next(true);
+
       accountVerificationStorage = JSON.parse(accountVerificationStorage) as VerificationAccountResponse;
       this.accountVerified.next(accountVerificationStorage.account_verified);
       this.verifiedSteps.next(accountVerificationStorage.verified_steps);
       this.newCustomer.next(accountVerificationStorage.new_customer);
       this.terms_accepted.next(accountVerificationStorage.terms_accepted);
       this.balance.next(parseFloat(accountVerificationStorage.balance));
+
+      if (Boolean(accountVerificationStorage?.address_verified)) {
+        this.addressVerified.next(accountVerificationStorage.address_verified);
+      }
     }
   }
+
+  public async getForceAccountVerificationDetail() {
+    if (!this.firstRequestCompleted.getValue()) {
+      await this.getAccountVerificationDetail().toPromise();
+    }
+
+    return {
+      termsAccepted: this.terms_accepted.getValue(),
+      addressVerified: this.addressVerified.getValue(),
+      accountVerified: this.accountVerified.getValue(),
+      verifiedSteps: this.verifiedSteps.getValue(),
+      newCustomer: this.newCustomer.getValue(),
+      balance: this.balance.getValue()
+    }
+  } 
 
   public getAccountVerificationDetail(): Observable<VerificationAccountResponse> {
     return this.http.get(`${config.LOKI_URL}/user/account-verification`, this.headerService.getRequestOptions(true))
       .pipe(
           map((response: VerificationAccountResponse) => {
             sessionStorage.setItem(ACCOUNT_VERIFICATION_SESSION, JSON.stringify(response));
+            
             this.accountVerified.next(response.account_verified);
             this.verifiedSteps.next(response.verified_steps);
             this.newCustomer.next(response.new_customer);
             this.balance.next(parseFloat(response.balance));
             this.terms_accepted.next(response.terms_accepted);
-            this.showMessageAccountVerified();
+
+            if (Boolean(response?.address_verified)) {
+              this.addressVerified.next(response.address_verified);
+            }
+            
+            this.firstRequestCompleted.next(true);
             return response;
           }),
           catchError(this.errorService.handleError)
       );
-  }
-
-  private showMessageAccountVerified() {
-    const accountVerifiedLocalStorage = JSON.parse(localStorage.getItem(ACCOUNT_VERIFIED));
-    const accountVerified = this.accountVerified.getValue();
-    if(
-      accountVerifiedLocalStorage != null
-      && !accountVerifiedLocalStorage
-      && accountVerified
-    ) {
-      this.openModalAccountVerifiedWithSuccess();
-    }
-    localStorage.setItem(ACCOUNT_VERIFIED, JSON.stringify(accountVerified))
   }
 
   public openModalAccountVerificationAlert(): NgbModalRef {
@@ -112,6 +129,8 @@ export class AccountVerificationService {
       centered: true,
       windowClass: 'modal-500 modal-account-verification',
       backdrop: 'static',
+      keyboard: false,
+      
     });
 
     return modalref;
@@ -153,20 +172,20 @@ export class AccountVerificationService {
     return modalref;
   }
 
-  public requestConfirmationCode(requestType: string = VerificationTypes.EMAIL) {
-    return requestType == VerificationTypes.EMAIL
+  public requestConfirmationCode(requestType: string = AccountVerificationTypes.EMAIL) {
+    return requestType == AccountVerificationTypes.EMAIL
       ? this.requestConfirmationCodePerEmail()
       : this.requestConfirmationCodePerPhone();
   }
 
-  public confirmateCode(requestType: string = VerificationTypes.EMAIL, code: string = '') {
-    return requestType == VerificationTypes.EMAIL
+  public confirmateCode(requestType: string = AccountVerificationTypes.EMAIL, code: string = '') {
+    return requestType == AccountVerificationTypes.EMAIL
       ? this.confirmateCodePerEmail(code)
       : this.confirmateCodePerPhone(code);
   }
 
   private requestConfirmationCodePerEmail() {
-    return this.http.get(`${config.BASE_URL}/clientes/request-email-confirmation-code`, this.headerService.getRequestOptions(true))
+    return this.http.get(`${config.BASE_URL}/clientes/request-email-confirmation-code?flow=register`, this.headerService.getRequestOptions(true))
       .pipe(
         map((response) => response),
         catchError(this.errorService.handleError)
