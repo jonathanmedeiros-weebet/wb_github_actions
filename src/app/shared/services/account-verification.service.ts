@@ -98,7 +98,7 @@ export class AccountVerificationService {
       newCustomer: this.newCustomer.getValue(),
       balance: this.balance.getValue()
     }
-  }
+  } 
 
   public getAccountVerificationDetail(): Observable<VerificationAccountResponse> {
     return this.http.get(`${config.LOKI_URL}/user/account-verification`, this.headerService.getRequestOptions(true))

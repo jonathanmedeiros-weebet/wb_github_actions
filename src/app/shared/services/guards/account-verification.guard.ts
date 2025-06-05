@@ -24,16 +24,14 @@ export class AccountVerificationGuard implements CanActivate {
     const nextUrl = state.url;
     const previousUrl = window.location.pathname;
 
-    if(this.authService.isLoggedIn() && this.authService.isCliente()) {
+    if (this.authService.isLoggedIn() && this.authService.isCliente()) {
       const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
-      const hasModalAccountVerificationOpen = document.getElementById('account-verification-alert');
-      const hasModalAddressVerifiedOpen = document.getElementById('account-verified-address');
 
-      if (hasModalTermsAcceptedOpen || hasModalAccountVerificationOpen || hasModalAddressVerifiedOpen) {
+      if (hasModalTermsAcceptedOpen) {
         return true;
       }
 
-      if(previousUrl == nextUrl) {
+      if (previousUrl == nextUrl) {
         this.router.navigate(['/']);
         this.defineGuardScope(nextUrl);
         return true;
@@ -57,7 +55,7 @@ export class AccountVerificationGuard implements CanActivate {
         '/clientes/saque'
       ];
       
-      if(!termExceptions.includes(nextUrl)) {
+      if (!termExceptions.includes(nextUrl)) {
         const termsResult = await this.openModalTerms();
         if (!termsResult) {
           return false;
