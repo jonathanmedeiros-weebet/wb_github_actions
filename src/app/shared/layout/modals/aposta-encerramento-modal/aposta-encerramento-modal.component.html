@@ -284,12 +284,12 @@
                     {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' |
                     translate) + (valorEncerramento | currency) }}
                 </button>
-                <div class="grp-buttons-encerramentos">
-                    <button style="margin-right: 10px;" class="btn sec btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
+                <div class="grp-buttons-encerramentos" *ngIf="itemSelecionado && !falhaSimulacao && !simulando">
+                    <button style="margin-right: 10px;" class="btn sec btn-outline-custom"
                         (click)="descartar()">
                         {{ 'geral.cancelar' | translate }}
                     </button>
-                    <button class="btn btn-custom" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
+                    <button class="btn btn-custom" *ngIf="!process"
                         (click)="confirmarEncerramento()">
                         {{ 'geral.confirmar' | translate }}
                     </button>
