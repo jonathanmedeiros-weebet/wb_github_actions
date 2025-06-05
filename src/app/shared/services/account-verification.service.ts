@@ -55,6 +55,7 @@ export class AccountVerificationService {
   public accountVerified = new BehaviorSubject<boolean>(false);
   public verifiedSteps: BehaviorSubject<VerifiedSteps> = new BehaviorSubject<VerifiedSteps>(verifiedStepsDefault);
   public terms_accepted = new BehaviorSubject<boolean>(false);
+   public firstRequestCompleted: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private modalService: NgbModal,
@@ -67,6 +68,8 @@ export class AccountVerificationService {
   ) {
     let accountVerificationStorage: VerificationAccountResponse | string | null = sessionStorage.getItem(ACCOUNT_VERIFICATION_SESSION);
     if (Boolean(accountVerificationStorage)) {
+      this.firstRequestCompleted.next(true);
+
       accountVerificationStorage = JSON.parse(accountVerificationStorage) as VerificationAccountResponse;
       this.accountVerified.next(accountVerificationStorage.account_verified);
       this.verifiedSteps.next(accountVerificationStorage.verified_steps);
@@ -75,6 +78,19 @@ export class AccountVerificationService {
       this.balance.next(parseFloat(accountVerificationStorage.balance));
     }
   }
+
+   public async getForceAccountVerificationDetail() {
+    if (!this.firstRequestCompleted.getValue()) {
+      await this.getAccountVerificationDetail().toPromise();
+    }
+    return {
+      termsAccepted: this.terms_accepted.getValue(),
+      accountVerified: this.accountVerified.getValue(),
+      verifiedSteps: this.verifiedSteps.getValue(),
+      newCustomer: this.newCustomer.getValue(),
+      balance: this.balance.getValue()
+    }
+   }  
 
   public getAccountVerificationDetail(): Observable<VerificationAccountResponse> {
     return this.http.get(`${config.LOKI_URL}/user/account-verification`, this.headerService.getRequestOptions(true))
@@ -86,6 +102,7 @@ export class AccountVerificationService {
             this.newCustomer.next(response.new_customer);
             this.balance.next(parseFloat(response.balance));
             this.terms_accepted.next(response.terms_accepted);
+            this.firstRequestCompleted.next(true);
             this.showMessageAccountVerified();
             return response;
           }),
