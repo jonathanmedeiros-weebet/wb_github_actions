@@ -910,6 +910,15 @@ gulp.task('pinplay.bet', function (done) {
     });
 });
 
+gulp.task('pinplay.net', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "pinplay.net",
+        banca: "PINPLAY",
+        styles: "",
+    });
+});
+
 gulp.task('3tbet.com.br', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
