@@ -1051,6 +1051,15 @@ gulp.task('ultrabetss.com', function (done) {
     });
 });
 
+gulp.task('ultrabetss.bet', function (done) {
+    tasks(done, {
+        server: "front5.weebet.tech",
+        host: "ultrabetss.bet",
+        banca: "ULTRA BETSS",
+        styles: "",
+    });
+});
+
 gulp.task('betbras.com', function (done) {
     tasks(done, {
         server: "front5.weebet.tech",
