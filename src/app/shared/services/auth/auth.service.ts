@@ -10,7 +10,6 @@ import { ParametrosLocaisService } from './../parametros-locais.service';
 import { config } from './../../config';
 
 import moment from 'moment';
-import { GeolocationService } from '../geolocation.service';
 import { Ga4Service, EventGa4Types } from '../ga4/ga4.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterV3ModalComponent } from '../../layout/modals/register-v3-modal/register-v3-modal.component';
@@ -37,7 +36,6 @@ export class AuthService {
         private errorService: ErrorService,
         private paramsService: ParametrosLocaisService,
         private router: Router,
-        private geolocation: GeolocationService,
         private ga4Service: Ga4Service,
         private modalService: NgbModal,
         private bannerService: BannerService

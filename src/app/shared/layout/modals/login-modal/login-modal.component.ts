@@ -183,34 +183,25 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     async submit() {
         this.btnDisabled = true;
-        let allowed = true;
+        let allowed: any = true;
         let msg = this.translate.instant('geral.locationPermission');
+        const restrictionStateBet = this.paramsLocais.getRestrictionStateBet();
+        let locationAllowed: any = true;
 
-        if (this.restrictionStateBet != 'Todos') {
-            this.lastLocationPermission = this.currentLocationPermission;
-            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+        if (this.paramsLocais.getEnableRequirementPermissionRetrieveLocation() || restrictionStateBet !== 'Todos') {
+            locationAllowed = await this.checkLocationPermission();
+        }
 
-            if (this.currentLocationPermission == 'granted') {
-                if (this.lastLocationPermission == 'denied') {
-                    allowed = false;
-                    location.reload();
-                } else if (!this.geolocationService.checkGeolocation()) {
-                    allowed = await this.geolocationService.saveLocalStorageLocation();
-                }
-            } else if (this.currentLocationPermission == 'denied') {
-                allowed = false;
-            } else if (this.currentLocationPermission == 'prompt') {
-                allowed = await this.geolocationService.saveLocalStorageLocation();
-            }
+        if (!locationAllowed) {
+            this.handleError(this.translate.instant('geral.locationPermission'));
+            return;
+        }
 
-            if (allowed) {
-                let localeState = localStorage.getItem('locale_state');
-
-                if (this.restrictionStateBet != localeState) {
-                    msg = this.translate.instant('geral.stateRestriction');
-                    allowed = false;
-                }
-            }
+        const isValidState = this.checkRestrictionState(restrictionStateBet);
+        
+        if (!isValidState) {
+            this.handleError(this.translate.instant('geral.stateRestriction'));
+            return;
         }
 
         if (allowed) {
@@ -508,5 +499,28 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     refreshPage(): void {
         window.location.reload();
     }
-}
 
+    async checkLocationPermission() {
+        this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+
+        if (this.currentLocationPermission === 'granted') {
+            return this.geolocationService.checkGeolocation() || await this.geolocationService.saveLocalStorageLocation();
+        }
+
+        if (this.currentLocationPermission === 'prompt') {
+            return await this.geolocationService.saveLocalStorageLocation();
+        }
+
+        return false;
+    }
+
+    private checkRestrictionState(restrictionState: string): boolean {
+        const localeState = localStorage.getItem('locale_state');
+
+        if (restrictionState !== 'Todos' && restrictionState !== localeState) {
+            return false;
+        }
+
+        return true;
+    }
+}

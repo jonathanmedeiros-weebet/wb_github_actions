@@ -262,6 +262,7 @@
         "field": "Campo",
         "or": "O",
         "geolocationError": "Por favor, verifique la configuración de ubicación de su navegador y intente nuevamente.",
+        "geolocationErrorWhenBettting": "Por favor, comprueba la configuración de localización de tu navegador e intenta apostar de nuevo.",
         "restricaoDeLocalizacao": "Este recurso está disponible solo para usuarios en Brasil.",
         "stateRestriction": "Esta función no está disponible en su estado.",
         "locationPermission": "Para utilizar esta función, debe habilitar la ubicación en su navegador.",

@@ -9,10 +9,9 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import {takeUntil} from 'rxjs/operators';
-import {BehaviorSubject, Subject} from 'rxjs';
-import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
-import { TranslateService } from '@ngx-translate/core';
+import {Subject} from 'rxjs';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
+import { GeolocationValidationService } from 'src/app/shared/services/geolocation-validation.service';
 
 @Component({
     selector: 'app-acumuladao-form',
@@ -38,7 +37,6 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     unsub$ = new Subject();
     headerHeight;
     mobileScreen;
-    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
         private router: Router,
@@ -54,8 +52,8 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         private cd: ChangeDetectorRef,
         private renderer: Renderer2,
         private el: ElementRef,
-        private geolocationService: GeolocationService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private geolocationValidationService: GeolocationValidationService
     ) {
         super();
     }
@@ -165,10 +163,17 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
             };
 
             if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
-                this.dados = {
-                    ...this.dados,
-                    geolocation: await this.geolocationService.getCurrentPosition()
+                const validation = await this.geolocationValidationService.validateGeolocationWhenBetting({
+                    enableRequirementGeolocation: true,
+                    restrictionState: this.paramsService.getRestrictionStateBet()
+                })
+
+                if (!validation.valid) {
+                    valid = false;
+                    msg = validation.msg;
                 }
+
+                this.dados['geolocation'] = validation.geolocation;
             }
 
             this.acumuladao.jogos.forEach(j => {
