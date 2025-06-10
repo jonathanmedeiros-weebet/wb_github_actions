@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountVerificationService, ClienteService, MessageService } from './../../../../services';
-import { VerificationTypes } from './../../../enums';
+import { AccountVerificationTypes } from './../../../enums';
 
 @Component({
   selector: 'app-verify-email-or-phone',
@@ -13,7 +13,7 @@ import { VerificationTypes } from './../../../enums';
 export class VerifyEmailOrPhoneComponent implements OnInit {
   @ViewChildren('codeInputs') codeInputs!: QueryList<ElementRef<HTMLInputElement>>;
 
-  private verificationType: string = VerificationTypes.EMAIL;
+  private verificationType: string = AccountVerificationTypes.EMAIL;
   private verificationValue: string = 'teste@teste.com';
   public confirmCodeForm: FormGroup;
   public showModalSuccess: boolean = false;
@@ -31,7 +31,7 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
   ) {}
 
   get verificationTypeIsEmail() {
-    return this.verificationType == VerificationTypes.EMAIL;
+    return this.verificationType == AccountVerificationTypes.EMAIL;
   }
 
   get title() {
@@ -101,7 +101,7 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
             .sendTwoFactorAuthCode(this.verificationType, this.customerId, this.verificationValue)
             .toPromise()
             .then(() => {
-                if (this.verificationType == VerificationTypes.EMAIL) {
+                if (this.verificationType == AccountVerificationTypes.EMAIL) {
                     this.messageService.success(this.translate.instant('senhas.codigoDeVerificacaoPorEmail'));
                 }
             })
@@ -113,7 +113,7 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
           .requestConfirmationCode(this.verificationType)
           .toPromise()
           .then(() => {
-            if (this.verificationType == VerificationTypes.EMAIL) {
+            if (this.verificationType == AccountVerificationTypes.EMAIL) {
               this.messageService.success(this.translate.instant('senhas.codigoDeVerificacaoPorEmail'));
             }
           })

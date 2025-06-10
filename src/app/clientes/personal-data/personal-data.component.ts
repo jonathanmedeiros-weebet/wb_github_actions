@@ -9,6 +9,8 @@ import { TermsComponent } from './terms/terms.component';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { AccountVerificationTypes } from 'src/app/shared/enums';
 
 @Component({
   selector: 'app-registration-validation',
@@ -73,6 +75,7 @@ export class PersonalDataComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private layoutService: LayoutService,
         private sidebarService: SidebarService,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
@@ -88,13 +91,30 @@ export class PersonalDataComponent implements OnInit {
             });
     }
 
+    private isOpenAccordion(accordionName: string) {
+        const accordions = {
+            [AccountVerificationTypes.DOCUMENT]: 'openDocumentAccordion',
+            [AccountVerificationTypes.EMAIL]: 'openEmailAccordion',
+            [AccountVerificationTypes.PHONE]: 'openPhoneAccordion',
+            [AccountVerificationTypes.ADDRESS]: 'openAddressAccordion',
+        }
+
+        const paramKey = accordions[accordionName] ?? '';
+        return Boolean(this.route.snapshot.queryParamMap.get(paramKey));
+    }
+
     private verifyAccountVerificationSteps() {
         this.accountVerificationService.verifiedSteps.subscribe(
-            (verifiedSteps) => {
+            async () => {
+
+                const { addressVerified, verifiedSteps } = await this.accountVerificationService.getForceAccountVerificationDetail();
+                verifiedSteps['address'] = addressVerified;
+
                 this.accordionItems = this.accordionItems.map((item: AccordionItem) => ({
                     ...item,
                     showVerificationStatus: verifiedSteps[item.key] != undefined,
-                    isVerified: Boolean(verifiedSteps[item.key])
+                    isVerified: Boolean(verifiedSteps[item.key]),
+                    isVisible: this.isOpenAccordion(item.key)
                 }))
             }
         )

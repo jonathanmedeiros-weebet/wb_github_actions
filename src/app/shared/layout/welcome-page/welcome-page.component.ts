@@ -4,7 +4,6 @@ import { ParametrosLocaisService } from './../../services/parametros-locais.serv
 import { config } from './../../../shared/config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
-import { AccountVerificationService } from 'src/app/services';
 
 @Component({
   selector: 'app-welcome-page',
@@ -12,14 +11,12 @@ import { AccountVerificationService } from 'src/app/services';
   styleUrls: ['./welcome-page.component.css']
 })
 
-export class WelcomePageComponent {
-    public accountVerified: boolean = false;
+export class WelcomePageComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private modalService: NgbModal,
-        private params: ParametrosLocaisService,
-        private accountVerificationService: AccountVerificationService
+        private params: ParametrosLocaisService
     ) {}
 
     get clientName() {
@@ -49,22 +46,10 @@ export class WelcomePageComponent {
         if (localStorage.getItem('permissionWelcomePage') !== null ) {
             localStorage.removeItem('permissionWelcomePage');
         }
-
-        this.accountVerificationService.accountVerified.subscribe((accountVerified) => {
-            this.accountVerified = accountVerified;
-        });
     }
 
     async depositeAgora() {
         if (window.innerWidth < 1025) {
-            if (!this.accountVerificationService.terms_accepted.getValue()) {
-                const termsResult = await this.accountVerificationService.openModalTermsPromise();
-                if (!termsResult) return;
-            }
-            
-            if (!this.accountVerified) {
-                this.accountVerificationService.openModalAccountVerificationAlert();
-            }
             this.modalService.open(DepositoComponent);
             this.router.navigate(['/']);
         } else {

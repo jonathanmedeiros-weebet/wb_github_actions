@@ -1,0 +1,25 @@
+:host {
+    width: 100%;
+}
+
+.account-verification-step-bar {
+    width: 100%;
+    height: auto;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &__item {
+        min-width: 10px;
+        flex: 1;
+        height: 4px;
+        background-color: rgba(var(--foreground-rgb), 0.2);
+        border-radius: 100px;
+        border: none;
+
+        &--verified {
+            background-color: var(--highlight);
+        }
+    }
+}

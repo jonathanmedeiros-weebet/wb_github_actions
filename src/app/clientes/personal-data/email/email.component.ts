@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountVerificationService, ClienteService, MessageService } from 'src/app/services';
-import { VerificationTypes } from 'src/app/shared/enums';
+import { AccountVerificationTypes } from 'src/app/shared/enums';
 
 export interface CustomerResponse {
     email: string;
@@ -79,7 +79,7 @@ export class EmailComponent implements OnInit {
 
     public handleVerification() {
         this.accountVerificationService.openModalPhoneOrEmailVerificationStep({
-            type: VerificationTypes.EMAIL,
+            type: AccountVerificationTypes.EMAIL,
             value: this.email
         });
     }

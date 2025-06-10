@@ -1,0 +1,23 @@
+<div id="account-verification-alert" class="account-verification-alert">
+    <div class="account-verification-alert__header">
+        <div class="account-verification-alert__banner" *ngIf="hasRegisterBanner">
+            <div
+                class="account-verification-alert__banner-mobile"
+                *ngIf="registerBannerMobile"
+                [ngStyle]="{'background-image': 'url(' + registerBannerMobile + ')' }"
+            ></div>
+        </div>
+    </div>
+    <div class="account-verification-alert__body">
+        <span class="account-verification-alert__title">{{ 'accountVerification.alertAccountVerificationTitle' | translate }}</span>
+        <span class="account-verification-alert__description" [innerHTML]="description"></span>
+    </div>
+    <div class="account-verification-alert__footer">
+        <button class="account-verification-alert__btn-to-verify" (click)="goToAccountVerification()">
+            {{'accountVerification.buttonValidate' | translate}}
+        </button>
+        <button class="account-verification-alert__btn-logout" (click)="handleLogout()">
+            {{'geral.logout_account' | translate}}
+        </button>
+    </div>
+</div>
