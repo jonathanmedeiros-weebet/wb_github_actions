@@ -1,0 +1,106 @@
+<div class="loading-listagem" *ngIf="showLoadingIndicator">
+    <div class="ssc-square banner"></div>
+
+    <div class="superodd-loading">
+        <div class="titulo">
+            <div class="ssc-square" style="height: 16px; width: 230px;"></div>
+        </div>
+        <div class="info">
+            <div class="header">
+                <div class="data">
+                   <div class="ssc-square" style="height: 9px; width: 50px; margin-bottom: 5px;"></div>
+                   <div class="ssc-square" style="height: 9px; width: 50px;"></div>
+                </div>
+                <div class="ssc-square" style="height: 12px; width: 300px;"></div>
+            </div>
+            <div class="opcoes">
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="superodd-loading">
+        <div class="titulo">
+            <div class="ssc-square" style="height: 16px; width: 230px;"></div>
+        </div>
+        <div class="info">
+            <div class="header">
+                <div class="data">
+                   <div class="ssc-square" style="height: 9px; width: 50px; margin-bottom: 5px;"></div>
+                   <div class="ssc-square" style="height: 9px; width: 50px;"></div>
+                </div>
+                <div class="ssc-square" style="height: 12px; width: 300px;"></div>
+            </div>
+            <div class="opcoes">
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="superodd-loading">
+        <div class="titulo">
+            <div class="ssc-square" style="height: 16px; width: 230px;"></div>
+        </div>
+        <div class="info">
+            <div class="header">
+                <div class="data">
+                   <div class="ssc-square" style="height: 9px; width: 50px; margin-bottom: 5px;"></div>
+                   <div class="ssc-square" style="height: 9px; width: 50px;"></div>
+                </div>
+                <div class="ssc-square" style="height: 12px; width: 300px;"></div>
+            </div>
+            <div class="opcoes">
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-list">
+    <app-banners pagina="superodd"></app-banners>
+    <div class="wrap-sticky">
+        <div class="sem-evento" *ngIf="superodds && !superodds.length">
+            {{'geral.nenhumEventoDisponivel' | translate}}!
+        </div>
+
+        <div *ngIf="!showLoadingIndicator">
+            <div class="categoria">
+                <ng-container *ngFor="let superodd of superodds">
+                    <div class="categoria-header">
+                        <span class="categoria-nome">{{superodd.name}}</span>
+                    </div>
+                    <div class="superodds">
+                        <div class="superodd">
+                            <div class="indentificacao">
+                                <div class="horario">
+                                    {{superodd.end_at | moment: 'DD/MM'}}
+                                    <br>
+                                    {{superodd.end_at | moment: 'HH:mm'}}
+                                </div>
+                                <div class="nome">
+                                    {{superodd.odd.name}}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div #scrollOdds class="odds" id="{{superodd.id}}">
+                                    <div class="odd" (click)="addCotacao(superodd, superodd.odd)">
+                                        <div class="inner-odd odd-enabled {{itensSelecionados[superodd.odd.id] ? 'selecionado' : ''}}">
+                                        <span class="nome" [ngStyle]="{'padding-right': '10px'}">
+                                        </span>
+                                            <span class="valor">
+                                            {{superodd.odd.value}}
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="css-hack"></div>
+    </div>
+    <app-footer></app-footer>
+</div>

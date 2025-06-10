@@ -164,6 +164,13 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
                 jogos: [],
             };
 
+            if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+                this.dados = {
+                    ...this.dados,
+                    geolocation: await this.geolocationService.getCurrentPosition()
+                }
+            }
+
             this.acumuladao.jogos.forEach(j => {
                 if ((j.time_a_resultado != null) && (j.time_b_resultado != null)) {
                     this.dados.jogos.push({

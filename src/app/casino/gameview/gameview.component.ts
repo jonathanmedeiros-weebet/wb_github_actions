@@ -153,15 +153,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         const handleWindowChange = () => {
             this.checkIfMobileOrDesktopOrTablet();
-            
+
             setTimeout(() => {
-                this.resolveGameScreen();
-                this.cd.detectChanges();
+                if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
+                    this.resolveGameScreen(true);
+                    this.cd.detectChanges();
+                }
             }, 200)
         };
 
         window.addEventListener("resize", handleWindowChange);
-        
+
         this.hideLiveChats();
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
@@ -258,6 +260,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
         );
     }
 
+    isLandscape(): boolean {
+        return window.innerWidth > window.innerHeight;
+    }
+
     checkIfMobileOrDesktopOrTablet() {
         this.isDesktop = false;
         this.isTablet = false;
@@ -269,8 +275,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if (
-            window.innerWidth > 482 
-            && (window.innerHeight > 320 
+            window.innerWidth > 482
+            && (window.innerHeight > 320
                 && window.innerHeight < window.innerWidth)
         ) {
             return this.isHorizontalMobile = true;
@@ -427,14 +433,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
     async loadGame() {
         if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
             await this.geolocationService.saveLocalStorageLocation();
-            
+
             if (!this.geolocationService.checkGeolocation()) {
                 this.handleError(this.translate.instant('geral.geolocationError'));
                 this.router.navigate(['/']);
                 return;
             }
         }
-        
+
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
 
         if (restrictionStateBet != 'Todos') {
@@ -468,7 +474,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.showModalBetLimit(response.bet_limit?.message);
                         this.router.navigate(['/']);
                     }
-                    
+
                     if (!response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
                         this.showModalBetLimit(response.bet_limit?.message, false);
                     }
@@ -480,11 +486,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameProviderName = response.gameFornecedorExibicao;
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
-                        if(this.gameFornecedor !== 'pgsoft') {
+                        // if(this.gameFornecedor !== 'pgsoft') {
                             this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-                        } else {
-                            this.htmlGame = response.htmlGame;
-                        }
+                        // } else {
+                            // this.htmlGame = response.htmlGame;
+                        // }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
                             this.gameName = response.gameName.split("- 9", 1) || "";
@@ -522,6 +528,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         switch (this.gameFornecedor) {
             case 'tomhorn':
                 this.closeSessionGameTomHorn();
+                this.location.back();
                 break;
             case 'parlaybay':
                 this.router.navigate(['pb']);
@@ -1154,14 +1161,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
-    private resolveGameScreen() {
+    private resolveGameScreen(disableHeaderForced = false) {
         if (this.isMobile && this.gameMode === 'REAL') {
             this.disableHeader();
+            if(disableHeaderForced) this.disableHeader();
             this.fixMobileHeader();
         }
-        
+
         if (this.isTablet && this.gameMode === 'REAL') {
             this.disableHeader();
+            if(disableHeaderForced) this.disableHeader();
             this.fixTabletHeader();
         }
 

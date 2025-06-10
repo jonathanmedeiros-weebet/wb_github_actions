@@ -345,7 +345,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             });
         }
 
-        this.jogosDestaque = jogosDestaques;
+        this.jogosDestaque = [...jogosDestaques];
         this.cd.detectChanges();
     }
 

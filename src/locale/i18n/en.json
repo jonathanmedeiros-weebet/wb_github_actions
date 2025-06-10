@@ -302,7 +302,12 @@
         "jogoResponsavel": "Responsible Gaming",
         "updateInformationPersonalData": "Update and manage your information, such as name, email and phone number, to ensure a personalized and secure experience in the system.",
         "change_email": "Change email",
-        "change_phone": "Change phone"
+        "change_phone": "Change phone",
+        "logout_account": "Log out",
+        "copy": "Copy",
+        "paste": "Paste",
+        "codeIn": "code in {{time}}s",
+        "resend": "Resend"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -319,7 +324,8 @@
     "bet": {
         "sportsBetting": "Sports betting",
         "casinoBetting": "Casino betting",
-        "incomeTaxOnPrize": "Income tax on prize"
+        "incomeTaxOnPrize": "Income tax on prize",
+        "onlyOneEvent": "Only one event can be bet on at a time."
     },
     "dias": {
         "ontem": "Yesterday",
@@ -703,7 +709,8 @@
         "next": "Next",
         "previous": "Previous",
         "save_change": "Save change",
-        "view": "View"
+        "view": "View",
+        "talkToSupport": "Talk to support"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -885,5 +892,33 @@
             "title": "Terms and Agreements",
             "description": "Terms of Use, Privacy Policy, and Terms of Service."
         }
+    },
+    "accountVerification": {
+        "alertEmailVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address",
+        "alertPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered phone number",
+        "alertEmailAndPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number",
+        "problemsWithCode": "Problems with the code?",
+        "playngByTheRules": "Playing by the rules",
+        "checkSpam": "Check your spam box.",
+        "checkEmailRegistered": "Make sure you have access to your registered e-mail.",
+        "checkPhoneSignal": "Check if your phone has signal",
+        "checkPhoneNumberRegistered": "Check if the registered number receives calls and messages",
+        "checkingLegistation": "In order to comply with the legislation, we need to carry out this validation stage.",
+        "securePlataform": "This measure guarantees more security for you on our platform!",
+        "validationWithSuccess": "Your {{verificationType}} has been successfully validated!",
+        "accessIsAlmostReadyMessage": "You're almost there! Just a few more details need to be validated before you can access the best platform.",
+        "almostDoneMessage": "Almost done! A few more details still need to be validated.",
+        "whyNeedValidate": "Why do I need to validate?",
+        "enterTheVerificationCode": "Enter the {{verificationType}} code",
+        "dontReceiveTheEmail": "Didn't receive the {{verificationType}}?",
+        "verificationCodeHasBeenSentToEmail": "An email with the verification code has been sent to {{email}}",
+        "verificationCodeHasBeenSentToPhone": "A text message with the verification code has been sent to {{phone}}",
+        "validatingCode": "Validating code",
+        "buttonValidate":"Validate",
+        "alertAccountVerificationTitle": "Your fun with guaranteed security",
+        "alertAccountVerificationDescription": "It is a trustworthy online betting platform committed to the security of its users!<br><br>To comply with current legislation, we need to verify some of the information you provided.",
+        "verifiedAddressTitle": "Update Your Address",
+        "verifiedAddressBody": "To place bets on our platform, you need to provide your address information. This ensures security and compliance with our policies.",
+        "verifiedAddressBtn": "Update Address"
     }
 }

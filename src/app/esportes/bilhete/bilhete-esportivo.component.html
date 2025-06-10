@@ -105,7 +105,7 @@
                             <div class="input-md">
                                 <input type="text" id="nomeApostador" formControlName="apostador"
                                     [ngClass]="applyCssInputError('apostador')"
-                                    class="form-control inverted-out" placeholder=" ">
+                                    class="form-control inverted-out personalized-ticket-label" placeholder=" ">
                                 <label for="nomeApostador">{{'bilhete.nomeDoApostador' | translate}}</label>
 
                             </div>
@@ -116,7 +116,7 @@
                                 <i>R$</i>
                                 <input type="number" formControlName="valor" [min]="apostaMinima"
                                     [max]="apostaMaximo" (focusin)="setFocoValor(true)" (focusout)="setFocoValor(false)"
-                                    [ngClass]="applyCssInputError('valor')" class="form-control inverted-out"
+                                    [ngClass]="applyCssInputError('valor')" class="form-control inverted-out personalized-ticket-label"
                                     placeholder="Valor">
                             </div>
                             <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>

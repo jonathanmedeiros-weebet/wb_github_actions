@@ -16,7 +16,8 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     @Input() icon = '';
     @Input() displayLabel = true;
     @Input() isHome = false;
-    @Input() games = [];
+    @Input("games") gamesIds = [];
+    @Input() highlightedGames = [];
     @Output() maisCotacoesDestaque = new EventEmitter();
     @Output() hasFeaturedMatches = new EventEmitter<boolean>();
     jogosDestaque = [];
@@ -69,6 +70,13 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
             this.widthCard = 300;
         }
 
+        if (
+            (!this.gamesIds || this.gamesIds.length <= 0)
+            && (this.highlightedGames && this.highlightedGames.length > 0)
+        ) {
+            this.gamesIds = this.highlightedGames.map(jogo => jogo.event_id + '');
+        }
+
         this.getGames();
     }
 
@@ -81,7 +89,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     }
 
     getGames() {
-        this.jogoService.getGamesById(this.games)
+        this.jogoService.getGamesById(this.gamesIds)
             .subscribe(jogos => {
                 this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
 
