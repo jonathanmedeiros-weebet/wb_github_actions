@@ -200,7 +200,8 @@
     "betvem.io": "gulp betvem.io",
     "apostecerto.io": "gulp apostecerto.io",
     "brasavip.bet": "gulp brasavip.bet",
-    "fadadopirao.bet": "gulp fadadopirao.bet"
+    "fadadopirao.bet": "gulp fadadopirao.bet",
+    "apuesterapido.com": "gulp apuesterapido.com"
   },
   "private": true,
   "dependencies": {

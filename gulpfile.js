@@ -1884,3 +1884,12 @@ gulp.task('fadadopirao.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apuesterapido.com', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "apuesterapido.com",
+        banca: "APUESTE RAPIDO",
+        styles: "",
+    });
+});
