@@ -31,9 +31,14 @@ export class AccountVerificationGuard implements CanActivate {
         return true;
       }
 
-      if (previousUrl == nextUrl) {
-        this.router.navigate(['/']);
-        this.defineGuardScope(nextUrl);
+      if (previousUrl === nextUrl) {
+        const isContinue = await this.defineGuardScope(nextUrl);
+
+        if (!isContinue) {
+          this.authService.logout();
+          this.router.navigateByUrl('/login');
+          return false;
+        }
         return true;
       } else {
         const isContinue = await this.defineGuardScope(nextUrl);
