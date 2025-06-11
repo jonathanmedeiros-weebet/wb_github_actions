@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { AccountVerificationService } from '../account-verification.service';
 import { AuthService } from '../auth/auth.service';
 import { ModalControllerService } from '../modal-controller.service';
+import { ParametrosLocaisService } from '../parametros-locais.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,17 @@ export class AccountVerificationGuard implements CanActivate {
     private accountVerificationService: AccountVerificationService,
     private modalControllerService: ModalControllerService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private paramLocais: ParametrosLocaisService
   ) {}
+
+  homePageUrl = {
+    'home': '/casino',
+    'esporte': '/esportes/futebol',
+    'cassino': '/casino',
+    'cassino_ao_vivo': '/live-casino',
+    'rifa': '/rifas/wall',
+  }
 
   async canActivate(
     next: ActivatedRouteSnapshot,
@@ -23,6 +33,7 @@ export class AccountVerificationGuard implements CanActivate {
     void next;
     const nextUrl = state.url;
     const previousUrl = window.location.pathname;
+    const homePage = this.paramLocais.getOpcoes().pagina_inicial;
 
     if (this.authService.isLoggedIn() && this.authService.isCliente()) {
       const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
@@ -32,14 +43,15 @@ export class AccountVerificationGuard implements CanActivate {
       }
 
       if (previousUrl === nextUrl) {
-        const isContinue = await this.defineGuardScope(nextUrl);
+        this.defineGuardScope(nextUrl);
 
-        if (!isContinue) {
-          this.authService.logout();
-          this.router.navigateByUrl('/login');
-          return false;
+        if (this.homePageUrl[homePage] == nextUrl) {
+          return true;
         }
+
+        this.router.navigate(['/']);
         return true;
+
       } else {
         const isContinue = await this.defineGuardScope(nextUrl);
         return isContinue;
