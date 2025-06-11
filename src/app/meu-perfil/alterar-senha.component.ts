@@ -162,8 +162,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.legitimuzService.curCustomerIsVerified
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(curCustomerIsVerified => {
-                        if(curCustomerIsVerified == null) return;
-
                         this.verifiedIdentity = curCustomerIsVerified;
                         if (this.verifiedIdentity) {
                             this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
@@ -291,7 +289,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 codigo: this.codigoMultifator
             }
         }
-
         if (this.isCliente) {
             this.clienteService.alterarSenha(values)
                 .pipe(takeUntil(this.unsub$))
@@ -333,33 +330,37 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     private validacaoMultifator() {
         this.loading = true;
-
-        const modalref = this.modalService.open(
-            MultifactorConfirmationModalComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
-                centered: true,
-                backdrop: 'static'
-            });
-
-        modalref.componentInstance.senha = this.form.get('senha_atual').value;
-        modalref.result.then(
-            (result) => {
-                this.tokenMultifator = result.token;
-                this.codigoMultifator = result.codigo;
-
-                if (result.checked) {
-                    return this.submit();
-                }
+        this.auth.requestEmailMultifator(this.form.get('senha_atual').value)
+            .subscribe(response => {
+                this.tokenMultifator = response.token;
                 this.loading = false;
-            },
-            (dismissReason) => {
-                this.loading = false;
-                if (dismissReason === 'success') {
-                    window.location.reload();
-                }
-            }
-        );
+                const modalref = this.modalService.open(
+                    MultifactorConfirmationModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        windowClass: 'modal-550 modal-h-350',
+                        centered: true,
+                        backdrop: 'static'
+                    });
+
+                modalref.componentInstance.tokenMultifator = this.tokenMultifator;
+                modalref.result.then(
+                    (result) => {
+                        this.tokenMultifator = result.token;
+                        this.codigoMultifator = result.codigo;
+
+                        if (result.checked) {
+                            return this.submit();
+                        }
+                        this.loading = false;
+                    },
+                    (dismissReason) => {
+                        this.loading = false;
+                        if (dismissReason === 'success') {
+                            window.location.reload();
+                        }
+                    }
+                );
+            })
     }
 
     checkPassword() {
