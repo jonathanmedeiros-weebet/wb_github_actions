@@ -1893,3 +1893,12 @@ gulp.task('apuesterapido.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('wingobet.bet', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "wingobet.bet",
+        banca: "WinGoBet",
+        styles: "",
+    });
+});
