@@ -910,6 +910,15 @@ gulp.task('pinplay.bet', function (done) {
     });
 });
 
+gulp.task('pinplay.net', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "pinplay.net",
+        banca: "PINPLAY",
+        styles: "",
+    });
+});
+
 gulp.task('3tbet.com.br', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
@@ -1046,6 +1055,15 @@ gulp.task('ultrabetss.com', function (done) {
     tasks(done, {
         server: "front5.weebet.tech",
         host: "ultrabetss.com",
+        banca: "ULTRA BETSS",
+        styles: "",
+    });
+});
+
+gulp.task('ultrabetss.bet', function (done) {
+    tasks(done, {
+        server: "front5.weebet.tech",
+        host: "ultrabetss.bet",
         banca: "ULTRA BETSS",
         styles: "",
     });
@@ -1863,6 +1881,24 @@ gulp.task('fadadopirao.bet', function (done) {
         server: "front1.weebet.tech",
         host: "fadadopirao.bet",
         banca: "FADA DO PIRÃO",
+        styles: "",
+    });
+});
+
+gulp.task('apuesterapido.com', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "apuesterapido.com",
+        banca: "APUESTE RAPIDO",
+        styles: "",
+    });
+});
+
+gulp.task('wingobet.bet', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "wingobet.bet",
+        banca: "WinGoBet",
         styles: "",
     });
 });
