@@ -151,4 +151,10 @@
     .datepicker-group i {
         right: 15px;
     }
+
+    .table tbody td {
+        background-color: var(--game);
+        color: var(--foreground-game);
+        border-bottom: 1px solid var(--foreground);
+    }
 }
