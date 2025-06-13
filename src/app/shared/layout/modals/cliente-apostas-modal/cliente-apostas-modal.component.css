@@ -251,4 +251,10 @@ h5 {
         color: var(--foreground-game);
         border-bottom: 1px solid var(--foreground);
     }
+
+    .acoes-aposta {
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
 }
