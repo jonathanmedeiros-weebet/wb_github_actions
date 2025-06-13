@@ -97,6 +97,7 @@
     "primoos.bet": "gulp primoos.bet",
     "realgol.net": "gulp realgol.net",
     "pinplay.bet": "gulp pinplay.bet",
+    "pinplay.net": "gulp pinplay.net",
     "3tbet.com.br": "gulp 3tbet.com.br",
     "megasports.bet": "gulp megasports.bet",
     "81br.net": "gulp 81br.net",
@@ -111,6 +112,7 @@
     "kwbet.net": "gulp kwbet.net",
     "apostenasorte.bet": "gulp apostenasorte.bet",
     "ultrabetss.com": "gulp ultrabetss.com",
+    "ultrabetss.bet": "gulp ultrabetss.bet",
     "betbras.com": "gulp betbras.com",
     "capitalbets.bet": "gulp capitalbets.bet",
     "betinvestidor.com": "gulp betinvestidor.com",
@@ -198,7 +200,9 @@
     "betvem.io": "gulp betvem.io",
     "apostecerto.io": "gulp apostecerto.io",
     "brasavip.bet": "gulp brasavip.bet",
-    "fadadopirao.bet": "gulp fadadopirao.bet"
+    "fadadopirao.bet": "gulp fadadopirao.bet",
+    "apuesterapido.com": "gulp apuesterapido.com",
+    "wingobet.bet": "gulp wingobet.bet"
   },
   "private": true,
   "dependencies": {
