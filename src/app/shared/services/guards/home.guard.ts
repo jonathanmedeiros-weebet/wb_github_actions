@@ -34,6 +34,7 @@ export class HomeGuard  {
         const state = navigation?.extras?.state;
 
         let navigateOptions = { queryParams: route.queryParams };
+        navigateOptions['applyAccountVerificationGuardInSyncMode'] = true
 
         if (state?.fromRegistration) {
             navigateOptions['skipLocationChange'] = true;

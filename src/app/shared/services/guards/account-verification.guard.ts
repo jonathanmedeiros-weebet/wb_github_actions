@@ -42,7 +42,10 @@ export class AccountVerificationGuard implements CanActivate {
         return true;
       }
 
-      if (previousUrl === nextUrl) {
+      const navigation: any = this.router.getCurrentNavigation();
+      const applyAccountVerificationGuardInSyncMode = navigation?.extras?.applyAccountVerificationGuardInSyncMode ?? false;
+
+      if (previousUrl === nextUrl || applyAccountVerificationGuardInSyncMode) {
         this.defineGuardScope(nextUrl);
 
         if (this.homePageUrl[homePage] == nextUrl) {
