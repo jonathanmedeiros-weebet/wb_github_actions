@@ -1047,7 +1047,8 @@ gulp.task('apostenasorte.bet', function (done) {
         server: "front2.weebet.tech",
         host: "apostenasorte.bet",
         banca: "APOSTE NA SORTE",
-        styles: ""
+        styles: "",
+        dominioTemp: "apostenasorte.net"
     });
 });
 
