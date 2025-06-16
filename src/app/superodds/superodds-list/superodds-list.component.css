@@ -35,6 +35,10 @@
     color: var(--foreground-game);
 }
 
+.inner-odd odd-enabled {
+    cursor: pointer;
+}
+
 .superodd:first-of-type {
     margin-top: 0;
 }
@@ -179,7 +183,6 @@
 
     .odds .odd .inner-odd {
         padding: 15px 20px;
-        flex-direction: row;
         justify-content: space-between;
         border-radius: 4px;
     }
