@@ -75,7 +75,7 @@ export class AccountVerificationOnboardingComponent implements OnInit, OnDestroy
 
   private verifyCurrentStep(verifiedSteps: any): AccountVerificationTypes {
     const pendingSteps = ORDERED_STEPS.filter(step => {
-      return !verifiedSteps[step];
+      return verifiedSteps[step] != undefined && !verifiedSteps[step];
     })
 
     let currentStep = AccountVerificationTypes.COMPLETED;
