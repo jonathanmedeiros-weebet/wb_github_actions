@@ -31,6 +31,7 @@ label {
     font-size: 10px;
     line-height: 38px;
     top: -7px !important;
+    height: 10px;
 }
 
 select {
@@ -52,6 +53,68 @@ select {
     align-items: center;
     gap: 20px;
 }
+
+.select-search,
+.ngx-select-dropdown {
+    height: 44px !important;
+}
+
+::ng-deep .ngx-dropdown-button:focus {
+    border: 1px solid var(--highlight) !important;
+}
+
+::ng-deep .available-item,
+::ng-deep .search-container,
+::ng-deep .ngx-dropdown-list-container,
+::ng-deep .ngx-dropdown-button,
+::ng-deep .available-items,
+::ng-deep .available-item {
+    background-color: var(--inputs-odds) !important;
+    background: var(--inputs-odds) !important;
+    color: #ffff !important;
+}
+
+::ng-deep.display-text {
+    padding-top: 12px !important;
+}
+
+::ng-deep input[name="search-text"] {
+    color: #ffff !important;
+}
+
+::ng-deep input[name="search-text"]:focus {
+    border-bottom: 1px solid var(--highlight) !important;
+}
+
+::ng-deep .ngx-dropdown-button {
+    height: 44px !important;
+}
+
+::ng-deep .ngx-dropdown-button:has(.up) {
+    border: 1px solid var(--highlight) !important;
+}
+
+::ng-deep .selected-item {
+    background-color: var(--highlight) !important;
+}
+
+::ng-deep .nsdicon-angle-down {
+    display: none !important;
+}
+
+::ng-deep .ngx-select__container {
+    position: relative;
+}
+
+::ng-deep .ngx-dropdown-list-container{
+    margin-top: 15px;
+}
+
+#accountType {
+    cursor: pointer;
+    height: 44px !important;
+}
+
 
 @media only screen and (max-width: 767px) {
     .form-group.text-right {

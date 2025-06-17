@@ -15,6 +15,17 @@ export class AddBankAccountModalComponent {
   public form: FormGroup;
   public banks: Array<Bank> = [];
   public bankSelected: number = 0;
+  loading = true;
+
+  config = {
+    placeholder: this.translate.instant('bankAccounts.OptionBank'),
+    search: true,
+    limitTo: 0,
+    height: "250px",
+    displayKey: "nome",
+    noResultsFound: 'Sem resultados',
+    searchPlaceholder:'Procurar'
+  }
 
   constructor(
       private fb: UntypedFormBuilder,
@@ -41,10 +52,10 @@ export class AddBankAccountModalComponent {
   }
 
   getBanks() {
-      this.utilsService.getBanks().subscribe(
-          banks => this.banks = banks,
-          error => this.handleError(error)
-      );
+    this.utilsService.getBanks().subscribe(
+        banks => {this.banks = banks; this.loading = false},
+        error => this.handleError(error)
+    );
   }
 
   handleError(mensagem: string) {
@@ -54,6 +65,7 @@ export class AddBankAccountModalComponent {
   onSubmit() {
       if (this.form.valid) {
           let values = this.form.value;
+          values.bank = this.form.get('bank').value.id;
 
           this.clienteService
               .registerBankAccount(values)

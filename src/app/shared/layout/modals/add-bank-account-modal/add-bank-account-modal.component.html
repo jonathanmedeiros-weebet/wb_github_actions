@@ -1,4 +1,4 @@
-<div id="default-content">
+<div id="default-content" *ngIf="!loading">
     <div class="mobile-modal-header" *ngIf="showHeader">
         <a (click)="toBack()" class="botao-esquerdo">
             <i class="fa fa-arrow-left"></i>
@@ -19,40 +19,38 @@
         <div class="content">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="form-group input-md placeholder-active">
-                    <select formControlName="bank" class="form-control inverted-out">
-                        <option value="">{{'bankAccounts.OptionBank' | translate}}</option>
-                        <option *ngFor="let bank of banks" [value]="bank.id"
-                            [selected]="bank.id === bankSelected">{{bank.nome}}</option>
-                    </select>
+                     <ngx-select-dropdown class="select-search" [instanceId]="'dropdown_1'" tabindex="0" [multiple]="false"
+                        formControlName="bank" [config]="config" [options]="banks">
+                    </ngx-select-dropdown>
                     <label for="bank">{{'bankAccounts.Bank' | translate}}</label>
                     <app-error-msg [control]="form.get('bank')"></app-error-msg>
                 </div>
 
                 <div class="form-group input-md">
-                    <input type="text" formControlName="agencyNumber" class="form-control inverted-out" maxlength="10" required pattern="^\S*$">
-                    <label class="label">{{'bankAccounts.AgencyNumber' | translate}}</label>
+                    <input type="text" id="agencyNumber" formControlName="agencyNumber" class="form-control inverted-out" maxlength="10" required pattern="^\S*$">
+                    <label for="agencyNumber" class="label">{{'bankAccounts.AgencyNumber' | translate}}</label>
                     <app-error-msg [control]="form.get('agencyNumber')"></app-error-msg>
                 </div>
         
                 <div class="form-group input-md">
-                    <input type="text" formControlName="accountNumber" class="form-control inverted-out" maxlength="15" required pattern="^\S*$">
-                    <label class="label">{{'bankAccounts.AccountNumber' | translate}}</label>
+                    <input type="text" id="accountNumber" formControlName="accountNumber" class="form-control inverted-out" maxlength="15" required pattern="^\S*$">
+                    <label class="label" for="accountNumber">{{'bankAccounts.AccountNumber' | translate}}</label>
                     <app-error-msg [control]="form.get('accountNumber')"></app-error-msg>
                 </div>
 
                 <div class="form-group input-md">
-                    <input type="text" formControlName="accountDigit" class="form-control inverted-out" maxlength="1" required pattern="^\S*$">
-                    <label class="label">{{'bankAccounts.AccountDigit' | translate}}</label>
+                    <input type="text" id="accountDigit" formControlName="accountDigit" class="form-control inverted-out" maxlength="1" required pattern="^\S*$">
+                    <label class="label" for="accountDigit">{{'bankAccounts.AccountDigit' | translate}}</label>
                     <app-error-msg [control]="form.get('accountDigit')"></app-error-msg>
                 </div>
 
                 <div class="form-group input-md placeholder-active">
-                    <select formControlName="accountType" class="form-control inverted-out">
+                    <select id="accountType" formControlName="accountType" class="form-control inverted-out">
                         <option value="">{{'bankAccounts.optionAccountType' | translate}}</option>
                         <option value="corrente">{{'bankAccounts.CurrentAccount' | translate}}</option>
                         <option value="poupanca">{{'bankAccounts.SavingsAccount' | translate}}</option>
                     </select>
-                    <label for="bank">{{'bankAccounts.AccountType' | translate}}</label>
+                    <label for="accountType">{{'bankAccounts.AccountType' | translate}}</label>
                     <app-error-msg [control]="form.get('accountType')"></app-error-msg>
                 </div>
                
