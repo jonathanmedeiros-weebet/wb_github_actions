@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -34,6 +34,7 @@ export class AddBankAccountModalComponent {
       private translate: TranslateService,
       private clienteService: ClienteService,
       public activeModal: NgbActiveModal,
+      private elRef: ElementRef
   ){}
 
   ngOnInit(): void {
@@ -90,5 +91,14 @@ export class AddBankAccountModalComponent {
 
   toBack(){
     this.activeModal.dismiss();
+  }
+
+  onDropdownClick() {
+    setTimeout(() => {
+      const searchInput: HTMLInputElement = this.elRef.nativeElement.querySelector('.ngx-dropdown-container input');
+      if (searchInput) {
+        searchInput.focus();
+      }
+    }, 100);
   }
 }

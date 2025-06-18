@@ -19,7 +19,7 @@
         <div class="content">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="form-group input-md placeholder-active">
-                     <ngx-select-dropdown class="select-search" [instanceId]="'dropdown_1'" tabindex="0" [multiple]="false"
+                     <ngx-select-dropdown (click)="onDropdownClick()" class="select-search" [instanceId]="'dropdown_1'" tabindex="0" [multiple]="false"
                         formControlName="bank" [config]="config" [options]="banks">
                     </ngx-select-dropdown>
                     <label for="bank">{{'bankAccounts.Bank' | translate}}</label>
