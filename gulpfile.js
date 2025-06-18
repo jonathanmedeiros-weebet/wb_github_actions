@@ -1903,3 +1903,14 @@ gulp.task('wingobet.bet', function (done) {
         styles: "",
     });
 });
+
+
+gulp.task('esporte.fit', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "esporte.fit",
+        banca: "ESPORTE FIT",
+        styles: "",
+    });
+});
+
