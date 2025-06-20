@@ -18,7 +18,7 @@ export class AccountVerificationGuard implements CanActivate {
   ) {}
 
   homePageUrl = {
-    'home': '/casino',
+    'home': '/',
     'esporte': '/esportes/futebol',
     'cassino': '/casino',
     'cassino_ao_vivo': '/live-casino',
