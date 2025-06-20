@@ -149,6 +149,15 @@ gulp.task('mjrsports.com', function (done) {
     });
 });
 
+gulp.task('mjrsports.bet', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "mjrsports.bet",
+        banca: "MJR SPORTS",
+        styles: ""
+    });
+});
+
 gulp.task('sertaobets.com', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
@@ -193,6 +202,15 @@ gulp.task('esportbets.biz', function (done) {
         styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
         aditional_styles: ".sem-evento{color: #fff;}  #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
             " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #14805e; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
+    });
+});
+
+gulp.task('esportbets.bet', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "esportbets.bet",
+        banca: "Esport Bets",
+        styles: ""
     });
 });
 
@@ -509,6 +527,15 @@ gulp.task('ingamesport.com', function (done) {
         server: "front2.weebet.tech",
         host: "ingamesport.com",
         banca: "INGAME SPORT",
+        styles: ""
+    });
+});
+
+gulp.task('ingamebet.com', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "ingamebet.com",
+        banca: "INGAME BET",
         styles: ""
     });
 });
@@ -1047,7 +1074,8 @@ gulp.task('apostenasorte.bet', function (done) {
         server: "front2.weebet.tech",
         host: "apostenasorte.bet",
         banca: "APOSTE NA SORTE",
-        styles: ""
+        styles: "",
+        dominioTemp: "apostenasorte.net"
     });
 });
 
@@ -1902,3 +1930,14 @@ gulp.task('wingobet.bet', function (done) {
         styles: "",
     });
 });
+
+
+gulp.task('esporte.fit', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "esporte.fit",
+        banca: "ESPORTE FIT",
+        styles: "",
+    });
+});
+
