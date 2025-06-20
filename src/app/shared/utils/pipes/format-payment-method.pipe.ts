@@ -41,6 +41,8 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'Voluti';
             case 'pagstar':
                 return 'Pagstar';
+            case 'zenet':
+                return 'Zenet';
 		}
 
         return "";
