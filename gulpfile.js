@@ -1931,7 +1931,6 @@ gulp.task('wingobet.bet', function (done) {
     });
 });
 
-
 gulp.task('esporte.fit', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
@@ -1941,3 +1940,12 @@ gulp.task('esporte.fit', function (done) {
     });
 });
 
+
+gulp.task('reidasorte.bet', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "reidasorte.bet",
+        banca: "REI DA SORTE",
+        styles: "",
+    });
+});
