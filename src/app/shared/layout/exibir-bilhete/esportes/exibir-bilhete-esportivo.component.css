@@ -112,10 +112,12 @@ hr {
 }
 .item .nome{
     margin: 1px;
+    color: var(--foreground-game);
 }
 .item .cotacao{
     margin: 1px;
     font-size: 12px;
+    color: var(--foreground-game);
 }
 .valores .aposta, 
 .valores .ganho,
