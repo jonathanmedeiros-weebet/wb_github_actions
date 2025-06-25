@@ -183,121 +183,87 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     async submit() {
         this.btnDisabled = true;
-        let allowed = true;
-        let msg = this.translate.instant('geral.locationPermission');
+        const formData = this.form.value;
 
-        if (this.restrictionStateBet != 'Todos') {
-            this.lastLocationPermission = this.currentLocationPermission;
-            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
-
-            if (this.currentLocationPermission == 'granted') {
-                if (this.lastLocationPermission == 'denied') {
-                    allowed = false;
-                    location.reload();
-                } else if (!this.geolocationService.checkGeolocation()) {
-                    allowed = await this.geolocationService.saveLocalStorageLocation();
-                }
-            } else if (this.currentLocationPermission == 'denied') {
-                allowed = false;
-            } else if (this.currentLocationPermission == 'prompt') {
-                allowed = await this.geolocationService.saveLocalStorageLocation();
-            }
-
-            if (allowed) {
-                let localeState = localStorage.getItem('locale_state');
-
-                if (this.restrictionStateBet != localeState) {
-                    msg = this.translate.instant('geral.stateRestriction');
-                    allowed = false;
-                }
-            }
+        if (this.loginMode === 'phone') {
+            formData.username = formData.username.replace(/\s+/g, '');
         }
 
-        if (allowed) {
-            const formData = this.form.value;
-
-            if (this.loginMode === 'phone') {
-                formData.username = formData.username.replace(/\s+/g, '');
-            }
-
-            this.auth.verificaDadosLogin(formData)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    async (res) => {
-                        if (
-                            Boolean(res) &&
-                            Boolean(res.results) &&
-                            Boolean(res.results.migracao)
-                        ) {
-                            this.authService.forgot({
-                                "email": formData.username
-                            }).subscribe(
-                                () => {
-                                    this.activeModal.dismiss();
-                                    this.modalService.open(MigrationInformationModalComponent);
-                                },
-                                error => {
-                                    this.handleError(error);
-                                }
-                            );
-                            return;
-                        }
-
-                        const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && (this.paramsLocais.getOpcoes().legitimuz_token || this.paramsLocais.getOpcoes().dockCheck_token));
-                        const faceMatchRegisterEnabled = this.paramsLocais.getOpcoes().faceMatchRegister;
-                        let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
-
-                        this.getUsuario();
-
-                        if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
-                            const holdUser = this.usuario;
-                            localStorage.removeItem('user');
-                            const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
-                            if (!faceMatchResult) {
-                                return;
+        this.auth.verificaDadosLogin(formData)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                async (res) => {
+                    if (
+                        Boolean(res) &&
+                        Boolean(res.results) &&
+                        Boolean(res.results.migracao)
+                    ) {
+                        this.authService.forgot({
+                            "email": formData.username
+                        }).subscribe(
+                            () => {
+                                this.activeModal.dismiss();
+                                this.modalService.open(MigrationInformationModalComponent);
+                            },
+                            error => {
+                                this.handleError(error);
                             }
-                            localStorage.setItem('user', JSON.stringify(holdUser));
-                        }
+                        );
+                        return;
+                    }
 
-                        if (
-                            Boolean(this.usuario) &&
-                            this.usuario.tipo_usuario === 'cliente' &&
-                            this.authDoisFatoresHabilitado &&
-                            (!Boolean(this.auth.getCookie(this.usuario.cookie)) || isLastAuthOlderThan7Days) &&
-                            this.usuario.login !== 'suporte@wee.bet'
-                        ) {
-                            this.abrirModalAuthDoisFatores();
+                    const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && (this.paramsLocais.getOpcoes().legitimuz_token || this.paramsLocais.getOpcoes().dockCheck_token));
+                    const faceMatchRegisterEnabled = this.paramsLocais.getOpcoes().faceMatchRegister;
+                    let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
+
+                    this.getUsuario();
+
+                    if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
+                        const holdUser = this.usuario;
+                        localStorage.removeItem('user');
+                        const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
+                        if (!faceMatchResult) {
                             return;
                         }
-
-                        this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                        this.handleLogin();
-                        if (this.paramsLocais.getOpcoes().enableForceChangePassword) {
-                            this.clienteService.checkPasswordExpirationDays(this.usuario.id)
-                        }
-                        
-                    },
-                    (error) => {
-                        this.btnDisabled = false;
-                        if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
-                            sessionStorage.setItem('user', JSON.stringify(error.user));
-                            this.openModalInactiveRegister();
-                        }
-
-                        if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
-                            this.openModalBlockPeerAttemps();
-                        }
-
-                        if (error.code === LoginErrorCode.ACTIVE_SESSION) {
-                            this.openModalSessionAlert();
-                            return
-                        }
-                        this.handleError(error.message);
+                        localStorage.setItem('user', JSON.stringify(holdUser));
                     }
-                );
-        } else {
-            this.handleError(msg);
-        }
+
+                    if (
+                        Boolean(this.usuario) &&
+                        this.usuario.tipo_usuario === 'cliente' &&
+                        this.authDoisFatoresHabilitado &&
+                        (!Boolean(this.auth.getCookie(this.usuario.cookie)) || isLastAuthOlderThan7Days) &&
+                        this.usuario.login !== 'suporte@wee.bet'
+                    ) {
+                        this.abrirModalAuthDoisFatores();
+                        return;
+                    }
+
+                    this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
+                    this.handleLogin();
+                    if (this.paramsLocais.getOpcoes().enableForceChangePassword) {
+                        this.clienteService.checkPasswordExpirationDays(this.usuario.id)
+                    }
+                    
+                },
+                (error) => {
+                    this.btnDisabled = false;
+                    if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
+                        sessionStorage.setItem('user', JSON.stringify(error.user));
+                        this.openModalInactiveRegister();
+                    }
+
+                    if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
+                        this.openModalBlockPeerAttemps();
+                    }
+
+                    if (error.code === LoginErrorCode.ACTIVE_SESSION) {
+                        this.openModalSessionAlert();
+                        return
+                    }
+                    this.handleError(error.message);
+                }
+            );
     }
 
     private openModalInactiveRegister() {
