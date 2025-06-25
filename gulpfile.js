@@ -520,10 +520,10 @@ gulp.task('ingamesport.com', function (done) {
     });
 });
 
-gulp.task('ingamebet.com', function (done) {
+gulp.task('ingamedasorte.com', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "ingamebet.com",
+        host: "ingamedasorte.com",
         banca: "INGAME BET",
         styles: ""
     });
