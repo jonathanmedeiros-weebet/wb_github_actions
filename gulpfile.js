@@ -464,17 +464,6 @@ gulp.task('slsports.bet', function (done) {
     });
 });
 
-gulp.task('betdez.net', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "betdez.net",
-        banca: "BetDez",
-        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: #232d40; --foreground-highlight: #232d40; --odds: #71b04c; --foreground-odds: #fff; --event-time: #232d40;--foreground-selected-odds:#fff;",
-        aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
-        scripts: "<script type='text/javascript' async src='https://d335luupugsy2.cloudfront.net/js/loader-scripts/fd31469f-c1a4-4d85-a1a3-765366f02ce0-loader.js' ></script>"
-    });
-});
-
 gulp.task('topbets.website', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
@@ -1220,15 +1209,6 @@ gulp.task('bullbets.com.br', function (done) {
     });
 });
 
-gulp.task('trevocassino.vip', function (done) {
-    tasks(done, {
-        server: "front3.weebet.tech",
-        host: "trevocassino.vip",
-        banca: "TREVO CASSINO",
-        styles: "",
-    });
-});
-
 gulp.task('bosscassino.bet', function (done) {
     tasks(done, {
         server: "front1.weebet.tech",
@@ -1416,18 +1396,6 @@ gulp.task('gli.wee.bet', function (done) {
         host: "gli.wee.bet",
         banca: "GLI - Sandbox",
         styles: ""
-    });
-});
-
-gulp.task('betinha.com', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "betinha.com",
-        banca: "betinha.com",
-        styles: "",
-        xtremepush_sdk: "0F-o4hhQ-HQJhCjSdyAHUcYutoxcrqYB",
-        scripts: "<script> window.$chatwoot.toggle(); </script>",
-        dominioTemp: "betinha.bet"
     });
 });
 
