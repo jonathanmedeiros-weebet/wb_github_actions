@@ -51,9 +51,9 @@ input.inverted-out:focus label{
 .field {
     border-width: 1px;
     border-style: solid;
-    border-color: var(--input-foreground);
-    background: var(--input);
-    color: var(--input-foreground);
+    border-color: var(--foreground-inputs-odds);
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     padding: 5px 10px;
     border-radius: 5px;
     opacity: 0.4;
@@ -68,15 +68,15 @@ input.inverted-out:focus label{
 }
 
 .input-md input {
-    opacity: 1;
+    opacity: .4;
 }
 
 .input-select {
     border-width: 1px;
     border-style: solid;
-    background: var(--inputs-odds);
-    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.5);
-    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    background: rgba(var(--inputs-odds-rgb), .4);
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.3);
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.3);
     padding: 0px 15px;
     border-radius: 5px;
     height: 48px;
@@ -91,7 +91,7 @@ input.inverted-out:focus label{
 .input-select select {
     background-color: transparent;
     border: 0;
-    color: var(--input-foreground);
+    color: var(--foreground-inputs-odds);
     padding: 0 0 10px;
     outline: none;
 }
