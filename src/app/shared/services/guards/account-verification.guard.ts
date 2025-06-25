@@ -19,7 +19,7 @@ export class AccountVerificationGuard implements CanActivate {
 
   homePageUrl = {
     'home': '/',
-    'esporte': '/esportes/futebol',
+    'esporte': this.paramLocais.getOpcoes().betby ? '/sports' : '/esportes/futebol',
     'cassino': '/casino',
     'cassino_ao_vivo': '/live-casino',
     'rifa': '/rifas/wall',
@@ -47,7 +47,7 @@ export class AccountVerificationGuard implements CanActivate {
 
       if (previousUrl === nextUrl || applyAccountVerificationGuardInSyncMode) {
         this.defineGuardScope(nextUrl);
-
+        
         if (this.homePageUrl[homePage] == nextUrl) {
           return true;
         }

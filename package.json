@@ -203,7 +203,8 @@
     "fadadopirao.bet": "gulp fadadopirao.bet",
     "apuesterapido.com": "gulp apuesterapido.com",
     "wingobet.bet": "gulp wingobet.bet",
-    "esporte.fit": "gulp esporte.fit"
+    "esporte.fit": "gulp esporte.fit",
+    "reidasorte.bet": "gulp reidasorte.bet"
   },
   "private": true,
   "dependencies": {
