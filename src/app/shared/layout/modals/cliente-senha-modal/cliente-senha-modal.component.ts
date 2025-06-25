@@ -125,7 +125,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
                     res => {
                         this.cliente = res;
                         this.dataUserCPF = String(this.cliente.cpf).replace(/[.\-]/g, '');
-                        if (this.faceMatchType == 'docCheck') {
+                        if (this.faceMatchEnabled && this.faceMatchType == 'docCheck') {
                             this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
                             this.docCheckService.init();
                         }

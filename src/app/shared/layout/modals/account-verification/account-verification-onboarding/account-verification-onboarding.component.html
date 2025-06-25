@@ -1,0 +1,27 @@
+<div class="account-verification-onboarding">
+    <div class="account-verification-onboarding__header">
+        <app-account-verification-step-bar [steps]="verifiedSteps"/>
+    </div>
+    <div class="account-verification-onboarding__body">
+       
+        <app-account-verification-email-or-phone-step
+            *ngIf="showPhoneStep"
+            verificationType="phone"
+            (onAdvance)="toAdvance()"
+        />
+        <app-account-verification-email-or-phone-step
+            *ngIf="showEmailStep"
+            verificationType="email"
+            (onAdvance)="toAdvance()"
+        />
+        <app-account-verification-document-step *ngIf="showDocumentStep" (onAdvance)="toAdvance()" />
+    </div>
+    <div class="account-verification-onboarding__footer">
+        <button
+            class="account-verification-onboarding__logout-button"
+            (click)="handleLogout()"
+        >
+            {{ 'geral.logout_account' | translate }}
+        </button>
+    </div>
+</div>
