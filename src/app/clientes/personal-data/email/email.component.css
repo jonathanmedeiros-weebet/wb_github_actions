@@ -12,9 +12,9 @@
 .field {
     border-width: 1px;
     border-style: solid;
-    border-color: var(--input-foreground);
-    background: var(--input);
-    color: var(--input-foreground);
+    border-color: var(--foreground-inputs-odds);
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     padding: 5px 10px;
     border-radius: 5px;
     width: 100%;
@@ -28,7 +28,7 @@
 }
 
 .field.editing {
-    opacity: 1;
+    opacity: .4;
 }
 
 .field .input {
@@ -40,7 +40,7 @@
 .field .input input {
     border: 0;
     background: transparent;
-    color: var(--input-foreground);
+    color: var(--foreground-inputs-odds);
     width: 100%;
 }
 
