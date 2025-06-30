@@ -1,0 +1,129 @@
+#cupom {
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#cupom img{
+    max-height: 90px;
+    max-width: 150px;
+}
+
+#cupom .ganhou{
+    color:green
+}
+
+#cupom .perdeu{
+    color:red
+}
+
+#cupom .cancelado{
+    text-decoration: line-through
+}
+
+#cupom .jogo-resultado{
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.acumuladao-nome{
+    font-weight: bolder;
+    border-radius: 5px;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px dashed black;
+}
+
+.numero{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top:15px;
+}
+
+.informacoes p{
+    margin: 1px;
+    font-size: 12px;
+}
+
+.item {
+    border-radius: 10px;
+    padding: 10px;
+    width: 85%;
+}
+
+#jogo-table {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    background-color: var(--game);
+    border-bottom: 2px dotted var(--bottom-bar);
+}
+
+.jogo-horario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 15%;
+}
+
+.item .horario{
+    margin: 1px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.item .jogo{
+    margin: 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.nome{
+    margin: 1px;
+    font-weight: bold;
+}
+
+.item .cotacao{
+    margin: 1px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.valores {
+    border-radius: 10px;
+    padding: 10px;
+    background: var(--game);
+    border-bottom: 2px dotted var(--bottom-bar);
+}
+
+.valores .total-desafios, .valores .aposta, .valores .ganho, .valores .cambista-paga, .valores #resultado-final {
+    text-align: left;
+    margin: 3px 1px 1px 10px;
+    font-size: 12px;
+}
+
+.rodape{
+    padding: 10px;
+    margin: 5px 1px 1px 1px;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: center;
+}
+
+#resultado-final {
+    margin: 5px 0 0;
+}
+
+#resultado-final .ganhou{
+    color: green;
+}
+
+#resultado-final .perdeu{
+    color: red;
+}

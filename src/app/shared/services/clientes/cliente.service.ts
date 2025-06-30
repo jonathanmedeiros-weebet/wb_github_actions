@@ -11,7 +11,8 @@ import { ParametrosLocaisService } from "../parametros-locais.service";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
 import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
-import { VerificationTypes } from '../../enums';
+import { AccountVerificationTypes } from '../../enums';
+import { AuthService } from '../auth/auth.service';
 
 declare var xtremepush: any;
 
@@ -23,13 +24,12 @@ export class ClienteService {
     private apiUrl = `${config.LOKI_URL}`;
 
     codigoFiliacaoCadastroTemp;
-    logadoSource;
-    logado;
-    clienteSource;
     modalRef: NgbModalRef;
 
     private twoFactorAuthVerifiedSource;
     twoFactorAuthVerified$;
+
+    public customerData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
     constructor(
         private http: HttpClient,
@@ -38,11 +38,8 @@ export class ClienteService {
         private paramsService: ParametrosLocaisService,
         private ga4Service: Ga4Service,
         private modalService: NgbModal,
+        private authService: AuthService
     ) {
-        this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
-        this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
-        this.logado = this.logadoSource.asObservable();
-
         this.twoFactorAuthVerifiedSource = new BehaviorSubject<boolean>(false);
         this.twoFactorAuthVerified$ = this.twoFactorAuthVerifiedSource.asObservable();
     }
@@ -70,7 +67,7 @@ export class ClienteService {
                         localStorage.setItem('user', JSON.stringify(dataUser.user));
                         this.setIsCliente(true);
                         localStorage.setItem('tokenCassino', dataUser.tokenCassino);
-                        this.logadoSource.next(true);
+                        this.authService.logadoSource.next(true);
                         if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', dataUser.user.id);
                             setTimeout(function() {
@@ -95,11 +92,17 @@ export class ClienteService {
             );
     }
 
-    getCliente(id) {
+    getCliente(id = null) {
+        if (!Boolean(id)) {
+            const user = this.getUser();
+            id = user.id;
+        } 
+
         return this.http.get(`${this.clienteUrl}/getCliente/${id}`, this.headers.getRequestOptions(true))
             .pipe(
                 map(
                     (response: any) => {
+                        this.customerData.next(response?.results)
                         return response.results;
                     }
                 ),
@@ -322,7 +325,7 @@ export class ClienteService {
     }
 
     setIsCliente(value: boolean) {
-        this.clienteSource.next(value);
+        this.authService.clienteSource.next(value);
     }
 
     isLoggedIn(): boolean {
@@ -426,7 +429,7 @@ export class ClienteService {
 
     public sendTwoFactorAuthCode(verificationMethod: string, customerId: number, recipient: string) {
         switch (verificationMethod) {
-            case VerificationTypes.PHONE:
+            case AccountVerificationTypes.PHONE:
                 return this.sendTwoFactorAuthCodeBySms(customerId, recipient);
         }
 
@@ -450,7 +453,7 @@ export class ClienteService {
 
     public confirmTwoFactorAuthCode(verificationMethod: string, customerId: number, recipient: string, code: string) {
         switch (verificationMethod) {
-            case VerificationTypes.PHONE:
+            case AccountVerificationTypes.PHONE:
                 return this.confirmTwoFactorAuthCodeBySms(customerId, recipient, code);
         }
 

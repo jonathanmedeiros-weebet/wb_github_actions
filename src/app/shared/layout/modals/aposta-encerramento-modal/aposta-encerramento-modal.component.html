@@ -91,7 +91,7 @@
                                 </p>
                             </div>
                         </td>
-                        <td class="item border-right">
+                        <td class="item border-right" id="td-result">
                             <div style="display: flex; justify-content: center;">
                                 <p class="jogo-resultado" style="float:right" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO <br />
@@ -171,11 +171,19 @@
             <div id="cupom">
                 <div class="conteudo">
                     <div class="item">
-                        <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                        <p ngbTooltip="{{item.campeonato_nome | uppercase}}"
+                        triggers="manual"
+                        #tooltipChampionship="ngbTooltip"
+                        (click)="tooltipChampionship.open()"
+                        class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                             <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                         </p>
-                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-height: 2em; margin-left: 18px">
-                            <div>
+                        <div class="teams-container">
+                            <div ngbTooltip="{{item.time_a_nome}} {{item.time_a_resultado}} x {{item.time_b_resultado}} {{item.time_b_nome}}"
+                            triggers="manual"
+                            #tooltipTeams="ngbTooltip"
+                            (click)="tooltipTeams.open()"
+                            id="teams-names">
                                 <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
                                     style="font-weight: bolder;">
                                     {{item.time_a_nome}}
@@ -183,7 +191,7 @@
                                     {{item.time_b_nome}}
                                 </p>
                             </div>
-                            <div>
+                            <div id="game-status">
                                 <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO
                                     <span [ngClass]="resultadoClass(item)">
@@ -271,19 +279,21 @@
     <div class="button-container">
         <ng-container>
             <div id="buttons-container">
-                <button id="encerrar-aposta" *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
+                <button id="encerrar-aposta" *ngIf="podeEncerrar(aposta) && !falhaSimulacao" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
                     [disabled]="simulando">
                     {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' |
                     translate) + (valorEncerramento | currency) }}
                 </button>
-                <button style="margin-right: 10px;" class="btn sec btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
-                    (click)="descartar()">
-                    {{ 'geral.cancelar' | translate }}
-                </button>
-                <button class="btn btn-custom" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
-                    (click)="confirmarEncerramento()">
-                    {{ 'geral.confirmar' | translate }}
-                </button>
+                <div class="grp-buttons-encerramentos" *ngIf="itemSelecionado && !falhaSimulacao && !simulando">
+                    <button style="margin-right: 10px;" class="btn sec btn-outline-custom"
+                        (click)="descartar()">
+                        {{ 'geral.cancelar' | translate }}
+                    </button>
+                    <button class="btn btn-custom" *ngIf="!process"
+                        (click)="confirmarEncerramento()">
+                        {{ 'geral.confirmar' | translate }}
+                    </button>
+                </div>
                 <button disabled class="btn btn-custom sec btn-block" *ngIf="!falhaSimulacao && encerrando;">
                     {{ 'compartilhar_aposta.encerrando' | translate }}
                     <i class="fa fa-spinner fa-spin"></i>

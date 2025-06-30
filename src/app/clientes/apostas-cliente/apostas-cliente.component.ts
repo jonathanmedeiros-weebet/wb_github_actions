@@ -14,6 +14,7 @@ import { config } from '../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
 import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
 import {Ga4Service, EventGa4Types} from '../../shared/services/ga4/ga4.service';
+import { SuperoddService } from 'src/app/shared/services/superodd.service';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -29,6 +30,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     acumuladaoHabilitado;
     desafioHabilitado;
     desafioNome: string;
+    superoddHabilitado;
+    superoddNome: string;
     casinoHabilitado;
     loteriaPopularHabilitada;
     rifaHabilitada;
@@ -92,7 +95,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private auth: AuthService,
         private translate: TranslateService,
         private paramsService: ParametrosLocaisService,
-        private ga4Service: Ga4Service
+        private ga4Service: Ga4Service,
+        private superoddService: SuperoddService,
     ) {
         super();
 
@@ -115,6 +119,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
         this.desafioNome = this.params.getOpcoes().desafio_nome;
+        this.superoddHabilitado = this.params.getOpcoes().superodd;
+        this.superoddNome = this.params.getOpcoes().superodd_nome;
         this.casinoHabilitado = this.params.getOpcoes().casino;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
         this.rifaHabilitada = this.params.getOpcoes().rifa;
@@ -152,6 +158,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             { id: 'cassino', label: this.paramsService.getCustomCasinoName(), habilitado: this.casinoHabilitado },
             { id: 'acumuladao', label: this.translate.instant('geral.acumuladao'), habilitado: this.acumuladaoHabilitado },
             { id: 'desafio', label: this.translate.instant(this.desafioNome), habilitado: this.desafioHabilitado },
+            { id: 'superodd', label: this.translate.instant(this.superoddNome), habilitado: this.superoddHabilitado },
             { id: 'loteria', label: this.translate.instant('geral.loteria'), habilitado: this.loteriasHabilitada },
             { id: 'loteria-popular', label: this.translate.instant('submenu.loteriaPopular'), habilitado: this.loteriaPopularHabilitada },
             { id: 'rifa', label: this.translate.instant('geral.rifa'), habilitado: this.rifaHabilitada }
@@ -201,6 +208,13 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                 break;
             case 'desafio':
                 this.desafioApostaService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
+                break;
+            case 'superodd':
+                this.superoddService.getBets(queryParams)
                     .subscribe(
                         apostas => this.handleResponse(apostas),
                         error => this.handleError(error)
@@ -259,15 +273,15 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.totais.premioBonus = 0;
 
         response.forEach(aposta => {
-           
+
             if (!aposta.cartao_aposta) {
                 if(aposta.rollover_status != 'cancelado'){
-                    if (!aposta?.is_bonus) { 
+                    if (!aposta?.is_bonus) {
                         this.totais.valor += parseFloat(aposta.valor);
                     } else {
                         this.totais.valorBonus += parseFloat(aposta.valor);
                     }
-                    
+
                     if (aposta.tipo === 'loteria') {
                         aposta.itens.forEach(lotteryItem => {
                             if (lotteryItem.status === 'ganhou') {
@@ -336,7 +350,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             return 'red';
         }
-        
+
     }
 
     onDateSelection(date: NgbDate, datepicker: any) {
@@ -396,7 +410,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         }
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
-        let typeWindow = aposta.tipo == 'esportes' ? 'modal-700' : '';
+        let typeWindow = aposta.tipo == 'esportes' ? 'modal-500' : '';
 
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(

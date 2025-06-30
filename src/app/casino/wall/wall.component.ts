@@ -43,29 +43,29 @@ export class WallComponent implements OnInit, AfterViewInit {
     public isCliente: boolean;
     public isLoggedIn: boolean;
 
-    public gameList: GameCasino[];
-    public gamesCassino: GameCasino[];
-    public gamesDestaque: GameCasino[];
-    public gamesRecommended = [];
+    public gameList: GameCasino[] = [];
+    public gamesCassino: GameCasino[] = [];
+    public gamesDestaque: GameCasino[] = [];
+    public gamesRecommended: GameCasino[] = [];
     private newGamesCassino: GameCasino[];
     public cassinoFornecedores: Fornecedor[] = [];
 
     public gamesSection: GameSection[] = [];
 
     // Cassino
-    public gamesSlot: GameCasino[];
-    public gamesCrash: GameCasino[];
-    public gamesRaspadinha: GameCasino[];
-    public gamesRoleta: GameCasino[];
-    public gamesMesa: GameCasino[];
-    public gamesBingo: GameCasino[];
-    public gamesLive: GameCasino[];
+    public gamesSlot: GameCasino[] = [];
+    public gamesCrash: GameCasino[] = [];
+    public gamesRaspadinha: GameCasino[] = [];
+    public gamesRoleta: GameCasino[] = [];
+    public gamesMesa: GameCasino[] = [];
+    public gamesBingo: GameCasino[] = [];
+    public gamesLive: GameCasino[] = [];
 
     // Cassino ao vivo
-    public gamesBlackjack: GameCasino[];
-    public gamesBaccarat: GameCasino[];
-    public gamesPoker: GameCasino[];
-    public gamesGameshow: GameCasino[];
+    public gamesBlackjack: GameCasino[] = [];
+    public gamesBaccarat: GameCasino[] = [];
+    public gamesPoker: GameCasino[] = [];
+    public gamesGameshow: GameCasino[] = [];
 
     public gameFornecedor: string;
     public categorySelected: string = 'cassino';
@@ -144,26 +144,24 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        const page = this.isCassinoPage ? 'casino' : 'live_casino'
-
         if (this.isVirtualPage) {
             this.sideBarService.changeItens({
                 contexto: 'virtuais',
                 dados: {}
             });
         } else {
+            const page = this.isCassinoPage ? 'casino' : 'live_casino';
+            this.widgetService.byPage(page).subscribe(response => {
+                if (response) {
+                    this.widgets = response.map((i) => ({ ...i, selector: 'w' + i.id}));
+                    this.getGamesCasino();
+                }
+            });
             this.sideBarService.changeItens({
                 contexto: 'casino',
                 dados: {}
             });
         }
-
-        this.widgetService.byPage(page).subscribe(response => {
-            if (response) {
-                this.widgets = response.map((i) => ({ ...i, selector: 'w' + i.id}));
-                this.getGamesCasino();
-            }
-        });
 
         this.navigationHistoryService.limparFiltro$.subscribe(() => {
             this.clearFilters();
@@ -491,36 +489,27 @@ export class WallComponent implements OnInit, AfterViewInit {
         if(!providerName && !categoryName) {
             this.gameList = gamesCassinoList
         }else{
-            this.gameList = gamesCassinoList.filter((game: any) => {
-                const gameProvider = game.fornecedor.toUpperCase();
-                const gameCategory = game.category.toUpperCase();
-
-                if(providerName && categoryName) {
-                    return (
-                        gameProvider.includes(providerName.toUpperCase()) &&
-                        gameCategory.includes(categoryName.toUpperCase())
-                    );
-                }
-
-                if(providerName){
-                    return gameProvider.includes(providerName.toUpperCase());
-                }
-
-                if(categoryName){
-                    return gameCategory.includes(categoryName.toUpperCase());
-                }
-            });
-
+            let gameList = [];
             if (categoryName == 'recommendedToYou') {
-                this.gameList = this.gamesRecommended;
+                gameList = this.gamesRecommended;
+            } else if (['cassino-live', 'cassino'].includes(categoryName)) {
+                gameList = [];
+            } else {
+                gameList = this.widgets.find(widget => widget.selector == categoryName)?.items ?? [];
             }
+
+            if(providerName) {
+                gameList = gamesCassinoList.filter(game => (game.fornecedor.toLowerCase()).includes(providerName.toLowerCase()))
+            }
+
+            this.gameList = gameList;
         }
 
         this.gameTitle = this.getGameTitle(category);
     }
 
     private getGameTitle(category: string) {
-        const gameTitles = {
+        let gameTitles = {
             // Cassino
             recommendedToYou: this.translate.instant('cassino.recommendedToYou'),
             slot: this.translate.instant('cassino.slot'),
@@ -541,6 +530,9 @@ export class WallComponent implements OnInit, AfterViewInit {
             poker: 'Poker',
             gameshow: 'Game Show'
         }
+
+        const casinoWidgets = this.widgetService.widgets.getValue().filter(widget => widget.type == 'casino');
+        casinoWidgets.forEach(({name, selector}) => gameTitles[selector] = name);
 
         const categoryTitle = gameTitles[category] ?? '';
         const providerTitle = this.gameFornecedor

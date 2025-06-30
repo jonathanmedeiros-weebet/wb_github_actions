@@ -64,8 +64,8 @@
                         <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                             <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                         </p>
-                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-height: 2em; margin-left: 18px">
-                            <div>
+                        <div class="teams-container">
+                            <div id="teams-names">
                                 <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
                                     style="font-weight: bolder;">
                                     {{item.time_a_nome}}
@@ -73,7 +73,7 @@
                                     {{item.time_b_nome}}
                                 </p>
                             </div>
-                            <div>
+                            <div id="game-status">
                                 <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO
                                     <span [ngClass]="resultadoClass(item)">
@@ -103,7 +103,7 @@
                                     <span style="float:right">{{item.cotacao}}<span class="" *ngIf="item.ao_vivo"> | AO VIVO</span></span>
                                 </div>
                             </span>
-                        </p>            
+                        </p>
                     </div>
                 </div>
             </div>

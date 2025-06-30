@@ -76,17 +76,17 @@
                                     <span class="info-cupom">
                                         {{item.categoria_nome}}:
                                     </span>
-                                    <span>
+                                    <span style="color: var(--foreground-game);">
                                         {{item.odd_nome}}
                                         ({{item.cotacao}})
                                     </span>
-                                    <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+                                    <span *ngIf="item.ao_vivo" style="color: var(--foreground-game);"> | AO VIVO</span>
                                 </p>
                             </div>
                         </td>
-                        <td class="item border-right">
+                        <td class="item border-right" id="td-result">
                             <div style="display: flex; justify-content: center;">
-                                <p class="jogo-resultado" style="float:right" *ngIf="item.encerrado && !item.removido; else resultado">
+                                <p class="jogo-resultado" style="float:right; color: var(--foreground-game);" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO <br />
                                     <span [ngClass]="getBetResultClasses(item)">
                                         <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
@@ -114,11 +114,19 @@
             <div id="cupom">
                 <div class="conteudo">
                     <div class="item">
-                        <p class="campeonato info-cupom">
+                        <p ngbTooltip="{{item.campeonato_nome | uppercase}}"
+                        triggers="manual"
+                        #tooltipChampionship="ngbTooltip"
+                        (click)="tooltipChampionship.open()"
+                        class="campeonato info-cupom">
                             <i [ngClass]="getIconBySport(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                         </p>
-                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-height: 2em; margin-left: 18px">
-                            <div>
+                        <div ngbTooltip="{{item.time_a_nome}} {{item.time_a_resultado}} x {{item.time_b_resultado}} {{item.time_b_nome}}"
+                        triggers="manual" 
+                        #tooltipTeams="ngbTooltip"
+                        (click)="tooltipTeams.open()"
+                        class="teams-container">
+                            <div id="teams-names">
                                 <p class="nome"
                                     style="font-weight: bolder;">
                                     {{item.time_a_nome}}
@@ -126,7 +134,7 @@
                                     {{item.time_b_nome}}
                                 </p>
                             </div>
-                            <div>
+                            <div id="game-status">
                                 <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO
                                     <span [ngClass]="getBetResultClasses(item)">

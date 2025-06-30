@@ -390,7 +390,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                     const termsResult = await this.accountVerificationService.openModalTermsPromise();
                     if (!termsResult) return;
                 }
-                
+
                 if (!this.accountVerificationService.accountVerified.getValue()) {
                     this.accountVerificationService.openModalAccountVerificationAlert();
                     return;
@@ -487,7 +487,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
-        let typeWindow = aposta.tipo == 'esportes' ? 'modal-700' : '';
+        let typeWindow = aposta.tipo == 'esportes' ? 'modal-500' : '';
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',

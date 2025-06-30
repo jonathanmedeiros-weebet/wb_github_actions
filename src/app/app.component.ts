@@ -7,7 +7,6 @@ import {
     ImagemInicialService,
     MessageService,
     ParametrosLocaisService,
-    UtilsService,
     ClienteService,
     SecurityService,
     BannerService,
@@ -29,7 +28,6 @@ import { NavigationHistoryService } from 'src/app/shared/services/navigation-his
 import { CronService } from './shared/services/timer.service';
 import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
 import { RegisterV3ModalComponent } from './shared/layout/modals/register-v3-modal/register-v3-modal.component';
-import { BettingShopService } from './shared/services/betting-shop.service';
 import { BettingShopConnectModalComponent } from './shared/layout/modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
 import { BettingShopSwitchModalComponent } from './shared/layout/modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 declare var xtremepush;
@@ -78,7 +76,6 @@ export class AppComponent implements OnInit {
         private paramLocais: ParametrosLocaisService,
         private translate: TranslateService,
         private idleDetectService: IdleDetectService,
-        private utilsService: UtilsService,
         private activityDetectService: ActivityDetectService,
         private clienteService: ClienteService,
         private navigationHistoryService: NavigationHistoryService,
@@ -87,7 +84,6 @@ export class AppComponent implements OnInit {
         private accountVerificationService: AccountVerificationService,
         private bannerService: BannerService,
         private geolocationService: GeolocationService,
-        private bettingShopService: BettingShopService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -210,27 +206,8 @@ export class AppComponent implements OnInit {
                     this.openModalTimeLimit();
                 });
 
-                localStorage.removeItem(ACCOUNT_VERIFIED)
                 this.accountVerificationService.getAccountVerificationDetail().toPromise();
-
-                this.navigationHistoryService
-                    .verifyIfCurrentRouteUseAccountVerificationGuard()
-                    .then((useAccountVerificationGuard) => {
-                        localStorage.removeItem(ACCOUNT_VERIFIED)
-
-                        if (useAccountVerificationGuard) {
-                            this.accountVerificationService.getAccountVerificationDetail().toPromise();
-                        } else {
-                            this.accountVerificationService
-                                .getAccountVerificationDetail()
-                                .toPromise()
-                                .then(({ terms_accepted: termsAccepted }) => {
-                                    if (!termsAccepted) {
-                                        this.accountVerificationService.openModalTermsAccepd();
-                                    }
-                                });
-                        }
-                    });
+                this.clienteService.getCliente().toPromise();
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
@@ -269,17 +246,7 @@ export class AppComponent implements OnInit {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
 
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
-            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
-
-            // this.auth.openRegisterV3Modal();
-            const modalRef = this.modalService.open(RegisterV3ModalComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: `modal-400 modal-cadastro-cliente`,
-                backdrop: 'static'
-            });
-            modalRef.componentInstance.hasRegisterBanner = false;
+            this.auth.openRegisterV3Modal(); 
         }
 
         if (this.router.url.includes('/login')) {

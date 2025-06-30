@@ -39,6 +39,8 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'Onz';
             case 'voluti':
                 return 'Voluti';
+            case 'pagstar':
+                return 'Pagstar';
 		}
 
         return "";

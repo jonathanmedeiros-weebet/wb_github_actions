@@ -1,0 +1,353 @@
+.pre-bilhete {
+    width: 270px;
+    text-align: center;
+    padding: 0;
+    height: 100%;
+    background-color: var(--sidebars);
+    color: var(--foreground-sidebars);
+}
+
+.bilhete-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.titulo {
+    padding: 10px 0;
+    color: var(--foreground-sidebars);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+
+.acoes-bilhete {
+    padding: 0 15px;
+    font-weight: 400;
+    font-size: 11px; /* ajuste fonte */
+    line-height: 14px;
+    text-align: left;
+    margin: 10px 0;
+}
+
+.acoes-bilhete a {
+    color: var(--foreground-sidebars);
+    height: 15px;
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.acoes-bilhete a.disabled {
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+#nenhum-jogo {
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    text-align: left;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 11px; /* ajuste fonte */
+    line-height: 12px;
+}
+
+#nenhum-jogo span {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.pre-bilhete-desafio {
+    flex-grow: 1;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.footer-bilhete {
+    border-top: 2px solid rgba(241, 241, 241, .05);
+}
+
+.div-inputs {
+    padding: 20px 15px 8px 15px;
+}
+
+.informations {
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 0 0 10px;
+}
+
+.pre-bilhete .valor,
+.pre-bilhete .possivel-ganho,
+.pre-bilhete .cotacao {
+    color: var(--foreground-sidebars);
+    font-weight: bolder;
+}
+
+.div-desafios-selecionados {
+    padding: 0 15px;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.desafio-selecionado {
+    padding: 15px 0;
+    border-top: 1px dashed var(--highlight);
+    text-align: left;
+    position: relative;
+}
+
+.desafio-selecionado:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.desafio-selecionado > div:not(.remover-item) {
+    color: var(--foreground-sidebars);
+}
+
+.desafio-selecionado .horario,
+.desafio-selecionado .odd-bilhete .valor {
+    color: var(--foreground-sidebars);
+}
+
+.desafio-selecionado .odd-bilhete {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px 0;
+}
+
+.jogo-nome, .mercado, .horario {
+    font-size: 0.9rem;
+}
+
+.div-desafios-selecionados .remover-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--highlight);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.success-msg {
+    font-size: 1.3rem;
+}
+
+.success-msg .codigo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#aposta-deslogado .active {
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+}
+
+#aposta-deslogado .aposta-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    padding: 5px 0 15px;
+    border-bottom: 1px dashed var(--highlight);
+}
+
+#aposta-deslogado .aposta-item:last-child {
+    border-bottom: 0;
+}
+
+#aposta-deslogado .remover {
+    color: var(--highlight);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#aposta-deslogado .valor,
+#aposta-deslogado .horario {
+    font-weight: bolder;
+}
+
+.cartao-form .form-row select,
+.cartao-form .form-row input {
+    font-size: 1rem;
+}
+
+.desafio-selecionado-inner{
+    padding-right: 20px;
+}
+
+input {
+    font-size: 12px;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon > i {
+    position: absolute;
+    display: block;
+    transform: translate(0, -50%);
+    top: 50%;
+    pointer-events: none;
+    width: 25px;
+    text-align: center;
+    font-style: normal;
+    margin-left: 5px;
+}
+
+.input-icon > input {
+    padding-left: 30px;
+}
+
+.hide {
+    display: none;
+}
+
+.valores {
+    margin: 5px 0;
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.valores button {
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 11px; /* ajuste fonte */
+    transition: 200ms;
+    height: 30px;
+    width: 55px;
+}
+
+.valores button:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.valores.fadeIn {
+    animation-name: openValores;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+}
+
+.valores.fadeOut {
+    animation-delay: 500ms;
+    animation-name: closeValores;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+}
+
+.tabs {
+    display: flex;
+    border: 0;
+    background: var(--game);
+    color: var(--foreground-game);
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.tabs .tab {
+    border-radius: 4px;
+    text-align: center;
+    flex: 1;
+    background: var(--game);
+    color: var(--foreground-game);
+    cursor: pointer;
+    text-decoration: none;
+    height: 38px;
+}
+
+#aposta-deslogado .tabs .active,
+.tabs .active {
+    border: 0;
+    background: var(--highlight);
+    color: var(--foreground-highlight);
+    border-radius: 4px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#aposta-deslogado {
+    padding: 20px;
+}
+
+@keyframes openValores {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 40px;
+    }
+}
+
+@keyframes closeValores {
+    0% {
+        height: 40px;
+    }
+    100% {
+        height: 0;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    section.pre-bilhete {
+        height: 0 !important;
+        overflow: hidden;
+    }
+
+    .titulo {
+        padding: 10px;
+        color: var(--foreground);
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+    }
+
+    section.pre-bilhete.pre-bilhete-mobile {
+        height: 100% !important;
+        position: fixed !important;
+    }
+
+    .valores button {
+        width: auto;
+    }
+
+    @keyframes openValores {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 50px;
+        }
+    }
+
+    @keyframes closeValores {
+        0% {
+            height: 50px;
+        }
+        100% {
+            height: 0;
+        }
+    }
+}
