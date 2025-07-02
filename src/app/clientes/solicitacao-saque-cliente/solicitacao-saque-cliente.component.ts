@@ -78,6 +78,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     verifiedIdentity = false;
     disapprovedIdentity = false;
     faceMatchWithdraw = false;
+    isAddressRequired = false;
 
     useBankAccount = false;
     bankAccounts = [];
@@ -192,6 +193,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 }
             );
 
+        this.isAddressRequired = this.paramsLocais.getOpcoes().address_required;
+
         this.clienteService.getCliente(user.id)
             .subscribe({
                 next: (res) => {
@@ -215,7 +218,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
                     this.onChavePixChange();
 
-                    if (!this.cliente.endereco) {
+                    if (!this.cliente.endereco && this.isAddressRequired) {
                         this.cadastroCompleto = false;
                         this.rotaCompletarCadastro = '/clientes/personal-data';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
@@ -257,7 +260,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
                     if(curCustomerIsVerified == null) return;
-                    
+
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
