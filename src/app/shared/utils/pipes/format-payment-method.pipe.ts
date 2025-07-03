@@ -43,8 +43,8 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'Pagstar';
             case 'creditag':
                 return 'Creditag';
-            case 'zenet':
-                return 'Zenet';
+            case 'zenetpay':
+                return 'Zenetpay';
 		}
 
         return "";
