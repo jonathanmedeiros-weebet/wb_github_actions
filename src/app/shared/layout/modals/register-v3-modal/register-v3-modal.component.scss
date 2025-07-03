@@ -645,6 +645,25 @@ a.link-termos-politica {
     fill: var(--header);
 }
 
+#google-signin-button {
+    margin-top: 30px;
+}
+
+.text-line {
+    height: 1px;
+    margin: 30px 0;
+    background-color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    text-align: center;
+}
+
+.text-line span {
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    background-color: var(--background);
+    position: relative;
+    top: -0.65em;
+    padding: 0 10px;
+}
+
 @media screen and (max-width: 320px) {
     .country-personalized{
         width: 33%;
