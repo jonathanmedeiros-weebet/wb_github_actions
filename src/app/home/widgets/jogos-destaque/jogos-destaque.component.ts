@@ -167,7 +167,10 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
             });
         }
 
-        this.jogosDestaque = jogosDestaques;
+        this.jogosDestaque = this.jogosDestaquesIds.map(id =>
+            jogosDestaques.find(j => j._id + '' === id)
+        ).filter(jogo => jogo);
+
         this.cd.detectChanges();
     }
 
