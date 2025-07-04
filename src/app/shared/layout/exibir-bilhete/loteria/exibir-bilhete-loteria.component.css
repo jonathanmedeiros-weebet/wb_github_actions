@@ -35,10 +35,11 @@
 .dezenas-info {
     flex-direction: row;
     font-weight: bold;
+    align-items: center;
 }
 
 .dezenas-title {
-    margin: 10px 10px 0 0;
+    margin: 0 10px 0 0;
 }
 
 .footer-cupom, .conteudo {
@@ -59,7 +60,8 @@
 }
 
 .dezenas-apostadas > div {
-    background: var(--bottom-bar);
+    background: var(--highlight);
+    color: var(--foreground-highlight);
     border-radius: 50%;
     width: 40px;
     height: 40px;

@@ -410,7 +410,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         }
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
-        let typeWindow = aposta.tipo == 'esportes' ? 'modal-700' : '';
+        let typeWindow = aposta.tipo == 'esportes' ? 'modal-500' : '';
 
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(

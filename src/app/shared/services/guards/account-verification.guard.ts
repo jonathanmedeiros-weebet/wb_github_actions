@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { AccountVerificationService } from '../account-verification.service';
 import { AuthService } from '../auth/auth.service';
 import { ModalControllerService } from '../modal-controller.service';
+import { ParametrosLocaisService } from '../parametros-locais.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,17 @@ export class AccountVerificationGuard implements CanActivate {
     private accountVerificationService: AccountVerificationService,
     private modalControllerService: ModalControllerService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private paramLocais: ParametrosLocaisService
   ) {}
+
+  homePageUrl = {
+    'home': '/',
+    'esporte': this.paramLocais.getOpcoes().betby ? '/sports' : '/esportes/futebol',
+    'cassino': '/casino',
+    'cassino_ao_vivo': '/live-casino',
+    'rifa': '/rifas/wall',
+  }
 
   async canActivate(
     next: ActivatedRouteSnapshot,
@@ -23,6 +33,7 @@ export class AccountVerificationGuard implements CanActivate {
     void next;
     const nextUrl = state.url;
     const previousUrl = window.location.pathname;
+    const homePage = this.paramLocais.getOpcoes().pagina_inicial;
 
     if (this.authService.isLoggedIn() && this.authService.isCliente()) {
       const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
@@ -31,10 +42,19 @@ export class AccountVerificationGuard implements CanActivate {
         return true;
       }
 
-      if (previousUrl == nextUrl) {
-        this.router.navigate(['/']);
+      const navigation: any = this.router.getCurrentNavigation();
+      const applyAccountVerificationGuardInSyncMode = navigation?.extras?.applyAccountVerificationGuardInSyncMode ?? false;
+
+      if (previousUrl === nextUrl || applyAccountVerificationGuardInSyncMode) {
         this.defineGuardScope(nextUrl);
+        
+        if (this.homePageUrl[homePage] == nextUrl) {
+          return true;
+        }
+
+        this.router.navigate(['/']);
         return true;
+
       } else {
         const isContinue = await this.defineGuardScope(nextUrl);
         return isContinue;

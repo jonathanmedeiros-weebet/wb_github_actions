@@ -149,6 +149,15 @@ gulp.task('mjrsports.com', function (done) {
     });
 });
 
+gulp.task('mjrsports.bet', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "mjrsports.bet",
+        banca: "MJR SPORTS",
+        styles: ""
+    });
+});
+
 gulp.task('sertaobets.com', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
@@ -193,6 +202,15 @@ gulp.task('esportbets.biz', function (done) {
         styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
         aditional_styles: ".sem-evento{color: #fff;}  #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
             " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #14805e; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
+    });
+});
+
+gulp.task('esportbets.bet', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "esportbets.bet",
+        banca: "Esport Bets",
+        styles: ""
     });
 });
 
@@ -446,17 +464,6 @@ gulp.task('slsports.bet', function (done) {
     });
 });
 
-gulp.task('betdez.net', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "betdez.net",
-        banca: "BetDez",
-        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: #232d40; --foreground-highlight: #232d40; --odds: #71b04c; --foreground-odds: #fff; --event-time: #232d40;--foreground-selected-odds:#fff;",
-        aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
-        scripts: "<script type='text/javascript' async src='https://d335luupugsy2.cloudfront.net/js/loader-scripts/fd31469f-c1a4-4d85-a1a3-765366f02ce0-loader.js' ></script>"
-    });
-});
-
 gulp.task('topbets.website', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
@@ -509,6 +516,15 @@ gulp.task('ingamesport.com', function (done) {
         server: "front2.weebet.tech",
         host: "ingamesport.com",
         banca: "INGAME SPORT",
+        styles: ""
+    });
+});
+
+gulp.task('ingamedasorte.com', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "ingamedasorte.com",
+        banca: "INGAME BET",
         styles: ""
     });
 });
@@ -910,6 +926,15 @@ gulp.task('pinplay.bet', function (done) {
     });
 });
 
+gulp.task('pinplay.net', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "pinplay.net",
+        banca: "PINPLAY",
+        styles: "",
+    });
+});
+
 gulp.task('3tbet.com.br', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
@@ -1038,7 +1063,8 @@ gulp.task('apostenasorte.bet', function (done) {
         server: "front2.weebet.tech",
         host: "apostenasorte.bet",
         banca: "APOSTE NA SORTE",
-        styles: ""
+        styles: "",
+        dominioTemp: "apostenasorte.net"
     });
 });
 
@@ -1046,6 +1072,15 @@ gulp.task('ultrabetss.com', function (done) {
     tasks(done, {
         server: "front5.weebet.tech",
         host: "ultrabetss.com",
+        banca: "ULTRA BETSS",
+        styles: "",
+    });
+});
+
+gulp.task('ultrabetss.bet', function (done) {
+    tasks(done, {
+        server: "front5.weebet.tech",
+        host: "ultrabetss.bet",
         banca: "ULTRA BETSS",
         styles: "",
     });
@@ -1170,15 +1205,6 @@ gulp.task('bullbets.com.br', function (done) {
         server: "front3.weebet.tech",
         host: "bullbets.com.br",
         banca: "BULL BETS",
-        styles: "",
-    });
-});
-
-gulp.task('trevocassino.vip', function (done) {
-    tasks(done, {
-        server: "front3.weebet.tech",
-        host: "trevocassino.vip",
-        banca: "TREVO CASSINO",
         styles: "",
     });
 });
@@ -1370,18 +1396,6 @@ gulp.task('gli.wee.bet', function (done) {
         host: "gli.wee.bet",
         banca: "GLI - Sandbox",
         styles: ""
-    });
-});
-
-gulp.task('betinha.com', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "betinha.com",
-        banca: "betinha.com",
-        styles: "",
-        xtremepush_sdk: "0F-o4hhQ-HQJhCjSdyAHUcYutoxcrqYB",
-        scripts: "<script> window.$chatwoot.toggle(); </script>",
-        dominioTemp: "betinha.bet"
     });
 });
 
@@ -1863,6 +1877,43 @@ gulp.task('fadadopirao.bet', function (done) {
         server: "front1.weebet.tech",
         host: "fadadopirao.bet",
         banca: "FADA DO PIRÃO",
+        styles: "",
+    });
+});
+
+gulp.task('apuesterapido.com', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "apuesterapido.com",
+        banca: "APUESTE RAPIDO",
+        styles: "",
+    });
+});
+
+gulp.task('wingobet.bet', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "wingobet.bet",
+        banca: "WinGoBet",
+        styles: "",
+    });
+});
+
+gulp.task('esporte.fit', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "esporte.fit",
+        banca: "ESPORTE FIT",
+        styles: "",
+    });
+});
+
+
+gulp.task('reidasorte.bet', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "reidasorte.bet",
+        banca: "REI DA SORTE",
         styles: "",
     });
 });

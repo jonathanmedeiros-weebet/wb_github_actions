@@ -410,17 +410,20 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.clientesService
             .cadastrarCliente(values)
             .subscribe(
-                (res) => {
+                async (res) => {
                     this.activeModal.dismiss();
                     localStorage.removeItem('codigoAfiliado');
-                    localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
 
                     if (Boolean(res.dataUser.promocao_primeiro_deposito_ativa)) {
                         localStorage.setItem('promocaoPrimeiroDepositoAtivo', res.dataUser.promocao_primeiro_deposito_ativa);
                     }
 
                     this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
-                    this.router.navigate(['/welcome']);
+
+                    await this.accountVerificationService
+                        .getAccountVerificationDetail()
+                        .toPromise()
+                        .then(() => location.reload());
 
                     if (this.errorMessage  && res.success) {
                         this.errorMessage  = '';
