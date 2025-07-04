@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
-import { LayoutService, MessageService, SidebarService } from 'src/app/services';
+import { LayoutService, MessageService, ParametrosLocaisService, SidebarService } from 'src/app/services';
 import { AccordionItem } from 'src/app/shared/interfaces/accordion-item';
 import { AddressComponent } from './address/address.component';
 import { DocumentComponent } from './document/document.component';
@@ -75,7 +75,8 @@ export class PersonalDataComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private layoutService: LayoutService,
         private sidebarService: SidebarService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private paramsLocais : ParametrosLocaisService
     ) {}
 
     ngOnInit(): void {
@@ -108,7 +109,9 @@ export class PersonalDataComponent implements OnInit {
             async () => {
 
                 const { addressVerified, verifiedSteps } = await this.accountVerificationService.getForceAccountVerificationDetail();
-                verifiedSteps['address'] = addressVerified;
+                if (this.paramsLocais.getOpcoes().address_required) {
+                    verifiedSteps['address'] = addressVerified;
+                }
 
                 this.accordionItems = this.accordionItems.map((item: AccordionItem) => ({
                     ...item,
