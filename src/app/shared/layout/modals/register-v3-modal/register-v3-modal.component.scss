@@ -190,7 +190,7 @@ button {
 
 .register-cancel-modal {
     width: 450px;
-    margin: 0 20px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     gap: 1px;
@@ -673,7 +673,7 @@ a.link-termos-politica {
         display: flex;
         flex-direction: row;
         gap: 0;
-        min-height: 480px;
+        min-height: 609px;
         height: auto;
     }
 
@@ -683,7 +683,7 @@ a.link-termos-politica {
     }
 
     .banner {
-        width: 300px;
+        width: 400px;
         height: auto;
 
         &__desktop {
