@@ -102,7 +102,11 @@ export class UtilsService {
     getBanks() {
         return this.http.get(`${this.utilsUrl}/getBanks`, this.headers.getRequestOptions())
             .pipe(
-                map((res: any) => res.results),
+                map((res: any) => 
+                    res.results
+                    .map((item: any) => ({ ...item, nome: item.nome.toUpperCase() }))
+                    .sort((a: any, b: any) => a.nome.localeCompare(b.nome))
+                ),
                 catchError(() => [])
             );
     }

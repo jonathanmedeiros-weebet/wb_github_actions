@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,6 +15,17 @@ export class AddBankAccountModalComponent {
   public form: FormGroup;
   public banks: Array<Bank> = [];
   public bankSelected: number = 0;
+  loading = true;
+
+  config = {
+    placeholder: this.translate.instant('bankAccounts.OptionBank'),
+    search: true,
+    limitTo: 0,
+    height: "250px",
+    displayKey: "nome",
+    noResultsFound: 'Sem resultados',
+    searchPlaceholder:'Procurar'
+  }
 
   constructor(
       private fb: UntypedFormBuilder,
@@ -23,6 +34,7 @@ export class AddBankAccountModalComponent {
       private translate: TranslateService,
       private clienteService: ClienteService,
       public activeModal: NgbActiveModal,
+      private elRef: ElementRef
   ){}
 
   ngOnInit(): void {
@@ -41,10 +53,10 @@ export class AddBankAccountModalComponent {
   }
 
   getBanks() {
-      this.utilsService.getBanks().subscribe(
-          banks => this.banks = banks,
-          error => this.handleError(error)
-      );
+    this.utilsService.getBanks().subscribe(
+        banks => {this.banks = banks; this.loading = false},
+        error => this.handleError(error)
+    );
   }
 
   handleError(mensagem: string) {
@@ -54,6 +66,7 @@ export class AddBankAccountModalComponent {
   onSubmit() {
       if (this.form.valid) {
           let values = this.form.value;
+          values.bank = this.form.get('bank').value.id;
 
           this.clienteService
               .registerBankAccount(values)
@@ -78,5 +91,14 @@ export class AddBankAccountModalComponent {
 
   toBack(){
     this.activeModal.dismiss();
+  }
+
+  onDropdownClick() {
+    setTimeout(() => {
+      const searchInput: HTMLInputElement = this.elRef.nativeElement.querySelector('.ngx-dropdown-container input');
+      if (searchInput) {
+        searchInput.focus();
+      }
+    }, 100);
   }
 }

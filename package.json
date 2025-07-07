@@ -254,6 +254,7 @@
     "ngx-owl-carousel-o": "^18.0.0",
     "ngx-pagination": "^6.0.3",
     "ngx-print": "1.4",
+    "ngx-select-dropdown": "^3.3.2",
     "ngx-skeleton-loader": "^6.0.0",
     "ngx-toastr": "^18.0.0",
     "pdfmake": "^0.2.6",

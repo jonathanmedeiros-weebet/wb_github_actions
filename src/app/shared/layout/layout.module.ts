@@ -155,6 +155,7 @@ import {
 import { ButtonCloseComponent } from './button-close/button-close.component';
 import { InformationStepsComponent } from './modals/account-verification/information-steps/information-steps.component';
 import { AccountVerifiedAddressComponent } from './modals/account-verification/account-verified-address/account-verified-address.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 @NgModule({
     imports: [
@@ -185,7 +186,8 @@ import { AccountVerifiedAddressComponent } from './modals/account-verification/a
         RecaptchaFormsModule,
         SkeletonModule,
         WeePaginationModule,
-        NgbTooltipModule
+        NgbTooltipModule,
+        SelectDropDownModule
     ],
     declarations: [
         MainLayoutComponent,
