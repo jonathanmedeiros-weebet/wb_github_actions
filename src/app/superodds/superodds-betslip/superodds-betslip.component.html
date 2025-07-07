@@ -1,0 +1,163 @@
+<section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
+    <div class="bilhete-container">
+        <div class="titulo-bilhete">
+            <a (click)="closeCupom()" class="botao-esquerdo" *ngIf="mobileScreen">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <div class="titulo">{{'bilhete.titulo' | translate}}</div>
+            <div class="botao-direito" *ngIf="mobileScreen"></div>
+        </div>
+        <div class="acoes-bilhete">
+            {{'bilhete.eventosSelecionados' | translate}}
+            <a [ngClass]="{'disabled': itens.length == 0}" (click)="removerItens()">
+                <i class="fa-solid fa-trash"></i> {{'bilhete.removerTodos' | translate}}
+            </a>
+        </div>
+        <div class="pre-bilhete-desafio">
+            <div *ngIf="itens.length > 0; else semJogosSelecionados" class="div-desafios-selecionados">
+                <div *ngFor="let item of itens.value; let i=index" class="desafio-selecionado">
+                    <div class="desafio-selecionado-inner">
+                        <div class="categoria-nome">
+                            {{item.superodd.name}}
+                        </div>
+                        <div class="odd-bilhete">
+                            Resposta: <span class="odd-nome">{{item.odd.name}} </span><span
+                            class="valor">({{item.odd.value}})</span>
+                        </div>
+                    </div>
+                    <div class="remover-item" (click)="removerItem(i)">
+                        <i class="fa fa-times"></i>
+                    </div>
+                </div>
+            </div>
+            <ng-template #semJogosSelecionados>
+                <div class="div-jogos-selecionados">
+                    <div id="nenhum-jogo">
+                        <p>
+                            <span>
+                                <i class="fa-solid fa-circle-info"></i> {{'bilhete.nenhumaApostaSelecionada' | translate}}!
+                            </span>
+                        </p>
+                        {{'bilhete.selecioneAlgumaAposta' | translate}}
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <div class="footer-bilhete">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="div-inputs">
+                    <div class="form-group" *ngIf="!isCliente && modoCambista">
+                        <div class="input-md">
+                            <input type="text" id="nomeApostador" formControlName="apostador"
+                                   [ngClass]="applyCssInputError('apostador')"
+                                   class="form-control inverted-out" placeholder=" ">
+                            <label for="nomeApostador">{{'bilhete.nomeDoApostador' | translate}}</label>
+                        </div>
+
+                        <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}} "></app-error-msg>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-icon">
+                            <i>R$</i>
+                            <input type="number" formControlName="valor" [min]="apostaMinima"
+                                   (focusin)="setFocoValor(true)" (focusout)="setFocoValor(false)"
+                                   [ngClass]="applyCssInputError('valor')" class="form-control inverted-out"
+                                   placeholder="Valor">
+                        </div>
+                        <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                    </div>
+                    <div class="valores" [ngClass]="{'fadeIn': valorFocado, 'fadeOut': !valorFocado}">
+                        <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
+                        <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
+                        <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
+                        <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
+                    </div>
+                    <div class="informations">
+                        {{'bilhete.valorDaAposta' | translate}}:
+                        <span class="valor">{{form.value.valor | currency}}</span>
+                        <br>
+                        {{'bilhete.possiveisGanhos' | translate}}:
+                        <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
+                    </div>
+                </div>
+                <div class="form-group submit-buttons">
+                    <button *ngIf="!disabled; else btnProcessando" [attr.disabled]="itens.length <= 0 ? true : none"
+                            class="btn btn-custom btn-block">
+                        {{'bilhete.apostar' | translate}} <b>({{itens.length}})</b>
+                    </button>
+                    <ng-template #btnProcessando>
+                        <button disabled class="btn btn-custom btn-block">
+                            {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </ng-template>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<ng-template #apostaDeslogadoModal let-modal>
+    <div class="modal-body" id="aposta-deslogado">
+        <div *ngIf="opcoes.cartao_aposta" class="tabs">
+            <button class="btn tab" (click)="trocarTipoApostaDeslogado('preaposta')"
+                    [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
+                Pré-Aposta
+            </button>
+            <button class="btn tab" (click)="trocarTipoApostaDeslogado('cartao')"
+                    [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
+                Cartão de Aposta
+            </button>
+        </div>
+        <div *ngIf="itens.length > 0">
+            <div *ngFor="let item of itens.value; let i=index" class="aposta-item">
+                <div class="">
+                    <div class="desafio-nome">
+                        {{item.superodd.name}}
+                    </div>
+                    <div class="cotacao">
+                        Resposta: <span>{{item.odd.name}}</span>
+                        <span class="valor">
+                            {{item.odd.value}}
+                        </span>
+                    </div>
+                </div>
+                <div class="remover" (click)="removerItem(i)">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+        </div>
+        <div class="cartao-form" *ngIf="tipoApostaDeslogado == 'cartao'">
+            <form style="font-size: 1rem;" [formGroup]="cartaoApostaForm">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Chave</label>
+                        <input type="text" class="form-control inverted-out" formControlName="chave" autocomplete="off"
+                               style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>PIN</label>
+                        <input type="password" class="form-control inverted-out" formControlName="pin"
+                               autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-check col-md-6">
+                    <input type="checkbox" class="form-check-input" id="manter-cartao" formControlName="manter_cartao">
+                    <label class="form-check-label" for="manter-cartao">Manter Cartão</label>
+                </div>
+            </form>
+        </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-custom2" (click)="modalRef.dismiss()">{{'modais.fechar' | translate}}</button>
+            <button type="button" class="btn btn-custom" *ngIf="!disabled; else processandoPreAposta"
+                    (click)="finalizarApostaDeslogado()">
+                {{'modais.finalizar' | translate}}
+            </button>
+            <ng-template #processandoPreAposta>
+                <button disabled class="btn btn-custom">
+                    {{'geral.processando' | translate}}... <i class="fa fa-spinner fa-spin"></i>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+</ng-template>

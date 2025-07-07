@@ -940,6 +940,10 @@ button {
     .content-sports {
         padding: 0;
     }
+
+    .modal-information-step-centered .modal-dialog {
+        max-width: max-content !important;
+    }
 }
 
 
@@ -1622,6 +1626,14 @@ input[type=number]::-webkit-outer-spin-button {
     height: 350px;
 }
 
+.modal-280 .modal-dialog {
+    max-width: 280px;
+}
+
+.modal-375 .modal-dialog {
+    max-width: 375px;
+}
+
 .modal-500 .modal-dialog {
     max-width: 500px;
 }
@@ -1632,6 +1644,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .modal-400 .modal-dialog {
     max-width: 400px;
+}
+
+.modal-460 .modal-dialog {
+    max-width: 460px;
 }
 
 .modal-600 .modal-dialog {
@@ -1795,6 +1811,7 @@ ngb-datepicker-month {
     .modal-cadastro-cliente .modal-dialog,
     .modal-login .modal-dialog,
     .modal-account-verification .modal-dialog,
+    .modal-generic .modal-dialog,
     .modal-account-verified-success .modal-dialog {
         margin: 0 auto;
         height: auto;
@@ -1918,6 +1935,11 @@ ngb-datepicker-month {
     .titulo{
         padding: 0;
     }
+
+    .modal-information-steps .modal-dialog {
+        padding: 0 24px;
+        height: auto;
+    }
 }
 
 .custom-modal-force-password .modal-dialog > .modal-content {
@@ -1968,18 +1990,25 @@ label {
     width: 100%;
 }
 
-.modal-account-verification {
-    z-index: 90002;
+.modal-account-verification,
+.modal-generic {
+
+    z-index: 90010;
 }
 
 .modal-account-verified-success {
     z-index: 90001;
 }
 
+.modal-generic .modal-dialog .modal-content {
+    background-color: transparent !important;
+}
+
 @media only screen and (max-width: 480px) {
     .modal-cadastro-cliente .modal-dialog,
     .modal-login .modal-dialog,
     .modal-account-verification .modal-dialog,
+    .modal-generic .modal-dialog,
     .modal-account-verified-success .modal-dialog {
         max-width: 100%;
         height: 100%;
@@ -1987,10 +2016,17 @@ label {
     }
 }
 
+
 @media only screen and (max-width: 768px) {
     .modal-account-verified-success .modal-dialog {
         max-width: 100%;
         height: 100%;
+        margin: 0;
+    }
+    .modal-generic-centered .modal-dialog {
+        max-width: 100%;
+        max-height: auto !important;
+        height: auto !important;
         margin: 0;
     }
 }
@@ -2000,7 +2036,7 @@ label {
 }
 
 #ex-doccheck-dialog {
-    z-index: 90003 !important;
+    z-index: 90011 !important;
 }
 
 .color-primary {

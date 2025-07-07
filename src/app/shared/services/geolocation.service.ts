@@ -69,7 +69,10 @@ export class GeolocationService {
     private central_url = `${config.HOST}/api/geolocation`;
     private requestOnGoing = false;
 
-    constructor(private http: HttpClient, private header: HeadersService) { }
+    constructor(
+        private http: HttpClient,
+        private header: HeadersService
+    ) { }
 
     private isLocationCompleteAndUnchanged(stored: LocationData, current: Geolocation): boolean {
         return (
@@ -172,7 +175,6 @@ export class GeolocationService {
         return new Promise((resolve, reject) => {
             try {
                 if (!navigator.geolocation) {
-
                     throw new Error('Geolocation not allowed.');
                 };
 

@@ -980,7 +980,11 @@
                 <span>{{'menu.rifas' | translate }}</span>
             </a>
         </div>
-
+        <div class="category" *ngIf="superoddHabilitado">
+            <a [routerLink]="['/superodds']" routerLinkActive="active">
+                <span>{{superoddNome}}</span>
+            </a>
+        </div>
         <div class="category" *ngIf="desafioHabilitado">
             <a [routerLink]="['/desafios']" routerLinkActive="active">
                 <span>{{desafioNome}}</span>

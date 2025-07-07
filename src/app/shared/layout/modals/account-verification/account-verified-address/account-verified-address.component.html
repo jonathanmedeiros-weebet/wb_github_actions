@@ -1,0 +1,21 @@
+<div id="account-verified-address" class="account-verified-address">
+    <div class="account-verified-address__header">
+        <span class="account-verified-address__icon">
+            <icon-circle-exclamation color="var(--highlight)" [size]="26" />
+        </span>
+       <app-button-close (onClick)="onClick()"></app-button-close>
+    </div>
+    <div class="account-verified-address__body">
+        <span class="account-verified-address__title">
+            {{ 'accountVerification.verifiedAddressTitle' | translate }}
+        </span>
+        <span class="account-verified-address__description">
+            {{ 'accountVerification.verifiedAddressBody' | translate }}
+        </span>
+    </div>
+    <div class="account-verified-address__footer">
+        <button class="account-verified-address__btn-to-verify" (click)="goToAccountVerification()">
+            {{ 'accountVerification.verifiedAddressBtn' | translate }}
+        </button>
+    </div>
+</div>

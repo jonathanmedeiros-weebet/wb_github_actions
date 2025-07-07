@@ -268,6 +268,7 @@
         "field": "Campo",
         "or": "OU",
         "geolocationError": "Por favor, verifique a configuração de localização do seu navegador e tente novamente.",
+        "geolocationErrorWhenBettting": "Por favor, verifique a configuração de localização do seu navegador e tente apostar novamente.",
         "restricaoDeLocalizacao": "Este recurso está disponível apenas para usuários no Brasil.",
         "stateRestriction": "Este recurso não está disponivel para o seu estado.",
         "locationPermission": "Para utilizar este recurso, é necessário ativar a localização no navegador.",
@@ -306,7 +307,12 @@
         "continue": "Continuar",
         "updateInformationPersonalData": "Atualize e gerencie suas informações, como nome, e-mail e telefone, para garantir uma experiência personalizada e segura no sistema.",
         "change_email": "Alterar e-mail",
-        "change_phone": "Alterar telefone"
+        "change_phone": "Alterar telefone",
+        "logout_account": "Sair da conta",
+        "copy": "Copiar",
+        "paste": "Colar",
+        "codeIn": "código em {{time}}s",
+        "resend": "Reenviar"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -323,7 +329,8 @@
     "bet": {
         "sportsBetting": "Apostas esportivas",
         "casinoBetting": "Apostas cassino",
-        "incomeTaxOnPrize": "Imposto de renda sobre prêmio"
+        "incomeTaxOnPrize": "Imposto de renda sobre prêmio",
+        "onlyOneEvent": "Só é permitido apostar em 1 evento por vez."
     },
     "dias": {
         "ontem": "Ontem",
@@ -707,7 +714,8 @@
         "next": "Próximo",
         "previous": "Anterior",
         "save_change": "Salvar Alteração",
-        "view": "Visualizar"
+        "view": "Visualizar",
+        "talkToSupport": "Fale com o suporte"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -890,5 +898,33 @@
             "title": "Termos e aceites",
             "description": "Termos de uso, política de privacidade e termos de serviço."
         }
+    },
+    "accountVerification": {
+        "alertEmailVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail cadastrado",
+        "alertPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu telefone cadastrado",
+        "alertEmailAndPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail e telefone cadastrados",
+        "problemsWithCode": "Problemas com o código?",
+        "playngByTheRules": "Jogando com a regra",
+        "checkSpam": "Verifique a sua caixa de spam.",
+        "checkEmailRegistered": "Certifique-se de que você tem acesso ao e-mail cadastrado.",
+        "checkPhoneSignal": "Verifique se o seu telefone está com sinal telefônico",
+        "checkPhoneNumberRegistered": "Verifique se o número cadastrado  recebe ligações e mensagens",
+        "checkingLegistation": "Como cumprimento da legislação, precisamos realizar essa etapa de validação.",
+        "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!",
+        "validationWithSuccess": "Seu {{verificationType}} foi validado com sucesso!",
+        "accessIsAlmostReadyMessage": "Falta pouco para ter acesso ao melhor plataforma! Ainda falta algumas informações a serem validadas.",
+        "almostDoneMessage": "Está quase lá! Ainda falta algumas informações a serem validadas.",
+        "whyNeedValidate": "Por que preciso validar?",
+        "enterTheVerificationCode": "Digite o código do {{verificationType}}",
+        "dontReceiveTheEmail": "Não recebeu o {{verificationType}}?",
+        "verificationCodeHasBeenSentToEmail": "Um e-mail com o código de verificação foi enviada para {{email}}",
+        "verificationCodeHasBeenSentToPhone": "Uma mensagem de texto com o código de verificação foi enviada para {{phone}}",
+        "validatingCode": "Validando código",
+        "buttonValidate":"Realizar validações",
+        "alertAccountVerificationTitle": "Sua diversão com a segurança garantida",
+        "alertAccountVerificationDescription": "é uma casa de aposta online confiável e comprometida com a segurança dos seus usuários!<br><br>Para atender à legislação vigente, precisamos verificar algumas das informações que você cadastrou.",
+        "verifiedAddressTitle": "Atualize seu Endereço",
+        "verifiedAddressBody": "Para que você possa realizar apostas dentro da nossa plataforma, precisamos que você preencha suas informações de endereço. Isso garante a segurança e a conformidade com as nossas políticas.",
+        "verifiedAddressBtn": "Atualizar Endereço"
     }
 }

@@ -26,6 +26,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Geolocation } from 'src/app/shared/services/geolocation.service';
 import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
+import { GeolocationValidationService } from 'src/app/shared/services/geolocation-validation.service';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -100,7 +101,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private geolocationService: GeolocationService,
         private sportIdService: SportIdService,
         private ga4Service: Ga4Service,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private geolocationValidationService: GeolocationValidationService
     ) {
         super();
 
@@ -388,7 +390,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                     const termsResult = await this.accountVerificationService.openModalTermsPromise();
                     if (!termsResult) return;
                 }
-                
+
                 if (!this.accountVerificationService.accountVerified.getValue()) {
                     this.accountVerificationService.openModalAccountVerificationAlert();
                     return;
@@ -415,23 +417,15 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
-            if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
-                const saveLocation = await this.geolocationService.saveLocalStorageLocation();
+            if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+                const geolocationValidation = await this.geolocationValidationService.validateGeolocationWhenBetting({
+                    enableRequirementGeolocation: true,
+                    restrictionState: this.paramsService.getRestrictionStateBet()
+                })
 
-                if (!saveLocation) {
+                if (!geolocationValidation.valid) {
                     valido = false;
-                    msg = this.translate.instant('geral.geolocationError');
-                }
-            }
-
-            const restrictionStateBet = this.paramsService.getRestrictionStateBet();
-
-            if (restrictionStateBet != 'Todos') {
-                let localeState = localStorage.getItem('locale_state');
-
-                if (restrictionStateBet != localeState) {
-                    valido = false;
-                    msg = this.translate.instant('geral.stateRestriction');
+                    msg = geolocationValidation.msg;
                 }
             }
 
@@ -493,7 +487,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
-        let typeWindow = aposta.tipo == 'esportes' ? 'modal-700' : '';
+        let typeWindow = aposta.tipo == 'esportes' ? 'modal-500' : '';
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
@@ -686,13 +680,18 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         const values = clone(this.form.value);
 
         if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
-            const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
-            values['geolocation'] = geolocation;
-        }
+            const validation = await this.geolocationValidationService.validateGeolocationWhenBetting({
+                enableRequirementGeolocation: true,
+                restrictionState: this.paramsService.getRestrictionStateBet()
+            });
 
-        values['ibge_code'] = localStorage.getItem('ibge_code');
-        values['locale_city'] = localStorage.getItem('locale_city');
-        values['locale_state'] = localStorage.getItem('locale_state');
+            if (!validation.valid) {
+                this.handleError(validation.msg ?? this.translate.instant('geral.geolocationErrorWhenBettting'));
+                return;
+            }
+
+            values['geolocation'] = validation.geolocation;
+        }
 
         values.itens.map(item => {
             // Cotacação Local

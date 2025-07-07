@@ -54,6 +54,14 @@
     margin-bottom: 0;
     color: var(--foreground-game);
 }
+.teams-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-height: 2em;
+    margin-left: 18px;
+}
 .ganhou{
     color: #0C9F19;
     text-transform: uppercase;
@@ -112,10 +120,12 @@ hr {
 }
 .item .nome{
     margin: 1px;
+    color: var(--foreground-game);
 }
 .item .cotacao{
     margin: 1px;
     font-size: 12px;
+    color: var(--foreground-game);
 }
 .valores .aposta, 
 .valores .ganho,
@@ -199,6 +209,9 @@ hr {
     border-top: 0;
     border-bottom: 1px solid var(--background);
 }
+.table tbody tr td {
+    color: var(--foreground-game);
+}
 .table thead {
     background-color: var(--game);
     border-radius: 10px 10px 0 0;
@@ -246,6 +259,10 @@ table tr td:nth-child(3) {
     display: none;
 }
  @media only screen and (max-width: 532px) {
+    .teams-container {
+        margin-left: 0px;
+        width: auto;
+    }
     .modal-body {
         max-height: 55vh;
     }
@@ -302,6 +319,15 @@ table tr td:nth-child(3) {
 @media only screen and (min-width: 532px) and (max-width: 1024px) {
     .modal-body {
         max-height: 55vh;
+    }
+    #teams-names, #game-status {
+        display: flex;
+        flex: 1;
+    }
+    #game-status {
+        display: flex;
+        justify-content: end;
+        margin-right: 18px;
     }
     .odd-container {
         display: flex;

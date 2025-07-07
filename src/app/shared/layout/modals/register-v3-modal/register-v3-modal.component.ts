@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -67,6 +67,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public cpfSpinner = false;
     private previousUrl: string;
     public storagedBtag: string | null = null;
+    public showAlertStepsVerificationAccount: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -142,14 +143,17 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     }
 
     private prepareBanner() {
+        if (!this.hasRegisterBanner) {
+            return;
+        }
         const page = 'cadastro';
         this.bannerService
             .banners
             .subscribe((banners) => {
                 if(Boolean(banners) && Boolean(banners.length)) {
                     this.registerBanner = banners.find(banner => banner.pagina == page);
-                    this.hasRegisterBanner = Boolean(this.registerBanner);
                 }
+                this.hasRegisterBanner = Boolean(this.registerBanner);
             })
     }
 
@@ -308,6 +312,14 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.controls.senha.updateValueAndValidity();
         }
 
+        this.form.valueChanges.subscribe(() => {
+            if (this.form.controls.email.valid && this.form.controls.telefone.valid) {
+                this.showAlertStepsVerificationAccount = true;
+            } else {
+                this.showAlertStepsVerificationAccount = false;
+            }
+        });
+
         if (this.provedorCaptcha == 'recaptcha') {
             this.form.valueChanges.subscribe(() => {
                 if (this.form.controls.senha.valid && !this.submitting) {
@@ -355,36 +367,22 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
     public async submit() {
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
+        let locationAllowed: any = true;
+        
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() || restrictionStateBet !== 'Todos') {
+            locationAllowed = await this.checkLocationPermission();
+        }
 
-        if (restrictionStateBet != 'Todos') {
-            let allowed = true;
-            this.lastLocationPermission = this.currentLocationPermission;
-            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+        if (!locationAllowed) {
+            this.handleError(this.translate.instant('geral.locationPermission'));
+            return;
+        }
 
-            if (this.currentLocationPermission == 'granted') {
-                if (this.lastLocationPermission == 'denied') {
-                    allowed = false;
-                    location.reload();
-                } else if (!this.geolocationService.checkGeolocation()) {
-                    allowed = await this.geolocationService.saveLocalStorageLocation();
-                }
-            } else if (this.currentLocationPermission == 'denied') {
-                allowed = false;
-            } else if (this.currentLocationPermission == 'prompt') {
-                allowed = await this.geolocationService.saveLocalStorageLocation();
-            }
-
-            if (allowed) {
-                let localeState = localStorage.getItem('locale_state');
-
-                if (restrictionStateBet != localeState) {
-                    this.messageService.error(this.translate.instant('geral.stateRestriction'));
-                    return;
-                }
-            } else {
-                this.messageService.error(this.translate.instant('geral.locationPermission'));
-                return;
-            }
+        const isValidState = this.checkRestrictionState(restrictionStateBet);
+        
+        if (!isValidState) {
+            this.messageService.error(this.translate.instant('geral.stateRestriction'));
+            return;
         }
 
         if (this.menorDeIdade) {
@@ -398,23 +396,20 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.clientesService
             .cadastrarCliente(values)
             .subscribe(
-                (res) => {
+                async (res) => {
                     this.activeModal.dismiss();
-
-                    this.auth.setIsCliente(true);
-
-                    const user = res.result.user;
-                    sessionStorage.setItem('user', JSON.stringify(user));
                     localStorage.removeItem('codigoAfiliado');
-                    localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
 
                     if (Boolean(res.dataUser.promocao_primeiro_deposito_ativa)) {
                         localStorage.setItem('promocaoPrimeiroDepositoAtivo', res.dataUser.promocao_primeiro_deposito_ativa);
                     }
 
                     this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
-                    this.accountVerificationService.getAccountVerificationDetail().toPromise();
-                    this.router.navigate(['/welcome']);
+
+                    await this.accountVerificationService
+                        .getAccountVerificationDetail()
+                        .toPromise()
+                        .then(() => location.reload());
 
                     if (this.errorMessage  && res.success) {
                         this.errorMessage  = '';
@@ -578,5 +573,29 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private formatarDataComAsterisco (data: string) {
         const [ano, mes, dia] = data.split('-');
         return `${dia[0]}*/${mes[0]}*/${ano[0]}***`;
+    }
+
+    async checkLocationPermission() {
+        this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+
+        if (this.currentLocationPermission === 'granted') {
+            return this.geolocationService.checkGeolocation() || await this.geolocationService.saveLocalStorageLocation();
+        }
+
+        if (this.currentLocationPermission === 'prompt') {
+            return await this.geolocationService.saveLocalStorageLocation();
+        }
+
+        return false;
+    }
+
+    private checkRestrictionState(restrictionState: string): boolean {
+        const localeState = localStorage.getItem('locale_state');
+
+        if (restrictionState !== 'Todos' && restrictionState !== localeState) {
+            return false;
+        }
+
+        return true;
     }
 }
