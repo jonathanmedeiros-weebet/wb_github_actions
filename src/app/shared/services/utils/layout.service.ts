@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -17,18 +18,20 @@ export class LayoutService {
     currentSubmenuHeight;
     currentHeaderHeight;
     verificaRemocaoIndiqueGanhe;
+    tawakChatClicked: boolean = false;
 
     private hideSubmenuSub = new BehaviorSubject<boolean>(false);
     private hideSubmenuCtrl = false;
     hideSubmenu;
 
-    constructor() {
+    constructor(
+        @Inject(DOCUMENT) private document: any
+    ) {
         this.currentIndiqueGanheCardHeight = this.indiqueGanheCardHeightSub.asObservable();
         this.currentSubmenuHeight = this.submenuHeightSub.asObservable();
         this.currentHeaderHeight = this.currentHeaderHeightSub.asObservable();
         this.verificaRemocaoIndiqueGanhe = this.statusIndiqueGanheAtivo.asObservable();
         this.hideSubmenu = this.hideSubmenuSub.asObservable();
-
     }
 
     changeIndiqueGanheCardHeight(height: number): void {
@@ -45,10 +48,10 @@ export class LayoutService {
         this.recalculateHeaderHeight();
     }
 
-	changeHeaderHeigh(height: number): void {
-		this.defaultHeaderHeight = height;
-		this.recalculateHeaderHeight();
-	}
+    changeHeaderHeigh(height: number): void {
+        this.defaultHeaderHeight = height;
+        this.recalculateHeaderHeight();
+    }
 
     private recalculateHeaderHeight(): void {
         this.currentIndiqueGanheCardHeight
@@ -87,5 +90,123 @@ export class LayoutService {
     resetHideSubmenu() {
         this.hideSubmenuCtrl = false;
         this.hideSubmenuSub.next(false);
+    }
+
+    hideLiveChats(renderer: Renderer2) {
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+
+        if (botaoContatoFlutuante) {
+            renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            renderer.setStyle(jivoChatBtn, 'display', 'none');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            renderer.setStyle(liveChatBtn, 'display', 'none');
+        }
+
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            const tawakIframes = this.document.querySelectorAll('[title="chat widget"]')
+            this.tawakChatClicked = tawakIframes[1].style.display == 'block'
+
+            tawakIframes.forEach(iframeChat => renderer.setStyle(iframeChat, 'display', 'none'));
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            renderer.setStyle(zendeskChat, 'display', 'none');
+        }
+
+        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
+        if (intercomBtnChat) {
+            renderer.setStyle(intercomBtnChat, 'display', 'none');
+        }
+
+        const intercomContainer = this.document.querySelector('#intercom-container');
+        if (intercomContainer) {
+            renderer.setStyle(intercomContainer, 'display', 'none');
+        }
+
+        const hooryChat = this.document.querySelector('.woot--bubble-holder');
+        if (hooryChat) {
+            renderer.setStyle(hooryChat, 'display', 'none');
+        }
+    }
+
+    restoreLiveChats(renderer: Renderer2) {
+        let scriptGalaxsys = document.getElementById("galaxsysScript");
+
+        if (scriptGalaxsys) {
+            scriptGalaxsys.remove();
+
+            const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+            if (botaoContatoFlutuante) {
+                renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+            }
+
+            const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+            if (jivoChatBtn) {
+                renderer.setStyle(jivoChatBtn, 'display', 'inline');
+            }
+
+            const liveChatBtn = this.document.getElementById('chat-widget-container');
+            if (liveChatBtn) {
+                renderer.setStyle(liveChatBtn, 'display', 'block');
+            }
+
+            const zendeskChat = this.document.querySelector('iframe#launcher');
+            if (zendeskChat) {
+                renderer.setStyle(zendeskChat, 'display', 'block');
+            }
+        }
+
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+        if (botaoContatoFlutuante) {
+            renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            renderer.setStyle(jivoChatBtn, 'display', 'inline');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            renderer.setStyle(liveChatBtn, 'display', 'block');
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            renderer.setStyle(zendeskChat, 'display', 'block');
+        }
+
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
+                if (key != 1 || this.tawakChatClicked) {
+                    renderer.setStyle(iframeChat, 'display', 'block');
+                }
+            });
+        }
+
+        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
+        if (intercomBtnChat) {
+            renderer.setStyle(intercomBtnChat, 'display', 'block');
+        }
+
+        const intercomContainer = this.document.querySelector('#intercom-container');
+        if (intercomContainer) {
+            renderer.setStyle(intercomContainer, 'display', 'block');
+        }
+
+        const hooryChat = this.document.querySelector('.woot--bubble-holder');
+        if (hooryChat) {
+            renderer.setStyle(hooryChat, 'display', 'block');
+        }
     }
 }
