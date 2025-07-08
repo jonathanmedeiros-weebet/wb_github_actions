@@ -834,15 +834,6 @@ gulp.task('nautsports.club', function (done) {
     });
 });
 
-gulp.task('bet73.site', function (done) {
-    tasks(done, {
-        server: "front3.weebet.tech",
-        host: "bet73.site",
-        banca: "BET 73",
-        styles: "",
-    });
-});
-
 gulp.task('easybets.club', function (done) {
     tasks(done, {
         server: "front1.weebet.tech",
@@ -1672,15 +1663,6 @@ gulp.task('betfortuna.com.br', function (done) {
     });
 });
 
-gulp.task('paraisobet.net', function (done) {
-    tasks(done, {
-        server: "front3.weebet.tech",
-        host: "paraisobet.net",
-        banca: "PARAISO BET",
-        styles: ""
-    });
-});
-
 gulp.task('sidjaisoekroe.io', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
@@ -1813,15 +1795,6 @@ gulp.task('betsplay.club', function (done) {
         server: "front1.weebet.tech",
         host: "betsplay.club",
         banca: "BETSPLAY",
-        styles: ""
-    });
-});
-
-gulp.task('arretadobet.com', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "arretadobet.com",
-        banca: "ARRETADO BET",
         styles: ""
     });
 });
