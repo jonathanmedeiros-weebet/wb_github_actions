@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, Render
 import { DOCUMENT } from '@angular/common';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../shared/layout/modals';
-import { AccountVerificationService, AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
+import { AccountVerificationService, AuthService, HelperService, MessageService, ParametrosLocaisService, LayoutService } from 'src/app/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepositoComponent } from '../clientes/deposito/deposito.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -44,6 +44,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         private elementRef: ElementRef,
         private loginService: LoginService,
         private accountVerificationService: AccountVerificationService,
+        private layoutService: LayoutService,
         @Inject(DOCUMENT) private document: any
     ) { }
 
@@ -59,11 +60,6 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             if (window.innerWidth <= 1280) {
                 this.heightHeader = 140;
             }
-        }
-
-        const zendeskChat = this.document.querySelector('iframe#launcher');
-        if (zendeskChat) {
-            this.renderer.setStyle(zendeskChat, 'display', 'none');
         }
 
         this.checkIfHasCustomerLoggedIn();
@@ -127,7 +123,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
                 if (!this.accountVerified) {
                     this.destroyBetbyIFrame();
-    
+
                     const accountVerificationAlert: NgbModalRef = this.accountVerificationService.openModalAccountVerificationAlert();
                     accountVerificationAlert.componentInstance.redirectEvenWhenClosing = true;
                     return;
@@ -160,7 +156,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         this.resizeObserver.observe(divElement);
 
         setTimeout(() => {
-            this.hideGtmElements();
+            this.layoutService.hideLiveChats(this.renderer);
         }, 1200);
     }
 
@@ -174,72 +170,6 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         this.loggedSubscription = this.authService
             .logado
             .subscribe((hasCustomerLoggedIn) => this.hasCustomerLoggedIn = hasCustomerLoggedIn);
-    }
-
-    hideGtmElements() {
-        const elementChat = document.querySelector('#chat-widget-container');
-        const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
-        const elementChatJivo = document.querySelector('#jivo_custom_widget');
-        const elementChatIntercom = document.querySelector('#intercom-container');
-        const elementChatIntercomLight = document.querySelector('.intercom-lightweight-app');
-        const elementChatWidget = document.querySelector('#chat-widget-container');
-
-        if (elementChat) {
-            this.renderer.setStyle(elementChat, 'display', 'none');
-        }
-
-        if (elementChatWeebet) {
-            this.renderer.setStyle(elementChatWeebet, 'display', 'none');
-        }
-
-        if (elementChatJivo) {
-            this.renderer.setStyle(elementChatJivo, 'display', 'none');
-        }
-
-        if (elementChatIntercom) {
-            this.renderer.setStyle(elementChatIntercom, 'display', 'none');
-        }
-
-        if (elementChatIntercomLight) {
-            this.renderer.setStyle(elementChatIntercomLight, 'display', 'none');
-        }
-
-        if (elementChatWidget) {
-            this.renderer.setStyle(elementChatWidget, 'display', 'none');
-        }
-    }
-
-    showGtmElements() {
-        const elementChat = document.querySelector('#chat-widget-container');
-        const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
-        const elementChatJivo = document.querySelector('#jivo_custom_widget');
-        const elementChatIntercom = document.querySelector('#intercom-container');
-        const elementChatIntercomLight = document.querySelector('.intercom-lightweight-app');
-        const elementChatWidget = document.querySelector('#chat-widget-container');
-
-        if (elementChat) {
-            this.renderer.removeStyle(elementChat, 'display');
-        }
-
-        if (elementChatWeebet) {
-            this.renderer.removeStyle(elementChatWeebet, 'display');
-        }
-
-        if (elementChatJivo) {
-            this.renderer.removeStyle(elementChatJivo, 'display');
-        }
-
-        if (elementChatIntercom) {
-            this.renderer.removeStyle(elementChatIntercom, 'display');
-        }
-
-        if (elementChatIntercomLight) {
-            this.renderer.removeStyle(elementChatIntercomLight, 'display');
-        }
-
-        if (elementChatWidget) {
-            this.renderer.removeStyle(elementChatWidget, 'display');
-        }
     }
 
     ngOnDestroy() {
@@ -349,11 +279,6 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     destroyBetbyIFrame() {
-        const zendeskChat = this.document.querySelector('iframe#launcher');
-        if (zendeskChat) {
-            this.renderer.setStyle(zendeskChat, 'display', 'block');
-        }
-
         if (this.bt) {
             this.bt.kill();
         }
@@ -366,7 +291,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             this.resizeObserver.disconnect();
         }
 
-        this.showGtmElements();
+        this.layoutService.restoreLiveChats(this.renderer);
 
         if (this.loginSubscription) {
             this.loginSubscription.unsubscribe();
