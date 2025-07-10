@@ -231,7 +231,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
-            
+
             if (this.paramsService.isBetPilotEnabled()) {
                 await this.getGamesRecommendations();
             }
@@ -463,48 +463,49 @@ export class WallComponent implements OnInit, AfterViewInit {
         category: string = '',
         enableSelectProvider: boolean = true
     ) {
-        let providerName = provider ?? this.gameFornecedor;
-        let categoryName = this.getCategorySlug(category ?? this.categorySelected);
+        const selectedProvider = provider || this.gameFornecedor;
+        const selectedCategory = this.getCategorySlug(category || this.categorySelected);
 
-        this.navigationHistoryService.setCategory(categoryName);
-        this.navigationHistoryService.setProvider(providerName);
+        this.navigationHistoryService.setCategory(selectedCategory);
+        this.navigationHistoryService.setProvider(selectedProvider);
 
-        this.categorySelected = category ?? 'cassino';
-        let gamesCassinoList = this.gamesCassino;
+        this.categorySelected = category || 'cassino';
 
-        if(['news', 'destaques'].includes(categoryName)) {
-            gamesCassinoList = categoryName === 'news' ? this.newGamesCassino : this.gamesDestaque;
+        let gamesSource = this.gamesCassino;
+        if (selectedCategory === 'news') {
+            gamesSource = this.newGamesCassino;
+        } else if (selectedCategory === 'destaques') {
+            gamesSource = this.gamesDestaque;
         }
 
-        if(['cassino', 'cassino-live', 'todos', 'news', 'destaques', 'virtual'].includes(categoryName)) {
-            categoryName = null;
+        let filterCategory = selectedCategory;
+        if (['cassino', 'cassino-live', 'todos', 'news', 'destaques', 'virtual'].includes(filterCategory)) {
+            filterCategory = null;
         }
+
+        let finalProvider = selectedProvider;
 
         if(enableSelectProvider){
-            // Responsável pela seleção do provedor no front;
-            providerName = (this.gameFornecedor !== providerName) ? providerName : null;
-            this.gameFornecedor = providerName;
+            finalProvider = this.gameFornecedor !== selectedProvider ? selectedProvider : null;
+            this.gameFornecedor = finalProvider;
         }
 
-        if(!providerName && !categoryName) {
-            this.gameList = gamesCassinoList
-        }else{
-            let gameList = [];
-            if (categoryName == 'recommendedToYou') {
-                gameList = this.gamesRecommended;
-            } else if (['cassino-live', 'cassino'].includes(categoryName)) {
-                gameList = [];
-            } else {
-                gameList = this.widgets.find(widget => widget.selector == categoryName)?.items ?? [];
-            }
+        let filteredGames = gamesSource;
 
-            if(providerName) {
-                gameList = gamesCassinoList.filter(game => (game.fornecedor.toLowerCase()).includes(providerName.toLowerCase()))
+        if (filterCategory === 'recommendedToYou') {
+            filteredGames = this.gamesRecommended;
+        } else {
+            if (filterCategory) {
+                filteredGames = this.widgets.find(widget => widget.selector == filterCategory)?.items ?? filteredGames.filter(game => game.category === filterCategory);
             }
-
-            this.gameList = gameList;
+            if (finalProvider) {
+                filteredGames = filteredGames.filter(game =>
+                    game.fornecedor?.toLowerCase().includes(finalProvider.toLowerCase())
+                );
+            }
         }
 
+        this.gameList = filteredGames;
         this.gameTitle = this.getGameTitle(category);
     }
 
