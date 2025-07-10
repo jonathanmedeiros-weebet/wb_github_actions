@@ -361,9 +361,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
     async solicitarDeposito() {
         if (this.paramsLocais.getEnableRequirementPermissionRetrieveLocation()) {
-            await this.geolocationService.saveLocalStorageLocation();
+            const locationValid = await this.geolocationService.saveLocalStorageLocation() || this.geolocationService.checkGeolocation();
 
-            if (!this.geolocationService.checkGeolocation()) {
+            if (!locationValid) {
                 this.handleError(this.translate.instant('geral.geolocationError'));
                 return;
             }

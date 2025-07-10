@@ -18,6 +18,7 @@ import { GeolocationService, Geolocation} from 'src/app/shared/services/geolocat
 import clone from 'clone';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
+import { GeolocationValidationService } from 'src/app/shared/services/geolocation-validation.service';
 
 @Component({
     selector: 'app-desafios-bilhete',
@@ -62,7 +63,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private cd: ChangeDetectorRef,
         private geolocationService: GeolocationService,
         private translate: TranslateService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private geolocationValidationService: GeolocationValidationService
     ) {
         super();
     }
@@ -230,9 +232,17 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
-            if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
-                valido = false;
-                msg = this.translate.instant('geral.geolocationError');
+            if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+                const validation = await this.geolocationValidationService.validateGeolocationWhenBetting({
+                    enableRequirementGeolocation: true,
+                    restrictionState: this.paramsService.getRestrictionStateBet()
+                });
+
+                if (!validation.valid) {
+                    this.enableSubmit();
+                    this.messageService.warning(validation.msg);
+                    return;
+                }
             }
 
             if (valido) {
@@ -243,14 +253,21 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                         delete item.odd;
                     });
 
-                    if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
-                        values['geolocation'] = await this.geolocationService.getCurrentPosition();
+                   if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+                        const validation = await this.geolocationValidationService.validateGeolocationWhenBetting({
+                            enableRequirementGeolocation: true,
+                            restrictionState: this.paramsService.getRestrictionStateBet()
+                        });
+
+                        if (!validation.valid) {
+                            this.enableSubmit();
+                            this.messageService.warning(validation.msg);
+                            return;
+                        }
+
+                        values['geolocation'] = validation.geolocation;
                     }
                     
-                    values['ibge_code'] = localStorage.getItem('ibge_code');
-                    values['locale_city'] = localStorage.getItem('locale_city');
-                    values['locale_state'] = localStorage.getItem('locale_state');                 
-
                     this.salvarAposta(values);
                 } else {
                     this.enableSubmit();

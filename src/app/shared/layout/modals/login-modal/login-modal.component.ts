@@ -183,6 +183,27 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     async submit() {
         this.btnDisabled = true;
+        let allowed: any = true;
+        let msg = this.translate.instant('geral.locationPermission');
+        const restrictionStateBet = this.paramsLocais.getRestrictionStateBet();
+        let locationAllowed: any = true;
+
+        if (this.paramsLocais.getEnableRequirementPermissionRetrieveLocation() || restrictionStateBet !== 'Todos') {
+            locationAllowed = await this.checkLocationPermission();
+        }
+
+        if (!locationAllowed) {
+            this.handleError(this.translate.instant('geral.locationPermission'));
+            return;
+        }
+
+        const isValidState = this.checkRestrictionState(restrictionStateBet);
+        
+        if (!isValidState) {
+            this.handleError(this.translate.instant('geral.stateRestriction'));
+            return;
+        }
+        
         const formData = this.form.value;
 
         if (this.loginMode === 'phone') {
@@ -474,5 +495,28 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     refreshPage(): void {
         window.location.reload();
     }
-}
 
+    async checkLocationPermission() {
+        this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+
+        if (this.currentLocationPermission === 'granted') {
+            return this.geolocationService.checkGeolocation() || await this.geolocationService.saveLocalStorageLocation();
+        }
+
+        if (this.currentLocationPermission === 'prompt') {
+            return await this.geolocationService.saveLocalStorageLocation();
+        }
+
+        return false;
+    }
+
+    private checkRestrictionState(restrictionState: string): boolean {
+        const localeState = localStorage.getItem('locale_state');
+
+        if (restrictionState !== 'Todos' && restrictionState !== localeState) {
+            return false;
+        }
+
+        return true;
+    }
+}

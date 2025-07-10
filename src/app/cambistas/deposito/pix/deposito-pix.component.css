@@ -117,6 +117,7 @@
 }
 
 .payment-method-icon {
+    margin-right: 8px;
     width: 36px;
     height: 23px;
     background-repeat: no-repeat;

@@ -51,10 +51,6 @@ export class PromocaoFormComponent implements OnInit {
         this.promocoesService.getPromocaoById(id).subscribe((data) => {
             this.promocao = data;
 
-            if (this.promocao && this.promocao.conteudo) {
-                this.promocao.conteudo = this.removerCor(this.promocao.conteudo);
-            }
-
             this.showLoadingIndicator = false;
         }, (error) => this.handleError(error))
     }
@@ -63,10 +59,4 @@ export class PromocaoFormComponent implements OnInit {
         this.messageService.error(msg);
     }
 
-    removerCor(conteudo: string): string {
-        let padrao = /style="color:\s*[^"]*"/g;
-        let conteudoModificado = conteudo.replace(padrao, 'style="color: var(--foreground-sidebars)"');
-        
-        return conteudoModificado;
-    }
 }
