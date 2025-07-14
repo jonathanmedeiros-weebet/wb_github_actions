@@ -94,7 +94,7 @@
                                 <td>{{'saques.saqueERegistrado' | translate}} {{ withdrawal.data }}</td>
                                 <td>{{ formatarChavePix(withdrawal.chavePix, withdrawal.tipoChavePix) }}</td>
                                 <td>
-                                {{ withdrawal.status }}
+                                    {{ withdrawal.status === 'FALHA NA OPERAÇÃO' ? 'PENDENTE' : withdrawal.status }}
                                 <a class="info" *ngIf="withdrawal.observacao" placement="top" [ngbPopover]="withdrawal.observacao">
                                     <i class="fa fa-info"></i>
                                 </a>

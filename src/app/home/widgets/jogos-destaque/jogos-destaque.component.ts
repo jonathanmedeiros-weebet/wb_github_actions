@@ -155,7 +155,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     }
 
     mapJogosDestaque() {
-        let jogosDestaques = [];
+        let newHighlightedGames = [];
 
         if (this.camps && this.camps.length > 0) {
             this.camps.forEach(camp => {
@@ -163,11 +163,11 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
                     return this.jogosDestaquesIds.includes(jogo._id + '');
                 });
 
-                jogosDestaques = jogosDestaques.concat(jogosSele);
+                newHighlightedGames = newHighlightedGames.concat(jogosSele);
             });
         }
 
-        this.jogosDestaque = jogosDestaques;
+        this.syncHighlightedGamesWithCenter(newHighlightedGames);
         this.cd.detectChanges();
     }
 
@@ -258,5 +258,11 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
                 this.bilheteService.atualizarItens(this.itens);
             }
         }
+    }
+
+    private syncHighlightedGamesWithCenter(highlightedGames) {
+        this.jogosDestaque = this.jogosDestaquesIds.map(id =>
+            highlightedGames.find(g => g._id + '' === id)
+        ).filter(game => game);
     }
 }
