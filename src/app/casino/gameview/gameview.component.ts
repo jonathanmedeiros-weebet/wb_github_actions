@@ -79,7 +79,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     avisoCancelarBonus = false;
     modalRef;
     unsub$ = new Subject();
-    tawakChatClicked: boolean = false;
     gameProviderName: string = '';
     private inGame: boolean = false
 
@@ -164,7 +163,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         window.addEventListener("resize", handleWindowChange);
 
-        this.hideLiveChats();
+        this.layoutService.hideLiveChats(this.renderer);
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
@@ -488,9 +487,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         // if(this.gameFornecedor !== 'pgsoft') {
-                            this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         // } else {
-                            // this.htmlGame = response.htmlGame;
+                        // this.htmlGame = response.htmlGame;
                         // }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
@@ -564,7 +563,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(true);
         }
 
-        this.restoreLiveChats();
+        this.layoutService.restoreLiveChats(this.renderer);
 
         if (this.headerService.getIsHeaderDisabled) {
             this.disableHeaderOptions();
@@ -593,8 +592,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         this.toggleFullscreenMob();
-
-        this.adjustFloatingButtons();
 
         this.fullscreen = true;
     }
@@ -699,28 +696,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         this.fullscreen = false;
-    }
-
-    adjustFloatingButtons() {
-        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
-        if (botaoContatoFlutuante) {
-            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
-        }
-
-        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
-        if (jivoChatBtn) {
-            this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
-        }
-
-        const liveChatBtn = this.document.getElementById('chat-widget-container');
-        if (liveChatBtn) {
-            this.renderer.setStyle(liveChatBtn, 'display', 'block');
-        }
-
-        const zendeskChat = this.document.querySelector('iframe#launcher');
-        if (zendeskChat) {
-            this.renderer.setStyle(zendeskChat, 'display', 'block');
-        }
     }
 
     openFullscreen() {
@@ -1165,126 +1140,18 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private resolveGameScreen(disableHeaderForced = false) {
         if (this.isMobile && this.gameMode === 'REAL') {
             this.disableHeader();
-            if(disableHeaderForced) this.disableHeader();
+            if (disableHeaderForced) this.disableHeader();
             this.fixMobileHeader();
         }
 
         if (this.isTablet && this.gameMode === 'REAL') {
             this.disableHeader();
-            if(disableHeaderForced) this.disableHeader();
+            if (disableHeaderForced) this.disableHeader();
             this.fixTabletHeader();
         }
 
         if ((this.isDesktop || this.isHorizontalMobile) && this.gameMode === 'REAL') {
             this.fixTabletAndDesktopScreen();
-        }
-    }
-
-    private hideLiveChats() {
-        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
-
-        if (botaoContatoFlutuante) {
-            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
-        }
-
-        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
-        if (jivoChatBtn) {
-            this.renderer.setStyle(jivoChatBtn, 'display', 'none');
-        }
-
-        const liveChatBtn = this.document.getElementById('chat-widget-container');
-        if (liveChatBtn) {
-            this.renderer.setStyle(liveChatBtn, 'display', 'none');
-        }
-
-        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
-        if (TawkChat) {
-            const tawakIframes = this.document.querySelectorAll('[title="chat widget"]')
-            this.tawakChatClicked = tawakIframes[1].style.display == 'block'
-
-            tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
-        }
-
-        const zendeskChat = this.document.querySelector('iframe#launcher');
-        if (zendeskChat) {
-            this.renderer.setStyle(zendeskChat, 'display', 'none');
-        }
-
-        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
-        if (intercomBtnChat) {
-            this.renderer.setStyle(intercomBtnChat, 'display', 'none');
-        }
-
-        const intercomContainer = this.document.querySelector('#intercom-container');
-        if (intercomContainer) {
-            this.renderer.setStyle(intercomContainer, 'display', 'none');
-        }
-    }
-
-    private restoreLiveChats() {
-        let scriptGalaxsys = document.getElementById("galaxsysScript");
-
-        if (scriptGalaxsys) {
-            scriptGalaxsys.remove();
-
-            const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
-            if (botaoContatoFlutuante) {
-                this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
-            }
-
-            const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
-            if (jivoChatBtn) {
-                this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
-            }
-
-            const liveChatBtn = this.document.getElementById('chat-widget-container');
-            if (liveChatBtn) {
-                this.renderer.setStyle(liveChatBtn, 'display', 'block');
-            }
-
-            const zendeskChat = this.document.querySelector('iframe#launcher');
-            if (zendeskChat) {
-                this.renderer.setStyle(zendeskChat, 'display', 'block');
-            }
-        }
-
-        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
-        if (botaoContatoFlutuante) {
-            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
-        }
-
-        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
-        if (jivoChatBtn) {
-            this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
-        }
-
-        const liveChatBtn = this.document.getElementById('chat-widget-container');
-        if (liveChatBtn) {
-            this.renderer.setStyle(liveChatBtn, 'display', 'block');
-        }
-
-        const zendeskChat = this.document.querySelector('iframe#launcher');
-        if (zendeskChat) {
-            this.renderer.setStyle(zendeskChat, 'display', 'block');
-        }
-
-        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
-        if (TawkChat) {
-            this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
-                if (key != 1 || this.tawakChatClicked) {
-                    this.renderer.setStyle(iframeChat, 'display', 'block');
-                }
-            });
-        }
-
-        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
-        if (intercomBtnChat) {
-            this.renderer.setStyle(intercomBtnChat, 'display', 'block');
-        }
-
-        const intercomContainer = this.document.querySelector('#intercom-container');
-        if (intercomContainer) {
-            this.renderer.setStyle(intercomContainer, 'display', 'block');
         }
     }
 }
