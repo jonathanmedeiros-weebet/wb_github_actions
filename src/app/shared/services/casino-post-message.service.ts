@@ -14,6 +14,7 @@ export class CasinoPostMessageService {
   constructor() {
     const self = this;
     window.addEventListener("message", function (message) {
+      console.log("PostMessage event received service: ", message);
       self.postMessageListener(message);
     });
   }
