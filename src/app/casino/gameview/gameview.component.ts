@@ -23,6 +23,7 @@ import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
 import { ConfigurationBetLimitModalComponent } from 'src/app/shared/layout/modals/configuration-bet-limit-modal/configuration-bet-limit-modal.component';
+import { CasinoPostMessageService } from 'src/app/shared/services/casino-post-message.service';
 
 @Component({
     selector: 'app-gameview',
@@ -42,6 +43,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     params: any = [];
     mobileScreen;
     fullscreen;
+    evolutionReady = false;
     elem: any;
     showLoadingIndicator = true;
     showGameListLoadingIndicator = true;
@@ -104,6 +106,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private translate: TranslateService,
         private geolocationService: GeolocationService,
         private accountVerificationService: AccountVerificationService,
+        private casinoPostMessageService: CasinoPostMessageService,
         @Inject(DOCUMENT) private document: any
 
     ) {
@@ -162,6 +165,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
         };
 
         window.addEventListener("resize", handleWindowChange);
+
+        this.casinoPostMessageService.listenSpecificEvent('EVO:EXIT_FULLSCREEN').subscribe(event => {
+            console.log("Received EVO:EXIT_FULLSCREEN event: ", event);
+            if (this.fullscreen) {
+                this.closeFullscreen();
+            }
+        });
 
         this.layoutService.hideLiveChats(this.renderer);
 
