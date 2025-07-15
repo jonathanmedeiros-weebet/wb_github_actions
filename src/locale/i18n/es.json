@@ -267,6 +267,7 @@
         "loginUsername": "Usuario",
         "field": "Campo",
         "or": "O",
+        "geolocationErrorWhenBettting": "Por favor, comprueba la configuración de localización de tu navegador e intenta apostar de nuevo.",
         "geolocationError": "Por favor, verifica la configuración de ubicación de tu navegador e inténtalo de nuevo.",
         "restricaoDeLocalizacao": "Esta función solo está disponible para usuarios en Brasil.",
         "stateRestriction": "Esta función no está disponible para tu estado.",

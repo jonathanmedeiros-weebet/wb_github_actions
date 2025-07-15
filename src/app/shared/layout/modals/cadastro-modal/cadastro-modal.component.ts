@@ -234,22 +234,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
+        const codigoAfiliado = this.auth.getLocalstorageWithExpiry('codigoAfiliado');
+        this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
 
         this.route.queryParams
             .subscribe((params) => {
-
-                if (params.ref || params.afiliado) {
-                    const codigoAfiliado = params.ref ?? params.afiliado;
-
-                    this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
-                    localStorage.setItem('codigoAfiliado', codigoAfiliado);
-                } else {
-                    const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
-                    if (storagedCodigoAfiliado) {
-                        this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
-                    }
-                }
-
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {

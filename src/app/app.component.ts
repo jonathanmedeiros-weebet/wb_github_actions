@@ -158,6 +158,9 @@ export class AppComponent implements OnInit {
                 if (params.btag) {
                     this.setWithExpiry('btag', params.btag, 1000 * 60 * 60 * 24); // 1 dia
                 }
+                if (params.ref || params.afiliado) {
+                    this.setWithExpiry('codigoAfiliado', params.ref || params.afiliado, 1000 * 60 * 60 * 24); // 1 dia
+                }
 
                 if (params.token) {
                     this.ativacaoCadastro = true;

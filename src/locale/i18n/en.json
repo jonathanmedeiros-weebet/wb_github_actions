@@ -266,6 +266,7 @@
         "field": "Field",
         "or": "OR",
         "geolocationError": "Please check your browser's location settings and try again.",
+        "geolocationErrorWhenBettting": "Please check your browser's location settings and try betting again.",
         "restricaoDeLocalizacao": "This feature is available only to users in Brazil.",
         "stateRestriction": "This feature is not available in your state.",
         "locationPermission": "To use this feature, you need to enable location in your browser.",

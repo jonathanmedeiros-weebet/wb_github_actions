@@ -13,9 +13,10 @@ import { jwtDecode } from 'jwt-decode';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
-import { finalize } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 import { Subject } from 'rxjs';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-register-v3-modal',
@@ -68,6 +69,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private previousUrl: string;
     public storagedBtag: string | null = null;
     public showAlertStepsVerificationAccount: boolean = false;
+    public loginGoogleAtivo: boolean = false;
+    public formSocial: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -89,7 +92,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         private bannerService: BannerService,
         private accountVerificationService: AccountVerificationService,
         private campanhaService: CampanhaAfiliadoService,
-        private location: Location
+        private location: Location,
+        private socialAuth: SocialAuthService
     ) {
         super();
     }
@@ -130,14 +134,37 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.patchValue({ btag: this.storagedBtag });
         }
 
+        const codigoAfiliado = this.auth.getLocalstorageWithExpiry('codigoAfiliado');
+        this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
+
         this.handleQueryParams();
+
+        if (this.paramsService.getOpcoes().habilitar_login_google) {
+            this.formSocial = true;
+            this.socialAuth.authState
+                .pipe(takeUntil(this.unsub$))
+                .subscribe((user) => {
+                    if (user) {
+                        this.loginGoogleAtivo = true;
+                        this.form.patchValue({
+                            nome: user.name,
+                            email: user.email,
+                            confirmarEmail: user.email,
+                            googleId: user.id,
+                            googleIdToken: user.idToken,
+                        });
+                        this.clearValidators();
+                    }
+                }
+                );
+        }
 
         setTimeout(() => this.documentNumberElement.nativeElement.focus(), 500);
     }
 
     ngOnDestroy() {
         this.location.replaceState(this.previousUrl);
-
+        this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -231,18 +258,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private handleQueryParams(): void {
         this.route.queryParams
             .subscribe((params) => {
-                if (params.ref || params.afiliado) {
-                    const codigoAfiliado = params.ref ?? params.afiliado;
-
-                    this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
-                    localStorage.setItem('codigoAfiliado', codigoAfiliado);
-                } else {
-                    const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
-                    if (storagedCodigoAfiliado) {
-                        this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
-                    }
-                }
-
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {
@@ -367,36 +382,22 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
     public async submit() {
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
+        let locationAllowed: any = true;
+        
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() || restrictionStateBet !== 'Todos') {
+            locationAllowed = await this.checkLocationPermission();
+        }
 
-        if (restrictionStateBet != 'Todos') {
-            let allowed = true;
-            this.lastLocationPermission = this.currentLocationPermission;
-            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+        if (!locationAllowed) {
+            this.handleError(this.translate.instant('geral.locationPermission'));
+            return;
+        }
 
-            if (this.currentLocationPermission == 'granted') {
-                if (this.lastLocationPermission == 'denied') {
-                    allowed = false;
-                    location.reload();
-                } else if (!this.geolocationService.checkGeolocation()) {
-                    allowed = await this.geolocationService.saveLocalStorageLocation();
-                }
-            } else if (this.currentLocationPermission == 'denied') {
-                allowed = false;
-            } else if (this.currentLocationPermission == 'prompt') {
-                allowed = await this.geolocationService.saveLocalStorageLocation();
-            }
-
-            if (allowed) {
-                let localeState = localStorage.getItem('locale_state');
-
-                if (restrictionStateBet != localeState) {
-                    this.messageService.error(this.translate.instant('geral.stateRestriction'));
-                    return;
-                }
-            } else {
-                this.messageService.error(this.translate.instant('geral.locationPermission'));
-                return;
-            }
+        const isValidState = this.checkRestrictionState(restrictionStateBet);
+        
+        if (!isValidState) {
+            this.messageService.error(this.translate.instant('geral.stateRestriction'));
+            return;
         }
 
         if (this.menorDeIdade) {
@@ -423,7 +424,10 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     await this.accountVerificationService
                         .getAccountVerificationDetail()
                         .toPromise()
-                        .then(() => location.reload());
+                        .then(() => {
+                            this.location.replaceState('/');
+                            location.reload();
+                        });
 
                     if (this.errorMessage  && res.success) {
                         this.errorMessage  = '';
@@ -587,5 +591,54 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private formatarDataComAsterisco (data: string) {
         const [ano, mes, dia] = data.split('-');
         return `${dia[0]}*/${mes[0]}*/${ano[0]}***`;
+    }
+
+    clearValidators() {
+        this.form.controls.senha.clearValidators();
+        this.form.controls.senha.updateValueAndValidity();
+    }
+
+    restoreValidators() {
+        this.form.controls.senha.clearValidators();
+        if (this.isStrengthPassword) {
+            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator());
+        } else {
+            this.form.controls.senha.addValidators([Validators.required, Validators.minLength(8)]);
+        }
+        this.form.controls.senha.updateValueAndValidity();
+    }
+
+    clearSocialForm() {
+        this.socialAuth.signOut();
+        this.restoreValidators();
+        this.loginGoogleAtivo = false;
+        this.form.patchValue({
+            googleId: '',
+            googleIdToken: '',
+        });
+    }
+    
+    async checkLocationPermission() {
+        this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+
+        if (this.currentLocationPermission === 'granted') {
+            return this.geolocationService.checkGeolocation() || await this.geolocationService.saveLocalStorageLocation();
+        }
+
+        if (this.currentLocationPermission === 'prompt') {
+            return await this.geolocationService.saveLocalStorageLocation();
+        }
+
+        return false;
+    }
+
+    private checkRestrictionState(restrictionState: string): boolean {
+        const localeState = localStorage.getItem('locale_state');
+
+        if (restrictionState !== 'Todos' && restrictionState !== localeState) {
+            return false;
+        }
+
+        return true;
     }
 }

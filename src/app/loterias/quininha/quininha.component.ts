@@ -22,6 +22,7 @@ import { GeolocationService, Geolocation } from 'src/app/shared/services/geoloca
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from '../../services';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
+import { GeolocationValidationService } from 'src/app/shared/services/geolocation-validation.service';
 
 @Component({
     selector: 'app-quininha',
@@ -69,7 +70,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private geolocationService: GeolocationService,
         private translate: TranslateService,
         private helperService: HelperService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private geolocationValidationService: GeolocationValidationService
     ) {
         super();
     }
@@ -257,8 +259,20 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.disabledSubmit();
 
         let geolocation = null;
+
         if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
-            geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+            const validation = await this.geolocationValidationService.validateGeolocationWhenBetting({
+                enableRequirementGeolocation: true,
+                restrictionState: this.paramsService.getRestrictionStateBet()
+            });
+
+            if (!validation.valid) {
+                this.enableSubmit();
+                this.messageService.warning(validation.msg);
+                return;
+            }
+
+            geolocation = validation.geolocation;
         }
 
         if (this.aposta.itens.length) {
