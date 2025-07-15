@@ -130,6 +130,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.patchValue({ btag: this.storagedBtag });
         }
 
+        const codigoAfiliado = this.auth.getLocalstorageWithExpiry('codigoAfiliado');
+        this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
+
         this.handleQueryParams();
 
         setTimeout(() => this.documentNumberElement.nativeElement.focus(), 500);
@@ -231,18 +234,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private handleQueryParams(): void {
         this.route.queryParams
             .subscribe((params) => {
-                if (params.ref || params.afiliado) {
-                    const codigoAfiliado = params.ref ?? params.afiliado;
-
-                    this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
-                    localStorage.setItem('codigoAfiliado', codigoAfiliado);
-                } else {
-                    const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
-                    if (storagedCodigoAfiliado) {
-                        this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
-                    }
-                }
-
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {
