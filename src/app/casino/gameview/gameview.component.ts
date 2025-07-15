@@ -172,10 +172,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         window.addEventListener("resize", handleWindowChange);
 
-        window.addEventListener("message", (event) => {
-            console.log("PostMessage event received: ", event);
-        });
-
         this.casinoPostMessageService.listenSpecificEvent('EVO:EXIT_FULLSCREEN').subscribe(event => {
             console.log("Received EVO:EXIT_FULLSCREEN event: ", event);
             if (this.fullscreen) {
@@ -591,6 +587,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         } else {
             this.disableHeaderOptions();
         }
+
+        this.casinoPostMessageService.destroy();
     }
 
     disableHeaderOptions() {
