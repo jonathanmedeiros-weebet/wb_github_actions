@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-
-@Injectable({
-  providedIn: 'root'
-})
 export class CasinoPostMessageService {
   evolutionReady: boolean = false;
   evolutionSource = null;
@@ -14,28 +10,30 @@ export class CasinoPostMessageService {
   constructor() {
     const self = this;
     window.addEventListener("message", function (message) {
-      console.log("PostMessage event received service: ", message);
       self.postMessageListener(message);
     });
   }
 
   postMessageListener(event: MessageEvent) {
-    console.log("Received postMessage event: ", event);
-    if (event.data && "EVO:APPLICATION_READY" === event.data.event) {
-      this.evolutionReady = true;
-      if (event.source) {
-        this.evolutionSource = event.source;
-      }
-
-      if (event.source && this.evolutionReady) {
-        (event.source as Window).postMessage({
-          command: "EVO:EVENT_SUBSCRIBE",
-          event: "EVO:GAME_LIFECYCLE"
-        }, { targetOrigin: "*" });
-      }
+    if (!event.data || !event.data.event || !event.data.context || !event.source) {
       return;
     }
+
+    console.log("PostMessage event received service: ", event);
+
+    if ("EVO:APPLICATION_READY" === event.data.event) {
+      this.evolutionReady = true;
+      this.evolutionSource = event.source;
+
+      (event.source as Window).postMessage({
+        command: "EVO:EVENT_SUBSCRIBE",
+        event: "EVO:GAME_LIFECYCLE"
+      }, { targetOrigin: "*" });
+      return;
+    }
+
     this.eventBehaviorSubject.next(event);
+    return;
   }
 
   sendPostMessage(data: object) {
@@ -47,7 +45,7 @@ export class CasinoPostMessageService {
 
   listenSpecificEvent(eventName: string): Observable<MessageEvent> {
     console.log("Setting up listener for specific event: ", eventName);
-    
+
     return this.eventBehaviorSubject.asObservable().pipe(
       filter(event => !!event && !!event.data && event.data.event === eventName),
       map(event => {
@@ -59,5 +57,6 @@ export class CasinoPostMessageService {
 
   destroy() {
     this.eventBehaviorSubject.complete();
+    window.removeEventListener("message", this.postMessageListener.bind(this));
   }
 }
