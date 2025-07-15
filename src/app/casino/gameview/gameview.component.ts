@@ -153,8 +153,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const handleWindowChange = () => {
             this.checkIfMobileOrDesktopOrTablet();
             if (this.gameFornecedor === 'evolution') {
-                console.log('Reloading page due to Evolution game provider resize issue');
-                window.location.reload();
+                if (this.iframe) {
+                    const iframeElement = this.iframe.nativeElement;
+                    console.log('Reloading page due to Evolution game provider resize issue');
+                    iframeElement.contentWindow.location.reload();
+                }
             }
             setTimeout(() => {
                 if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
