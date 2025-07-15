@@ -49,6 +49,8 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'Swiftpag';
             case 'creditag':
                 return 'Creditag';
+            case 'modabank':
+                return 'Modabank';
 		}
 
         return "";
