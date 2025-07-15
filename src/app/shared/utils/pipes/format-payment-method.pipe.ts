@@ -39,12 +39,18 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'Onz';
             case 'voluti':
                 return 'Voluti';
+            case 'credifit':
+                return 'Credifit';
             case 'pagstar':
                 return 'Pagstar';
-            case 'creditag':
-                return 'Creditag';
             case 'zenetpay':
                 return 'Zenetpay';
+            case 'swiftpag':
+                return 'Swiftpag';
+            case 'creditag':
+                return 'Creditag';
+            case 'modabank':
+                return 'Modabank';
 		}
 
         return "";
