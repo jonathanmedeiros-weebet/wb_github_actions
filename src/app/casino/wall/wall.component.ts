@@ -461,7 +461,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     public async filterGames(
         provider: string = '',
         category: string = '',
-        enableSelectProvider: boolean = true
+        enableSelectProvider: boolean = true,
+        seeAll: boolean = false
     ) {
         const selectedProvider = provider || this.gameFornecedor;
         const selectedCategory = this.getCategorySlug(category || this.categorySelected);
