@@ -14,6 +14,15 @@ export class CasinoPostMessageService {
   constructor() {
     const self = this;
     window.addEventListener("message", function (message) {
+      if (message.data.event === "EVO:EXIT_FULLSCREEN") {
+        console.log("EVO:EXIT_FULLSCREEN event received, exiting fullscreen mode.");
+      } else {
+        console.log(
+          "Message received:", message.data.event,
+          "Message Data:", message.data,
+        );
+
+      }
       self.postMessageListener(message);
     });
   }
