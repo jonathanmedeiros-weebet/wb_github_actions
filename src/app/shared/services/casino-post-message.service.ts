@@ -19,7 +19,10 @@ export class CasinoPostMessageService {
       return;
     }
 
-    console.log("PostMessage event received service: ", event);
+    if (event.data.event === "EVO:EXIT_FULLSCREEN") {
+      console.log("EVO:EXIT_FULLSCREEN event received, exiting fullscreen mode.");
+      return;
+    }
 
     if ("EVO:APPLICATION_READY" === event.data.event) {
       this.evolutionReady = true;

@@ -703,6 +703,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     exitFullscreenMob() {
+        if (this.gameFornecedor === 'evolution') {
+            this.casinoPostMessageService.sendPostMessage({
+                event: 'EVO:EXIT_FULLSCREEN'});
+        }
         if (this.document.exitFullscreen) {
             this.document.exitFullscreen();
         } else if (this.document.mozCancelFullScreen) {
@@ -776,6 +780,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     closeFullscreen() {
+        if (this.gameFornecedor === 'evolution') {
+            this.casinoPostMessageService.sendPostMessage({
+                event: 'EVO:EXIT_FULLSCREEN'});
+        }
         if (this.document.exitFullscreen) {
             this.document.exitFullscreen();
         } else if (this.document.mozCancelFullScreen) {
