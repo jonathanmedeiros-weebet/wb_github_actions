@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
+@Injectable({
+  providedIn: 'root'
+})
+
 export class CasinoPostMessageService {
   evolutionReady: boolean = false;
   evolutionSource = null;
