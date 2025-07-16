@@ -66,7 +66,9 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         this.initAccountVerification();
 
         if (this.hasCustomerLoggedIn) {
-            if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const { termsAccepted } = await this.accountVerificationService.getForceAccountVerificationDetail();
+
+            if (!termsAccepted) {
                 const result = await this.accountVerificationService.openModalTermsPromise();
                 if (!result && this.accountVerified) {
                     this.accountVerificationService.termAcceptRedirectDefault('/clientes/personal-data');
