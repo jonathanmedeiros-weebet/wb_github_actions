@@ -154,6 +154,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.elem = this.el.nativeElement.querySelector('.game-frame');
 
         const handleWindowChange = () => {
+            if (this.gameFornecedor === 'evolution') {
+                if (this.iframe) {
+                    const iframeElement = this.iframe.nativeElement;
+                    console.log('Reloading page due to Evolution game provider resize issue');
+                    iframeElement.src = iframeElement.src;
+                }
+            }
             this.checkIfMobileOrDesktopOrTablet();
             if (this.gameFornecedor === 'evolution') {
                 if (this.iframe) {
