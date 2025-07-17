@@ -203,7 +203,8 @@
     "esporte.fit": "gulp esporte.fit",
     "reidasorte.bet": "gulp reidasorte.bet",
     "naipesoft.app": "gulp naipesoft.app",
-    "maraplay.bet": "gulp maraplay.bet"
+    "maraplay.bet": "gulp maraplay.bet",
+    "hotbetz.bet": "gulp hotbetz.bet"
   },
   "private": true,
   "dependencies": {

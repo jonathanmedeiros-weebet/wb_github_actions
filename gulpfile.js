@@ -1908,3 +1908,12 @@ gulp.task('maraplay.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('hotbetz.bet', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "hotbetz.bet",
+        banca: "HOT BETZ",
+        styles: "",
+    });
+});
