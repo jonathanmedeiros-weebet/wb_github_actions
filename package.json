@@ -201,7 +201,9 @@
     "apuesterapido.com": "gulp apuesterapido.com",
     "wingobet.bet": "gulp wingobet.bet",
     "esporte.fit": "gulp esporte.fit",
-    "reidasorte.bet": "gulp reidasorte.bet"
+    "reidasorte.bet": "gulp reidasorte.bet",
+    "naipesoft.app": "gulp naipesoft.app",
+    "maraplay.bet": "gulp maraplay.bet"
   },
   "private": true,
   "dependencies": {
