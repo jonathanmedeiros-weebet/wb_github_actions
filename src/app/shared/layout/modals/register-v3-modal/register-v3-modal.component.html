@@ -32,6 +32,10 @@
                 </div>
             </div>
             <form class="body" [formGroup]="form" autocomplete="off">
+                <asl-google-signin-button id="google-signin-button" type='standard' size='large' logo_alignment='center' text='signup_with' *ngIf="formSocial && !loginGoogleAtivo"></asl-google-signin-button>
+                <div class="text-line" *ngIf="formSocial && !loginGoogleAtivo">
+                    <span>{{ 'geral.or' | translate }}</span>
+                </div>
                 <div class="row">
                     <div class="col-md-12" >
                         <div class="form-group">
@@ -100,6 +104,7 @@
                                     [ngClass]="applyCssInputError('email')"
                                     formControlName="email"
                                     placeholder=""
+                                    [readonly]="loginGoogleAtivo"
                                     (beforeinput)="onBeforeInput($event, 'email')"
                                 >
                                 <label class="text-input" for="email">{{'geral.email' | translate}}</label>
@@ -193,7 +198,7 @@
                         ></app-error-msg>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="!loginGoogleAtivo">
                     <div class="col-md-12">
                         <div class="form-group" [ngClass]="applyCssDivError('senha')">
                             <div class="input-md">

@@ -13,9 +13,10 @@ import { jwtDecode } from 'jwt-decode';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
-import { finalize } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 import { Subject } from 'rxjs';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-register-v3-modal',
@@ -68,6 +69,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private previousUrl: string;
     public storagedBtag: string | null = null;
     public showAlertStepsVerificationAccount: boolean = false;
+    public loginGoogleAtivo: boolean = false;
+    public formSocial: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -89,7 +92,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         private bannerService: BannerService,
         private accountVerificationService: AccountVerificationService,
         private campanhaService: CampanhaAfiliadoService,
-        private location: Location
+        private location: Location,
+        private socialAuth: SocialAuthService
     ) {
         super();
     }
@@ -135,12 +139,32 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
         this.handleQueryParams();
 
+        if (this.paramsService.getOpcoes().habilitar_login_google) {
+            this.formSocial = true;
+            this.socialAuth.authState
+                .pipe(takeUntil(this.unsub$))
+                .subscribe((user) => {
+                    if (user) {
+                        this.loginGoogleAtivo = true;
+                        this.form.patchValue({
+                            nome: user.name,
+                            email: user.email,
+                            confirmarEmail: user.email,
+                            googleId: user.id,
+                            googleIdToken: user.idToken,
+                        });
+                        this.clearValidators();
+                    }
+                }
+                );
+        }
+
         setTimeout(() => this.documentNumberElement.nativeElement.focus(), 500);
     }
 
     ngOnDestroy() {
         this.location.replaceState(this.previousUrl);
-
+        this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -400,7 +424,10 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     await this.accountVerificationService
                         .getAccountVerificationDetail()
                         .toPromise()
-                        .then(() => location.reload());
+                        .then(() => {
+                            this.location.replaceState('/');
+                            location.reload();
+                        });
 
                     if (this.errorMessage  && res.success) {
                         this.errorMessage  = '';
@@ -566,6 +593,31 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         return `${dia[0]}*/${mes[0]}*/${ano[0]}***`;
     }
 
+    clearValidators() {
+        this.form.controls.senha.clearValidators();
+        this.form.controls.senha.updateValueAndValidity();
+    }
+
+    restoreValidators() {
+        this.form.controls.senha.clearValidators();
+        if (this.isStrengthPassword) {
+            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator());
+        } else {
+            this.form.controls.senha.addValidators([Validators.required, Validators.minLength(8)]);
+        }
+        this.form.controls.senha.updateValueAndValidity();
+    }
+
+    clearSocialForm() {
+        this.socialAuth.signOut();
+        this.restoreValidators();
+        this.loginGoogleAtivo = false;
+        this.form.patchValue({
+            googleId: '',
+            googleIdToken: '',
+        });
+    }
+    
     async checkLocationPermission() {
         this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
 

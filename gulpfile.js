@@ -1890,3 +1890,30 @@ gulp.task('reidasorte.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('naipesoft.app', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "naipesoft.app",
+        banca: "NAIPE SOFT",
+        styles: "",
+    });
+});
+
+gulp.task('maraplay.bet', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "maraplay.bet",
+        banca: "MARAPLAY",
+        styles: "",
+    });
+});
+
+gulp.task('hotbetz.bet', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "hotbetz.bet",
+        banca: "HOT BETZ",
+        styles: "",
+    });
+});
