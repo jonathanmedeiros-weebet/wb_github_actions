@@ -571,7 +571,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         } else {
             this.disableHeaderOptions();
         }
-
     }
 
     disableHeaderOptions() {
