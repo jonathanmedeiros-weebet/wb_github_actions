@@ -23,7 +23,6 @@ import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
 import { ConfigurationBetLimitModalComponent } from 'src/app/shared/layout/modals/configuration-bet-limit-modal/configuration-bet-limit-modal.component';
-import { CasinoPostMessageService } from 'src/app/shared/services/casino-post-message.service';
 
 @Component({
     selector: 'app-gameview',
@@ -43,7 +42,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     params: any = [];
     mobileScreen;
     fullscreen;
-    evolutionReady = false;
     elem: any;
     showLoadingIndicator = true;
     showGameListLoadingIndicator = true;
@@ -106,7 +104,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private translate: TranslateService,
         private geolocationService: GeolocationService,
         private accountVerificationService: AccountVerificationService,
-        private casinoPostMessageService: CasinoPostMessageService,
         @Inject(DOCUMENT) private document: any
 
     ) {
@@ -154,21 +151,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.elem = this.el.nativeElement.querySelector('.game-frame');
 
         const handleWindowChange = () => {
-            if (this.gameFornecedor === 'evolution') {
-                if (this.iframe) {
-                    const iframeElement = this.iframe.nativeElement;
-                    console.log('Reloading page due to Evolution game provider resize issue');
-                    iframeElement.src = iframeElement.src;
-                }
-            }
             this.checkIfMobileOrDesktopOrTablet();
-            if (this.gameFornecedor === 'evolution') {
-                if (this.iframe) {
-                    const iframeElement = this.iframe.nativeElement;
-                    console.log('Reloading page due to Evolution game provider resize issue');
-                    iframeElement.contentWindow.location.reload();
-                }
-            }
             setTimeout(() => {
                 if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
                     this.resolveGameScreen(true);
@@ -178,14 +161,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         };
 
         window.addEventListener("resize", handleWindowChange);
-
-        this.casinoPostMessageService.listenSpecificEvent('EVO:EXIT_FULLSCREEN').subscribe(event => {
-            console.log("Received EVO:EXIT_FULLSCREEN event: ", event);
-            if (this.fullscreen) {
-                this.closeFullscreen();
-            }
-        });
-
+        
         this.layoutService.hideLiveChats(this.renderer);
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
@@ -710,10 +686,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     exitFullscreenMob() {
-        if (this.gameFornecedor === 'evolution') {
-            this.casinoPostMessageService.sendPostMessage({
-                event: 'EVO:EXIT_FULLSCREEN'});
-        }
         if (this.document.exitFullscreen) {
             this.document.exitFullscreen();
         } else if (this.document.mozCancelFullScreen) {
@@ -787,10 +759,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     closeFullscreen() {
-        if (this.gameFornecedor === 'evolution') {
-            this.casinoPostMessageService.sendPostMessage({
-                event: 'EVO:EXIT_FULLSCREEN'});
-        }
         if (this.document.exitFullscreen) {
             this.document.exitFullscreen();
         } else if (this.document.mozCancelFullScreen) {
