@@ -152,6 +152,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         const handleWindowChange = () => {
             this.checkIfMobileOrDesktopOrTablet();
+
             setTimeout(() => {
                 if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
                     this.resolveGameScreen(true);
@@ -161,7 +162,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         };
 
         window.addEventListener("resize", handleWindowChange);
-        
+
         this.layoutService.hideLiveChats(this.renderer);
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
@@ -571,7 +572,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.disableHeaderOptions();
         }
 
-        this.casinoPostMessageService.destroy();
     }
 
     disableHeaderOptions() {
