@@ -544,7 +544,7 @@ export class AuthService {
                     ariaLabelledBy: 'modal-basic-title',
                     size: 'md',
                     centered: true,
-                    windowClass: `${hasRegisterBanner ? 'modal-750' : 'modal-400'} modal-cadastro-cliente`,
+                    windowClass: `${hasRegisterBanner ? 'modal-950' : 'modal-400'} modal-cadastro-cliente`,
                     backdrop: 'static'
                 });
                 modalRef.componentInstance.hasRegisterBanner = Boolean(hasRegisterBanner);

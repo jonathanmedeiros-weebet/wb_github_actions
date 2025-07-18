@@ -190,7 +190,7 @@ button {
 
 .register-cancel-modal {
     width: 450px;
-    margin: 0 20px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     gap: 1px;
@@ -673,8 +673,8 @@ a.link-termos-politica {
         display: flex;
         flex-direction: row;
         gap: 0;
-        min-height: 480px;
-        height: auto;
+        height: 750px;
+       
     }
 
     .container {
@@ -683,7 +683,7 @@ a.link-termos-politica {
     }
 
     .banner {
-        width: 300px;
+        width: 480px;
         height: auto;
 
         &__desktop {
@@ -712,6 +712,10 @@ a.link-termos-politica {
     ::ng-deep .tooltip-password {
         --bs-tooltip-max-width: 390px !important;
         width: 100%;
+    }
+
+    .modal-cadastro-cliente .modal-dialog {
+        max-width: 930px !important;
     }
 }
 
