@@ -1154,4 +1154,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.fixTabletAndDesktopScreen();
         }
     }
+    
+    public showFullscreenButton() {
+        return this.gameFornecedor !== 'evolution' && this.gameCategory === 'cassino-live';
+    }
 }
