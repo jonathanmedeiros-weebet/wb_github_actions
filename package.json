@@ -188,7 +188,6 @@
     "sporte.vip": "gulp sporte.vip",
     "vaibet360.com": "gulp vaibet360.com",
     "sortebet777.com": "gulp sortebet777.com",
-    "3betco.com.br": "gulp 3betco.com.br",
     "apostacerta.bet": "gulp apostacerta.bet",
     "brasavipcassino.net": "gulp brasavipcassino.net",
     "betsplay.club": "gulp betsplay.club",
@@ -204,7 +203,8 @@
     "reidasorte.bet": "gulp reidasorte.bet",
     "naipesoft.app": "gulp naipesoft.app",
     "maraplay.bet": "gulp maraplay.bet",
-    "hotbetz.bet": "gulp hotbetz.bet"
+    "hotbetz.bet": "gulp hotbetz.bet",
+    "betpix77.io": "gulp betpix77.io"
   },
   "private": true,
   "dependencies": {

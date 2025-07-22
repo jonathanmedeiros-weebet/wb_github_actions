@@ -1763,15 +1763,6 @@ gulp.task('sortebet777.com', function (done) {
     });
 });
 
-gulp.task('3betco.com.br', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "3betco.com.br",
-        banca: "3BETCO",
-        styles: ""
-    });
-});
-
 gulp.task('apostacerta.bet', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
@@ -1914,6 +1905,15 @@ gulp.task('hotbetz.bet', function (done) {
         server: "front4.weebet.tech",
         host: "hotbetz.bet",
         banca: "HOT BETZ",
+        styles: "",
+    });
+});
+
+gulp.task('betpix77.io', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "betpix77.io",
+        banca: "BETPIX77",
         styles: "",
     });
 });
