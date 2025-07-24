@@ -32,7 +32,16 @@ import { ConfigurationBetLimitModalComponent } from 'src/app/shared/layout/modal
 export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @ViewChild('iframeElement', { static: false }) iframe: ElementRef<HTMLIFrameElement>;
+    @ViewChild('iframe', { static: false }) iframe2: ElementRef<HTMLIFrameElement>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+        alert('resize');
+        const temp = this.htmlGame;
+        this.htmlGame = '';
+        setTimeout(() => this.htmlGame = temp, 0);
+    }
+
     htmlGame;
     gameUrl: SafeUrl = '';
     gameId: string = '';
@@ -153,8 +162,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const handleWindowChange = () => {
             this.checkIfMobileOrDesktopOrTablet();
             if (this.gameFornecedor === 'evolution') {
+                alert('evolution');
                 if (this.iframe) {
+                    const iframe = this.iframe2.nativeElement;
                     const iframeElement = this.iframe.nativeElement;
+                    alert(`iframe ${iframeElement.src} - ${iframe.src}`);
+
+                    iframe.src = iframe.src;
+
                     iframeElement.style.display = 'none';
                     setTimeout(() => {
                         iframeElement.style.display = 'block';
