@@ -1577,6 +1577,7 @@ gulp.task('pintou.bet', function (done) {
         host: "pintou.bet",
         banca: "PINTOU.BET",
         styles: "",
+        dominioTemp: "pintoubet.com"
     });
 });
 
