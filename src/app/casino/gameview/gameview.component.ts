@@ -163,7 +163,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.checkIfMobileOrDesktopOrTablet();
             if (this.gameFornecedor === 'evolution') {
                 alert('evolution');
-                if (this.iframe || this.iframe2) {
                     const iframe = this.iframe2.nativeElement;
                     const iframeElement = this.iframe.nativeElement;
                     alert(`iframe ${iframeElement.src} - ${iframe.src}`);
@@ -174,7 +173,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     setTimeout(() => {
                         iframeElement.style.display = 'block';
                     }, 50);
-                }
             }
             setTimeout(() => {
                 if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
