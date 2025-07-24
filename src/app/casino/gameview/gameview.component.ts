@@ -163,16 +163,25 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.checkIfMobileOrDesktopOrTablet();
             if (this.gameFornecedor === 'evolution') {
                 alert('evolution');
+                try {
                     const iframe = this.iframe2.nativeElement;
                     const iframeElement = this.iframe.nativeElement;
-                    alert(`iframe ${iframeElement.src} - ${iframe.src}`);
 
-                    iframe.src = iframe.src;
+                    alert(`iframe ${iframeElement?.src} - ${iframe?.src}`);
+                    
+                   const originalSrc = iframe.src;
+                    iframe.src = '';
+                    setTimeout(() => {
+                        iframe.src = originalSrc;
+                    }, 10);
 
                     iframeElement.style.display = 'none';
                     setTimeout(() => {
                         iframeElement.style.display = 'block';
                     }, 50);
+                } catch (error) {
+                    alert(`Erro ao acessar src: ${error}`);
+                }
             }
             setTimeout(() => {
                 if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
