@@ -164,21 +164,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (this.gameFornecedor === 'evolution') {
                 alert('evolution');
                 try {
-                    const iframe = this.iframe2.nativeElement;
-                    const iframeElement = this.iframe.nativeElement;
+                    alert('chegou');
+                    alert('chegou -> ' + JSON.stringify(this.iframe));
+                    alert('chegou -> ' + JSON.stringify(this.iframe2));
+                    alert('chegou -> ' + JSON.stringify(this.iframe2.nativeElement));
+                    alert('chegou -> ' + JSON.stringify(this.iframe.nativeElement));
 
-                    alert(`iframe ${iframeElement?.src} - ${iframe?.src}`);
-                    
-                   const originalSrc = iframe.src;
-                    iframe.src = '';
-                    setTimeout(() => {
-                        iframe.src = originalSrc;
-                    }, 10);
+                  this.elem.contentWindow.location.reload();
+                    alert('finalizou');
 
-                    iframeElement.style.display = 'none';
-                    setTimeout(() => {
-                        iframeElement.style.display = 'block';
-                    }, 50);
                 } catch (error) {
                     alert(`Erro ao acessar src: ${error}`);
                 }
