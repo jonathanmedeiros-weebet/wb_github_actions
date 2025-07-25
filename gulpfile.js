@@ -1909,3 +1909,12 @@ gulp.task('betpix77.io', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betmasteroficial.net', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "betmasteroficial.net",
+        banca: "BET MASTER",
+        styles: "",
+    });
+});
