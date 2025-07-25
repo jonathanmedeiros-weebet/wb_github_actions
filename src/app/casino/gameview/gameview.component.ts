@@ -140,6 +140,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
     get isCassinoPage(): boolean {
         return this.blink === 'casino'
     }
+    reloadIframe() {
+        const iframeEl = this.iframe?.nativeElement;
+            if (iframeEl) {
+                this.renderer.setAttribute(iframeEl, 'src', iframeEl.src);
+                alert('iframe recarregado');
+            } else {
+                alert('iframe não encontrado');
+            }
+    }
 
     ngOnInit(): void {
         if (window.innerWidth <= 482) {
@@ -165,12 +174,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 alert('evolution');
                 try {
                     alert('chegou');
-                    alert('chegou -> ' + JSON.stringify(this.iframe));
-                    alert('chegou -> ' + JSON.stringify(this.iframe2));
-                    alert('chegou -> ' + JSON.stringify(this.iframe2.nativeElement));
-                    alert('chegou -> ' + JSON.stringify(this.iframe.nativeElement));
-
-                  this.elem.contentWindow.location.reload();
+                    this.reloadIframe();
                     alert('finalizou');
 
                 } catch (error) {
