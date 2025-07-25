@@ -134,6 +134,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
     get isCassinoPage(): boolean {
         return this.blink === 'casino'
     }
+    reloadIframe() {
+        const iframeEl = this.iframe?.nativeElement;
+            if (iframeEl) {
+                this.renderer.setAttribute(iframeEl, 'src', iframeEl.src);
+                alert('iframe recarregado');
+            } else {
+                alert('iframe não encontrado');
+            }
+    }
 
     ngOnInit(): void {
         if (window.innerWidth <= 482) {
