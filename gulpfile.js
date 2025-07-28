@@ -807,15 +807,6 @@ gulp.task('betsmania.live', function (done) {
     });
 });
 
-gulp.task('ricardo.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "ricardo.wee.bet",
-        banca: "RICARDO",
-        styles: "",
-    });
-});
-
 gulp.task('nautsports.club', function (done) {
     tasks(done, {
         server: "front1.weebet.tech",
@@ -1372,15 +1363,6 @@ gulp.task('sortegol.com', function (done) {
     });
 });
 
-gulp.task('gli.wee.bet', function (done) {
-    tasks(done, {
-        server: "54.147.182.240",
-        host: "gli.wee.bet",
-        banca: "GLI - Sandbox",
-        styles: ""
-    });
-});
-
 gulp.task('goldeplaca.online', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
@@ -1549,15 +1531,6 @@ gulp.task('playnabet.com', function (done) {
         server: "front2.weebet.tech",
         host: "playnabet.com",
         banca: "PLAY NA BET",
-        styles: "",
-    });
-});
-
-gulp.task('poc.wee.bet', function (done) {
-    tasks(done, {
-        server: "54.147.182.240",
-        host: "poc.wee.bet",
-        banca: "POC LOTEP",
         styles: "",
     });
 });
