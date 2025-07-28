@@ -1245,11 +1245,11 @@ gulp.task('brinksbet.com', function (done) {
     });
 });
 
-gulp.task('betbastet.com', function (done) {
+gulp.task('setedasorte.com.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "betbastet.com",
-        banca: "BET BASTET",
+        host: "setedasorte.com.br",
+        banca: "SETE DA SORTE",
         styles: ""
     });
 });
