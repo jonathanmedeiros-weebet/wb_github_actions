@@ -319,15 +319,6 @@ gulp.task('topbets.me', function (done) {
     });
 });
 
-gulp.task('masterbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "masterbet.wee.bet",
-        banca: "MasterBet",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #ffdf1b; --odds: #000; --foreground-odds: #fff; --event-time: #cb151c; --league: #333; --foreground-league: #fff;",
-    });
-});
-
 gulp.task('vitoriasports.bet', function (done) {
     tasks(done, {
         server: "front1.weebet.tech",
@@ -672,15 +663,6 @@ gulp.task('rondobet.com', function (done) {
         server: "front2.weebet.tech",
         host: "rondobet.com",
         banca: "RONDO BET",
-        styles: "",
-    });
-});
-
-gulp.task('bets60.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "bets60.wee.bet",
-        banca: "BETS 60",
         styles: "",
     });
 });
