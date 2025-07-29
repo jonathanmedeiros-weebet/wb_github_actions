@@ -1873,3 +1873,12 @@ gulp.task('betmasteroficial.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cr7bet.online', function (done) {
+    tasks(done, {
+        server: "front3.weebet.tech",
+        host: "cr7bet.online",
+        banca: "CR7 BET",
+        styles: "",
+    });
+});
