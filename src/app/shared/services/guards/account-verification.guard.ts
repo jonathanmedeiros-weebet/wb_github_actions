@@ -4,6 +4,7 @@ import { AccountVerificationService } from '../account-verification.service';
 import { AuthService } from '../auth/auth.service';
 import { ModalControllerService } from '../modal-controller.service';
 import { ParametrosLocaisService } from '../parametros-locais.service';
+import { set } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +52,11 @@ export class AccountVerificationGuard implements CanActivate {
         if (this.homePageUrl[homePage] == nextUrl) {
           return true;
         }
-
-        this.router.navigate(['/']);
+        console.log('nextUrl', nextUrl);
+        const cassino = ['/casino', '/live-casino'];
+        if (!cassino.includes(this.homePageUrl[homePage])) {
+          this.router.navigate(['/']);
+        }
         return true;
 
       } else {

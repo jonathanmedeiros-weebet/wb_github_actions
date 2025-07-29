@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestr
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import {
     AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService, HeadersService,
@@ -30,12 +30,9 @@ import { ConfigurationBetLimitModalComponent } from 'src/app/shared/layout/modal
     styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
-    @ViewChild('iframeContainer', { static: false }) iframeContainer!: ElementRef;
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
-    @ViewChild('iframeElement', { static: false }) iframe: ElementRef<HTMLIFrameElement>;
+    @ViewChild('iframeElement') iframe!: ElementRef<HTMLIFrameElement>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
-    @HostListener('window:resize', ['$event'])
-
     htmlGame;
     gameUrl: SafeUrl = '';
     gameId: string = '';
@@ -134,15 +131,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     get isCassinoPage(): boolean {
         return this.blink === 'casino'
     }
-    reloadIframe() {
-        const iframeEl = this.iframe?.nativeElement;
-            if (iframeEl) {
-                this.renderer.setAttribute(iframeEl, 'src', iframeEl.src);
-                alert('iframe recarregado');
-            } else {
-                alert('iframe não encontrado');
-            }
-    }
 
     ngOnInit(): void {
         if (window.innerWidth <= 482) {
@@ -165,11 +153,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const handleWindowChange = () => {
             this.checkIfMobileOrDesktopOrTablet();
             if (this.gameFornecedor === 'evolution') {
-                const iframe = document.getElementById('iframeTeste') as HTMLIFrameElement;
-                // console.log('iframe -> ', iframe)
-                // if (iframe) this.criarIframe(iframe.src);
-                if (iframe) this.criarIframe('www.google.com.br');
-                this.cd.detectChanges();
+                this.iframe.nativeElement.contentWindow?.location.reload();
             }
 
             setTimeout(() => {
@@ -265,38 +249,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.linkWhatsapp = `https://api.whatsapp.com/send/?text=${this.sharedMsg}%0A${encodeURIComponent(this.currentUrl)}&type=custom_url&app_absent=0`;
             this.linkTelegram = `https://telegram.me/share/url?url=${encodeURIComponent(this.currentUrl)}&text=${this.sharedMsg}`;
         }
-    }
-
-    private criarIframe(url: string) {
-       
-
-        setTimeout(() => {
-            const container = this.iframeContainer?.nativeElement;
-            console.log(this.isMobile);
-            console.log(this.gameMode);
-            console.log(this.isLoggedIn);
-
-            console.log('container -> ', this.iframeContainer)
-            console.log('container -> ', container)
-
-            while (container.firstChild) {
-              container.removeChild(container.firstChild);
-            }
-            console.log('container -> ', container)
-    
-            const safeUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-            const iframe: HTMLIFrameElement = this.renderer.createElement('iframe');
-            this.renderer.setStyle(iframe, 'width', '100%');
-            this.renderer.setStyle(iframe, 'height', '100%');
-            this.renderer.setAttribute(iframe, 'frameborder', '0');
-            this.renderer.setAttribute(iframe, 'allowfullscreen', 'true');
-            this.renderer.setAttribute(iframe, 'id', 'iframeteste'); // <-- Aqui define o id
-
-            iframe.src = url as string;
-            this.renderer.appendChild(container, iframe);
-        console.log('iframe -> ', iframe)
-
-        }, 3000);
     }
 
     abrirLogin() {
@@ -537,7 +489,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameProviderName = response.gameFornecedorExibicao;
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
-                        this.criarIframe(response.gameURL);
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
