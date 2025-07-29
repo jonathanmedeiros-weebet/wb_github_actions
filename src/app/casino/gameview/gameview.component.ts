@@ -166,8 +166,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.checkIfMobileOrDesktopOrTablet();
             if (this.gameFornecedor === 'evolution') {
                 const iframe = document.getElementById('iframeTeste') as HTMLIFrameElement;
-                console.log('iframe -> ', iframe)
-                if (iframe) this.criarIframe(iframe.src);
+                // console.log('iframe -> ', iframe)
+                // if (iframe) this.criarIframe(iframe.src);
+                if (iframe) this.criarIframe('www.google.com.br');
                 this.cd.detectChanges();
             }
 
