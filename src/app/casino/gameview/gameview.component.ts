@@ -81,6 +81,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     gameProviderName: string = '';
     private inGame: boolean = false
+    private boundResizeHandler = this.handleWindowChange.bind(this)
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -149,22 +150,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://wb-assets.com/img/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
-
-        const handleWindowChange = () => {
-            this.checkIfMobileOrDesktopOrTablet();
-            if (this.gameFornecedor === 'evolution') {
-                this.iframe.nativeElement.contentWindow?.location.reload();
-            }
-
-            setTimeout(() => {
-                if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
-                    this.resolveGameScreen(true);
-                    this.cd.detectChanges();
-                }
-            }, 200)
-        };
-
-        window.addEventListener("resize", handleWindowChange);
 
         this.layoutService.hideLiveChats(this.renderer);
 
@@ -292,6 +277,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngAfterViewInit() {
+
+        window.addEventListener("resize", this.boundResizeHandler);
+
         this.gamesScrolls.changes.subscribe(
             (scrolls) => this.scrolls = scrolls.toArray()
         );
@@ -461,12 +449,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 response => {
                     if (response['error'] == 1) {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
-                        this.router.navigate(['/']);
+                        // this.router.navigate(['/']);
                     };
 
                     if (response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
                         this.showModal(response.loss_limit.message);
-                        this.router.navigate(['/']);
+                        // this.router.navigate(['/']);
                     }
 
                     if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
@@ -475,7 +463,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
                     if (response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
                         this.showModalBetLimit(response.bet_limit?.message);
-                        this.router.navigate(['/']);
+                        // this.router.navigate(['/']);
                     }
 
                     if (!response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
@@ -502,7 +490,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 },
                 error => {
                     this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
-                    this.router.navigate(['/']);
+                    // this.router.navigate(['/']);
                 });
     }
 
@@ -570,6 +558,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
         } else {
             this.disableHeaderOptions();
         }
+
+         window.removeEventListener("resize", this.boundResizeHandler);
+
     }
 
     disableHeaderOptions() {
@@ -1157,4 +1148,21 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public showFullscreenButton() {
         return this.gameFornecedor !== 'evolution' && this.gameCategory === 'cassino-live';
     }
+
+    handleWindowChange() {
+            this.checkIfMobileOrDesktopOrTablet();
+            console.log('girou');
+            console.log(this.gameFornecedor)
+            if (this.gameFornecedor === 'tomhorn') {
+                console.log('recarregou');
+                window.location.reload();
+            }
+
+            setTimeout(() => {
+                if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
+                    this.resolveGameScreen(true);
+                    this.cd.detectChanges();
+                }
+            }, 200)
+        };
 }
