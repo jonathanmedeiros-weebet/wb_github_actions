@@ -1153,7 +1153,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.checkIfMobileOrDesktopOrTablet();
             console.log('girou');
             console.log(this.gameFornecedor)
-            if (this.gameFornecedor === 'tomhorn') {
+            if (this.gameFornecedor === 'evolution') {
                 console.log('recarregou');
                 window.location.reload();
             }
