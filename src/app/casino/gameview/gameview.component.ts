@@ -449,12 +449,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 response => {
                     if (response['error'] == 1) {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
-                        // this.router.navigate(['/']);
+                        this.router.navigate(['/']);
                     };
 
                     if (response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
                         this.showModal(response.loss_limit.message);
-                        // this.router.navigate(['/']);
+                        this.router.navigate(['/']);
                     }
 
                     if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
@@ -463,7 +463,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
                     if (response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
                         this.showModalBetLimit(response.bet_limit?.message);
-                        // this.router.navigate(['/']);
+                        this.router.navigate(['/']);
                     }
 
                     if (!response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
@@ -490,7 +490,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 },
                 error => {
                     this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
-                    // this.router.navigate(['/']);
+                    this.router.navigate(['/']);
                 });
     }
 
@@ -1151,10 +1151,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     handleWindowChange() {
             this.checkIfMobileOrDesktopOrTablet();
-            console.log('girou');
-            console.log(this.gameFornecedor)
             if (this.gameFornecedor === 'evolution') {
-                console.log('recarregou');
                 window.location.reload();
             }
 
