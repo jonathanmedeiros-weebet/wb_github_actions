@@ -81,6 +81,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     gameProviderName: string = '';
     private inGame: boolean = false
+    private boundResizeHandler = this.handleWindowChange.bind(this)
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -149,19 +150,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://wb-assets.com/img/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
-
-        const handleWindowChange = () => {
-            this.checkIfMobileOrDesktopOrTablet();
-
-            setTimeout(() => {
-                if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
-                    this.resolveGameScreen(true);
-                    this.cd.detectChanges();
-                }
-            }, 200)
-        };
-
-        window.addEventListener("resize", handleWindowChange);
 
         this.layoutService.hideLiveChats(this.renderer);
 
@@ -289,6 +277,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngAfterViewInit() {
+
+        window.addEventListener("resize", this.boundResizeHandler);
+
         this.gamesScrolls.changes.subscribe(
             (scrolls) => this.scrolls = scrolls.toArray()
         );
@@ -486,11 +477,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameProviderName = response.gameFornecedorExibicao;
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
-                        // if(this.gameFornecedor !== 'pgsoft') {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-                        // } else {
-                        // this.htmlGame = response.htmlGame;
-                        // }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
                             this.gameName = response.gameName.split("- 9", 1) || "";
@@ -571,6 +558,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
         } else {
             this.disableHeaderOptions();
         }
+
+         window.removeEventListener("resize", this.boundResizeHandler);
+
     }
 
     disableHeaderOptions() {
@@ -1158,4 +1148,18 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public showFullscreenButton() {
         return this.gameFornecedor !== 'evolution' && this.gameCategory === 'cassino-live';
     }
+
+    private handleWindowChange() {
+        this.checkIfMobileOrDesktopOrTablet();
+        if (this.gameFornecedor === 'evolution') {
+            window.location.reload();
+        }
+
+        setTimeout(() => {
+            if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
+                this.resolveGameScreen(true);
+                this.cd.detectChanges();
+            }
+        }, 200)
+    };
 }

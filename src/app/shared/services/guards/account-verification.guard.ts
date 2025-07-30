@@ -52,7 +52,17 @@ export class AccountVerificationGuard implements CanActivate {
           return true;
         }
 
-        this.router.navigate(['/']);
+        const liveCassinoUrl = ['live-casino'];
+        const urlParts = nextUrl.split('/');
+        const baseSegment = urlParts[1] ?? null;
+        const providerSegment = urlParts[2] ?? null;
+        const isEvolutionProvider = providerSegment === 'evolution';
+        const isLiveCassinoEvolution = liveCassinoUrl.includes(baseSegment) && isEvolutionProvider;
+
+        if (!isLiveCassinoEvolution) {
+          this.router.navigate(['/']);
+        }
+
         return true;
 
       } else {
