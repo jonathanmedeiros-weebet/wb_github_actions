@@ -31,7 +31,7 @@ import { ConfigurationBetLimitModalComponent } from 'src/app/shared/layout/modal
 })
 export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
-    @ViewChild('iframeElement') iframe!: ElementRef<HTMLIFrameElement>;
+    @ViewChild('iframeElement', { static: false }) iframe: ElementRef<HTMLIFrameElement>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
     htmlGame;
     gameUrl: SafeUrl = '';
