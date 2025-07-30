@@ -1149,17 +1149,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return this.gameFornecedor !== 'evolution' && this.gameCategory === 'cassino-live';
     }
 
-    handleWindowChange() {
-            this.checkIfMobileOrDesktopOrTablet();
-            if (this.gameFornecedor === 'evolution') {
-                window.location.reload();
-            }
+    private handleWindowChange() {
+        this.checkIfMobileOrDesktopOrTablet();
+        if (this.gameFornecedor === 'evolution') {
+            window.location.reload();
+        }
 
-            setTimeout(() => {
-                if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
-                    this.resolveGameScreen(true);
-                    this.cd.detectChanges();
-                }
-            }, 200)
-        };
+        setTimeout(() => {
+            if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
+                this.resolveGameScreen(true);
+                this.cd.detectChanges();
+            }
+        }, 200)
+    };
 }

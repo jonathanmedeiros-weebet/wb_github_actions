@@ -51,11 +51,14 @@ export class AccountVerificationGuard implements CanActivate {
         if (this.homePageUrl[homePage] == nextUrl) {
           return true;
         }
-        const cassinoUrl = ['live-casino'];
-        const basePath = nextUrl.split('/')[1]; 
-        const isCassinoUrl = cassinoUrl.includes(basePath);
-    
-        if (!isCassinoUrl) {
+
+        const liveCassinoUrl = ['live-casino'];
+        const urlParts = nextUrl.split('/');
+        const basePath = urlParts[1] || '';
+        const isEvolutionProvider = urlParts[2] === 'evolution';
+        const isLiveCassinoEvolution = liveCassinoUrl.includes(basePath) && isEvolutionProvider;
+
+        if (!isLiveCassinoEvolution) {
           this.router.navigate(['/']);
         }
 
