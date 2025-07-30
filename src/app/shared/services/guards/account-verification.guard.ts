@@ -54,8 +54,9 @@ export class AccountVerificationGuard implements CanActivate {
 
         const liveCassinoUrl = ['live-casino'];
         const urlParts = nextUrl.split('/');
-        const basePath = urlParts[1] || '';
-        const isEvolutionProvider = urlParts.length > 2 && urlParts[2] === 'evolution';
+        const basePath = urlParts[1] ?? null;
+        const providerUrl = urlParts[2] ?? null;
+        const isEvolutionProvider = providerUrl === 'evolution';
         const isLiveCassinoEvolution = liveCassinoUrl.includes(basePath) && isEvolutionProvider;
 
         if (!isLiveCassinoEvolution) {
