@@ -149,7 +149,7 @@ export class BilheteRifaComponent extends BaseFormComponent implements OnInit, O
         this.form = this.fb.group({
             sorteio_id: ['', [Validators.required]],
             apostador: ['', (this.isCliente || !this.modoCambista) ? '' : [Validators.required]],
-            valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
+            valor: [null, [Validators.required, Validators.min(this.apostaMinima)]],
             numeros: [0, [Validators.required, Validators.min(1)]]
         });
 
