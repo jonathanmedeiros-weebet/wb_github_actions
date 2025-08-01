@@ -131,6 +131,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return this.blink === 'casino'
     }
 
+    get shouldShowFullscreenButton(): boolean {
+        const isLiveCasino = this.router.url.startsWith('/live-casino/');
+        const isLiveCasinoButIsNotEvolution = (isLiveCasino && this.gameFornecedor !== 'evolution');
+        const isLiveCasinoEvolutionAndMobile = (isLiveCasino && this.gameFornecedor == 'evolution' && this.isMobile);
+        return !isLiveCasino || isLiveCasinoButIsNotEvolution || isLiveCasinoEvolutionAndMobile;
+    }
+
     ngOnInit(): void {
         if (window.innerWidth <= 482) {
             this.scrollStep = 200;
@@ -256,7 +263,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        window.addEventListener("orientationchange", this.boundResizeHandler);
+        if (screen?.orientation) {
+            screen.orientation.addEventListener("change", this.boundResizeHandler);
+        } else {
+            window.addEventListener("orientationchange", this.boundResizeHandler);
+        }
 
         this.gamesScrolls.changes.subscribe(
             (scrolls) => this.scrolls = scrolls.toArray()
@@ -344,15 +355,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         } else {
             this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
-        }
-    }
-
-    changeGameviewHeight() {
-        if (!this.isMobile) {
-            const headerHeight = this.headerHeight;
-            const contentEl = this.el.nativeElement.querySelector('.game-frame');
-            const headerGameView = this.el.nativeElement.querySelector('.header-game-view').getBoundingClientRect().height;
-            const height = window.innerHeight - headerHeight - headerGameView;
         }
     }
 
@@ -537,8 +539,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.disableHeaderOptions();
         }
 
-        window.removeEventListener("orientationchange", this.boundResizeHandler);
-
+        if (screen?.orientation) {
+            screen.orientation.removeEventListener("change", this.boundResizeHandler);
+        } else {
+            window.removeEventListener("orientationchange", this.boundResizeHandler);
+        }
     }
 
     disableHeaderOptions() {
@@ -900,7 +905,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(gameViewHeader, 'display', 'flex');
         }
         if (gameView) {
-            this.renderer.setStyle(gameView, 'padding-top', '50px');
             this.renderer.setStyle(gameView, 'position', 'fixed');
         }
     }
@@ -1054,7 +1058,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.isTablet) {
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
-                this.renderer.setStyle(gameView, 'padding-top', '50px');
                 this.renderer.setStyle(gameView, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
                 this.renderer.setStyle(gameFrame, 'style', 'margin-top: 0');
@@ -1082,7 +1085,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (this.isHorizontalMobile) {
             this.disableHeader();
             if (gameView) {
-                this.renderer.setStyle(gameView, 'padding-top', '50px');
                 this.renderer.setStyle(gameView, 'width', '100dvw');
                 this.renderer.setStyle(gameView, 'height', '100dvh');
                 this.renderer.setStyle(gameView, 'position', 'fixed');
@@ -1121,13 +1123,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if ((this.isDesktop || this.isHorizontalMobile) && this.gameMode === 'REAL') {
             this.fixTabletAndDesktopScreen();
         }
-    }
-
-    public showFullscreenButton() {
-        const isLiveCasino = this.router.url.startsWith('/live-casino/');
-        const isLiveCasinoButIsNotEvolution = (isLiveCasino && this.gameFornecedor !== 'evolution');
-        const isLiveCasinoEvolutionAndMobile = (isLiveCasino && this.gameFornecedor == 'evolution' && this.isMobile);
-        return !isLiveCasino || isLiveCasinoButIsNotEvolution || isLiveCasinoEvolutionAndMobile;
     }
 
     private async handleWindowChange() {
