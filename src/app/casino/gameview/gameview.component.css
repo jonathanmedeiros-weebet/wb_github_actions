@@ -324,7 +324,7 @@ iframe{
     }
 
     .game-view-mobile.in-game {
-        top: 57px;
+        top: 50px;
         position: fixed;
     }
 
@@ -390,7 +390,7 @@ iframe{
 
     .game-view-mobile.in-game {
        position: fixed;
-       top: 57px;
+       top: 50px;
     }
 
     .game-list app-wall-game-card {
