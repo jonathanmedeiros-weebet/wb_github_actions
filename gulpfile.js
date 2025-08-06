@@ -1862,3 +1862,12 @@ gulp.task('cr7bet.online', function (done) {
         styles: "",
     });
 });
+
+gulp.task('starkbet.casino', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "starkbet.casino",
+        banca: "STARK BET",
+        styles: "",
+    });
+});
