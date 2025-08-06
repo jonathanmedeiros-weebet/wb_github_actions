@@ -347,12 +347,12 @@ gulp.task('rblt.me', function (done) {
     });
 });
 
-gulp.task('esportebetsvip.com', function (done) {
+gulp.task('esportebets.io', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
         host: "esportebets.io",
         banca: "Esporte Bets",
-        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #003ae6; --foreground-highlight: #fff;"
+        styles: ""
     });
 });
 
