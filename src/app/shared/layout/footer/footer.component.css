@@ -85,8 +85,6 @@ h2{
     gap: 24px;
     align-self: stretch;
     flex-wrap: wrap;
-    max-height: 80px;
-    max-width: 250px;
 }
 
 .info-jogo h4 {
