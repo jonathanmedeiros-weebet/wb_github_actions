@@ -144,24 +144,17 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        if (this.isVirtualPage) {
-            this.sideBarService.changeItens({
-                contexto: 'virtuais',
-                dados: {}
-            });
-        } else {
-            const page = this.isCassinoPage ? 'casino' : 'live_casino';
-            this.widgetService.byPage(page).subscribe(response => {
-                if (response) {
-                    this.widgets = response.map((i) => ({ ...i, selector: 'w' + i.id}));
-                    this.getGamesCasino();
-                }
-            });
-            this.sideBarService.changeItens({
-                contexto: 'casino',
-                dados: {}
-            });
-        }
+        const page = this.isCassinoPage ? 'casino' : 'live_casino';
+        this.widgetService.byPage(page).subscribe(response => {
+            if (response) {
+                this.widgets = response.map((i) => ({ ...i, selector: 'w' + i.id}));
+                this.getGamesCasino();
+            }
+        });
+        this.sideBarService.changeItens({
+            contexto: 'casino',
+            dados: {}
+        });
 
         this.navigationHistoryService.limparFiltro$.subscribe(() => {
             this.clearFilters();

@@ -147,13 +147,15 @@
                 <ng-template #cassinoGameList>
                     <ng-container *ngSwitchCase="'result_filter'">
                         <div class="bloco">
-                            <div class="titulo" *ngIf="gameList && gameList.length">
-                                <app-back-page
-                                    [text]="gameTitle | titlecase"
-                                    [category]="categorySelected"
-                                    [provider]="gameFornecedor"
-                                ></app-back-page>
-                            </div>
+                            <ng-container *ngIf="!isVirtualPage">
+                                <div class="titulo" *ngIf="gameList && gameList.length">
+                                    <app-back-page
+                                        [text]="gameTitle | titlecase"
+                                        [category]="categorySelected"
+                                        [provider]="gameFornecedor"
+                                    ></app-back-page>
+                                </div>
+                            </ng-container>
                             <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">
                                 {{'geral.nenhumJogoEncontrado' | translate}}!
                             </div>
