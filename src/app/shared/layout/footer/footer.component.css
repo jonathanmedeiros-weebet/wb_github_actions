@@ -33,7 +33,8 @@ footer {
 }
 
 .logo img {
-    height: 53px
+    max-height: 80px;
+    max-width: 250px;
 }
 
 .licences {
@@ -79,12 +80,13 @@ h2{
 
 .logo {
     display: flex;
-    height: 53px;
     align-items: center;
     align-content: center;
     gap: 24px;
     align-self: stretch;
     flex-wrap: wrap;
+    max-height: 80px;
+    max-width: 250px;
 }
 
 .info-jogo h4 {
