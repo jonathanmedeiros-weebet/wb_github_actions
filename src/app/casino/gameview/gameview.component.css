@@ -100,6 +100,7 @@ iframe{
 
 .header-game-view .buttons-game-view {
     justify-content: right;
+    gap: 10px;
 }
 
 .game-name span {
@@ -222,6 +223,35 @@ iframe{
     display: flex;
 }
 
+#deposit-btn{
+    display: flex;
+    max-height: 23px;
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+    width: 82px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    font-size: 12px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 170px;
+    height: 40px;
+}
+
+.btn p {
+    padding: 0;
+    margin: 0;
+}
+
 @media only screen and (max-width: 1024px) {
     .game-view {
         z-index: 10000;
@@ -294,7 +324,7 @@ iframe{
     }
 
     .game-view-mobile.in-game {
-        top: 57px;
+        top: 50px;
         position: fixed;
     }
 
@@ -360,7 +390,7 @@ iframe{
 
     .game-view-mobile.in-game {
        position: fixed;
-       top: 57px;
+       top: 50px;
     }
 
     .game-list app-wall-game-card {
@@ -497,17 +527,6 @@ iframe{
         margin-top: 20px;
     }
 
-    .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 170px;
-        height: 40px;
-    }
-
     .register-btn {
         border: 1px solid var(--highlight);
         background: var(--highlight);
@@ -616,7 +635,7 @@ iframe{
 
     .game-frame {
         width: 100%;
-        margin: 0 20px;
+        margin: 0;
         margin-bottom: 30px;
         height: 780px;
     }
@@ -705,6 +724,7 @@ iframe{
 
     .header-game-view .buttons-game-view {
         justify-content: right;
+        gap: 10px;
     }
 
     .game-name span {
