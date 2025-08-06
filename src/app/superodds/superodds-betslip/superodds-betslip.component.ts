@@ -129,7 +129,7 @@ export class SuperoddsBetslipComponent extends BaseFormComponent implements OnIn
     createForm() {
         this.form = this.fb.group({
             apostador: ['', (this.isCliente || !this.modoCambista) ? '' : [Validators.required]],
-            valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
+            valor: [null, [Validators.required, Validators.min(this.apostaMinima)]],
             itens: this.fb.array([])
         });
 

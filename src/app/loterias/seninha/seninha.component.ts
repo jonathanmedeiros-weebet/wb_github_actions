@@ -165,7 +165,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     createForm() {
         this.form = this.fb.group({
-            valor: ['', Validators.compose([
+            valor: [null, Validators.compose([
                 Validators.required,
                 Validators.min(this.opcoes.valor_min_aposta_loterias)
             ])],
