@@ -307,15 +307,15 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             }
 
             if (moment().isSame(this.data, 'date')) {
-                this.getJogosDestaquesIds();
+                this.getHighlightedGamesIds();
             } else {
                 this.jogosDestaquesIds = [];
-                this.mapJogosDestaque();
+                this.mapHighlightedGames();
             }
         }
 
         if (changes['jogosDestaquesIds'] && this.jogosDestaquesIds) {
-            this.mapJogosDestaque();
+            this.mapHighlightedGames();
         }
     }
 
@@ -324,28 +324,40 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.unsub$.complete();
     }
 
-    getJogosDestaquesIds() {
+    getHighlightedGamesIds() {
         this.jogoService.getJogosDestaque()
             .subscribe(jogos => {
                 this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
-                this.mapJogosDestaque();
+                this.mapHighlightedGames(jogos.results);
             });
     }
 
-    mapJogosDestaque() {
-        let jogosDestaques = [];
+    mapHighlightedGames(apiHighlightedGames = []) {
+        let highlightedGames = [];
+        const destaqueIdSet = new Set(this.jogosDestaquesIds.map(id => String(id)));
 
-        if (this.camps && this.camps.length > 0) {
+         if (this.camps && this.camps.length > 0) {
             this.camps.forEach(camp => {
-                const jogosSele = camp.jogos.filter(jogo => {
-                    return this.jogosDestaquesIds.includes(jogo._id + '');
-                });
-
-                jogosDestaques = jogosDestaques.concat(jogosSele);
+                const jogosSele = camp.jogos.filter(jogo =>
+                    destaqueIdSet.has(String(jogo._id))
+                );
+                highlightedGames = highlightedGames.concat(jogosSele);
             });
         }
 
-        this.jogosDestaque = [...jogosDestaques];
+        apiHighlightedGames.forEach(jogoDestaque => {
+            const jogoId = String(jogoDestaque.fi);
+            const exists = highlightedGames.some(jogo => String(jogo._id) === jogoId);
+
+            if (!exists) {
+                highlightedGames.push({
+                    _id: jogoDestaque.fi,
+                    ...jogoDestaque
+                });
+            }
+        });
+
+        this.jogosDestaque = [...highlightedGames];
         this.cd.detectChanges();
     }
 
