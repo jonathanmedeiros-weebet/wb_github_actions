@@ -334,16 +334,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     mapHighlightedGames(apiHighlightedGames = []) {
         let highlightedGames = [];
-        const destaqueIdSet = new Set(this.jogosDestaquesIds.map(id => String(id)));
-
-         if (this.camps && this.camps.length > 0) {
-            this.camps.forEach(camp => {
-                const jogosSele = camp.jogos.filter(jogo =>
-                    destaqueIdSet.has(String(jogo._id))
-                );
-                highlightedGames = highlightedGames.concat(jogosSele);
-            });
-        }
 
         apiHighlightedGames.forEach(jogoDestaque => {
             const jogoId = String(jogoDestaque.fi);
