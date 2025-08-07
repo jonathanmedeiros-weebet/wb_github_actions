@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {config} from '../../config';
-import {HeadersService} from './headers.service';
-import {catchError, map, take} from 'rxjs/operators';
-import {ErrorService} from './error.service';
+import { Injectable } from '@angular/core';
+import { config } from '../../config';
+import { HeadersService } from './headers.service';
+import { catchError, map, take } from 'rxjs/operators';
+import { ErrorService } from './error.service';
 
 export enum MaskAnonymizationTypes {
     EMAIL = 'email',
@@ -72,7 +72,7 @@ export class UtilsService {
 
         if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
             return 'ios';
-        } else if (userAgent.match( /Android/i)) {
+        } else if (userAgent.match(/Android/i)) {
             return 'android';
         }
 
@@ -84,8 +84,8 @@ export class UtilsService {
         const date = new Date(dateString);
         const today = new Date();
         return date.getFullYear() === today.getFullYear() &&
-               date.getMonth() === today.getMonth() &&
-               date.getDate() === today.getDate();
+            date.getMonth() === today.getMonth() &&
+            date.getDate() === today.getDate();
     }
 
     timeStringToMilliseconds(time: string): number {
@@ -102,17 +102,17 @@ export class UtilsService {
     getBanks() {
         return this.http.get(`${this.utilsUrl}/getBanks`, this.headers.getRequestOptions())
             .pipe(
-                map((res: any) => 
+                map((res: any) =>
                     res.results
-                    .map((item: any) => ({ ...item, nome: item.nome.toUpperCase() }))
-                    .sort((a: any, b: any) => a.nome.localeCompare(b.nome))
+                        .map((item: any) => ({ ...item, nome: item.nome.toUpperCase() }))
+                        .sort((a: any, b: any) => a.nome.localeCompare(b.nome))
                 ),
                 catchError(() => [])
             );
     }
 
     applyMaskAnonymization(value: string, type: MaskAnonymizationTypes = MaskAnonymizationTypes.PHONE) {
-        if(type == MaskAnonymizationTypes.PHONE) {
+        if (type == MaskAnonymizationTypes.PHONE) {
             value = value.replace(/\D/g, '');
             if (value.length < 2) return '(**)*******';
             const lastTwo = value.slice(-2);
@@ -128,5 +128,38 @@ export class UtilsService {
         }
 
         return value;
+    }
+
+    private getDeviceType() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        const isMobileUA = /iphone|ipod|android.*mobile|windows phone/.test(userAgent);
+        const isTabletUA = /ipad|android(?!.*mobile)|tablet/.test(userAgent);
+
+        const width = window.innerWidth;
+        if (isMobileUA || (isTouchDevice && width <= 767)) return 'mobile';
+        if (isTabletUA || (isTouchDevice && width > 767 && width <= 1024)) return 'tablet';
+
+        return 'desktop';
+    }
+
+    public isMobile() {
+        return this.getDeviceType() == 'mobile';
+    }
+
+    public isTablet() {
+        return this.getDeviceType() == 'tablet';
+    }
+
+    public isDesktop() {
+        return this.getDeviceType() == 'desktop';
+    }
+
+    public isLandscape() {
+        return (
+            window.matchMedia("(orientation: landscape)").matches ||
+            window.innerWidth > window.innerHeight
+        );
     }
 }

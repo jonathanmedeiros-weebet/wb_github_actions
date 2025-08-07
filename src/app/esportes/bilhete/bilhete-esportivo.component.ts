@@ -276,7 +276,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     createForm() {
         this.form = this.fb.group({
             apostador: ['', (this.isCliente || !this.modoCambista) ? '' : [Validators.required]],
-            valor: [0, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
+            valor: [null, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
             itens: this.fb.array([]),
             aceitar_alteracoes_odds: [false],
             utilizar_bonus: [false]

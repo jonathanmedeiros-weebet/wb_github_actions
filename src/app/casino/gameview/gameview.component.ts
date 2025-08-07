@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
@@ -11,7 +11,7 @@ import {
 } from '../../services';
 import { interval, Subject } from 'rxjs';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { CadastroModalComponent, LoginModalComponent, StateRestrictionModalComponent } from "../../shared/layout/modals";
+import { LoginModalComponent, StateRestrictionModalComponent } from "../../shared/layout/modals";
 import { ConfiguracaoLimitePerdasModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
 import { takeUntil } from "rxjs/operators";
 import { Fornecedor } from '../wall/wall.component';
@@ -20,7 +20,6 @@ import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component'
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
-import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
 import { ConfigurationBetLimitModalComponent } from 'src/app/shared/layout/modals/configuration-bet-limit-modal/configuration-bet-limit-modal.component';
 
@@ -81,6 +80,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     gameProviderName: string = '';
     private inGame: boolean = false
+    private boundResizeHandler = this.handleWindowChange.bind(this)
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -100,7 +100,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private financeiroService: FinanceiroService,
         private headerService: HeadersService,
-        private clienteService: ClienteService,
         private translate: TranslateService,
         private geolocationService: GeolocationService,
         private accountVerificationService: AccountVerificationService,
@@ -132,14 +131,19 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return this.blink === 'casino'
     }
 
+    get shouldShowFullscreenButton(): boolean {
+        const isLiveCasino = this.router.url.startsWith('/live-casino/');
+        const isLiveCasinoButIsNotEvolution = (isLiveCasino && this.gameFornecedor !== 'evolution');
+        const isLiveCasinoEvolutionAndMobile = (isLiveCasino && this.gameFornecedor == 'evolution' && this.isMobile);
+        return !isLiveCasino || isLiveCasinoButIsNotEvolution || isLiveCasinoEvolutionAndMobile;
+    }
+
     ngOnInit(): void {
         if (window.innerWidth <= 482) {
             this.scrollStep = 200;
         }
 
-        if (window.innerWidth > 482 && window.innerWidth <= 1024) {
-            this.isTablet = true;
-        }
+        this.isTablet = this.utilsService.isTablet();
 
         this.getGameList();
         this.isLoggedIn = this.auth.isLoggedIn();
@@ -149,19 +153,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://wb-assets.com/img/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
-
-        const handleWindowChange = () => {
-            this.checkIfMobileOrDesktopOrTablet();
-
-            setTimeout(() => {
-                if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
-                    this.resolveGameScreen(true);
-                    this.cd.detectChanges();
-                }
-            }, 200)
-        };
-
-        window.addEventListener("resize", handleWindowChange);
 
         this.layoutService.hideLiveChats(this.renderer);
 
@@ -174,7 +165,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.fullscreen = false;
         this.menuFooterService.setIsPagina(true);
 
-        this.route.params.subscribe(params => {
+        this.route.params.subscribe(async (params) => {
             this.params = params;
             if (this.router.url.includes('parlaybay')) {
                 this.gameId = "170000";
@@ -197,7 +188,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 return;
             }
 
-            this.checkIfMobileOrDesktopOrTablet();
+            await this.checkIfMobileOrDesktopOrTablet();
 
             if (this.avisoCancelarBonus == false) {
                 this.loadGame();
@@ -259,36 +250,25 @@ export class GameviewComponent implements OnInit, OnDestroy {
         );
     }
 
-    isLandscape(): boolean {
-        return window.innerWidth > window.innerHeight;
-    }
-
-    checkIfMobileOrDesktopOrTablet() {
-        this.isDesktop = false;
-        this.isTablet = false;
-        this.isMobile = false;
-        this.isHorizontalMobile = false;
-
-        if (window.innerWidth > 1024) {
-            return this.isDesktop = true;
-        }
-
-        if (
-            window.innerWidth > 482
-            && (window.innerHeight > 320
-                && window.innerHeight < window.innerWidth)
-        ) {
-            return this.isHorizontalMobile = true;
-        }
-
-        if (window.innerWidth > 482) {
-            return this.isTablet = true;
-        }
-
-        return this.isMobile = true;
+    checkIfMobileOrDesktopOrTablet(): Promise<void> {
+        return new Promise((resolve) => {
+            this.isDesktop = this.utilsService.isDesktop();
+            this.isTablet = this.utilsService.isTablet();
+            this.isMobile = this.utilsService.isMobile();
+            setTimeout(() => {
+                this.isHorizontalMobile = this.utilsService.isLandscape();
+                resolve();
+            }, 100);
+        })
     }
 
     ngAfterViewInit() {
+        if (screen?.orientation) {
+            screen.orientation.addEventListener("change", this.boundResizeHandler);
+        } else {
+            window.addEventListener("orientationchange", this.boundResizeHandler);
+        }
+
         this.gamesScrolls.changes.subscribe(
             (scrolls) => this.scrolls = scrolls.toArray()
         );
@@ -375,15 +355,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         } else {
             this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
-        }
-    }
-
-    changeGameviewHeight() {
-        if (!this.isMobile) {
-            const headerHeight = this.headerHeight;
-            const contentEl = this.el.nativeElement.querySelector('.game-frame');
-            const headerGameView = this.el.nativeElement.querySelector('.header-game-view').getBoundingClientRect().height;
-            const height = window.innerHeight - headerHeight - headerGameView;
         }
     }
 
@@ -486,11 +457,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameProviderName = response.gameFornecedorExibicao;
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
-                        // if(this.gameFornecedor !== 'pgsoft') {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-                        // } else {
-                        // this.htmlGame = response.htmlGame;
-                        // }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
                             this.gameName = response.gameName.split("- 9", 1) || "";
@@ -570,6 +537,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.enableHeader();
         } else {
             this.disableHeaderOptions();
+        }
+
+        if (screen?.orientation) {
+            screen.orientation.removeEventListener("change", this.boundResizeHandler);
+        } else {
+            window.removeEventListener("orientationchange", this.boundResizeHandler);
         }
     }
 
@@ -932,7 +905,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(gameViewHeader, 'display', 'flex');
         }
         if (gameView) {
-            this.renderer.setStyle(gameView, 'padding-top', '50px');
             this.renderer.setStyle(gameView, 'position', 'fixed');
         }
     }
@@ -1086,7 +1058,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.isTablet) {
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
-                this.renderer.setStyle(gameView, 'padding-top', '50px');
                 this.renderer.setStyle(gameView, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
                 this.renderer.setStyle(gameFrame, 'style', 'margin-top: 0');
@@ -1114,7 +1085,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (this.isHorizontalMobile) {
             this.disableHeader();
             if (gameView) {
-                this.renderer.setStyle(gameView, 'padding-top', '50px');
                 this.renderer.setStyle(gameView, 'width', '100dvw');
                 this.renderer.setStyle(gameView, 'height', '100dvh');
                 this.renderer.setStyle(gameView, 'position', 'fixed');
@@ -1154,4 +1124,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.fixTabletAndDesktopScreen();
         }
     }
+
+    private async handleWindowChange() {
+        await this.checkIfMobileOrDesktopOrTablet();
+
+        setTimeout(() => {
+            if (this.utilsService.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
+                this.resolveGameScreen(true);
+                this.cd.detectChanges();
+            }
+        }, 200)
+    };
 }

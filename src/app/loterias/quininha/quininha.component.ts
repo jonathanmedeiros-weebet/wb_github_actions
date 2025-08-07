@@ -169,7 +169,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     createForm() {
         this.form = this.fb.group({
-            valor: ['', Validators.compose([
+            valor: [null, Validators.compose([
                 Validators.required,
                 Validators.min(this.opcoes.valor_min_aposta_loterias)
             ])],
