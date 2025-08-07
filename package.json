@@ -10,6 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "deployall": "sh deployall.sh",
     "casadinha.bet": "gulp casadinha.bet",
     "demo.wee.bet": "gulp demo.wee.bet",
     "esportivatop.com": "gulp esportivatop.com",
