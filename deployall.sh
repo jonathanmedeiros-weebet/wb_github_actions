@@ -11,7 +11,7 @@ ingamedasorte.com joguefacil.bet kwbet.net maraplay.bet megasports.bet miamipix.
 mjrsports.bet moneybets.net newbet.one novabet.site pinbet.bet pinplay.bet pintou.bet \
 playnabet.com primoos.bet reidasorte.bet rondobet.com sortebet777.com sortegol.com \
 sporte.vip sts13.vip supertop3.bet topbets.me ultrabetss.bet vaibet360.com viabet.com.br \
-vitoriasports.vip wingobet.bet"
+vitoriasports.vip wingobet.bet starkbet.casino apostecerto.io betvem.io"
 
 # Limpa logs anteriores
 > build_falhos.txt
