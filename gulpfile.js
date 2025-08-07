@@ -547,15 +547,6 @@ gulp.task('maranhaobets.net', function (done) {
     });
 });
 
-gulp.task('ligabet.click', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "ligabet.click",
-        banca: "LIGA BET",
-        styles: "",
-    });
-});
-
 gulp.task('ilhabet.net', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
@@ -1558,15 +1549,6 @@ gulp.task('joguefacil.bet', function (done) {
         server: "front2.weebet.tech",
         host: "joguefacil.bet",
         banca: "JOGUE FÁCIL",
-        styles: ""
-    });
-});
-
-gulp.task('sportvip.bet', function (done) {
-    tasks(done, {
-        server: "front3.weebet.tech",
-        host: "sportvip.bet",
-        banca: "SportVip",
         styles: ""
     });
 });
