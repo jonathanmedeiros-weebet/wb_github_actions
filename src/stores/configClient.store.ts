@@ -16,7 +16,7 @@ interface PrinterSetting {
 const production = true;
 const _host = production ? 'https://central.demo.wee.bet' : 'http://localhost';
 const _loki = production ? 'https://loki1.weebet.tech' : 'http://localhost:8000';
-const _center = production ? 'https://center.weebet.tech' : 'https://hermes.weebet.tech';
+const _center = production ? 'https://hermes.weebet.tech' : 'https://hermes.weebet.tech';
 const _live = 'https://streaming.weebet.tech';
 const _name = 'DEMO';
 const _slug = 'weebet.jm';
