@@ -1827,11 +1827,11 @@ gulp.task('betpix77.io', function (done) {
     });
 });
 
-gulp.task('betmasteroficial.net', function (done) {
+gulp.task('jubet.bet', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "betmasteroficial.net",
-        banca: "BET MASTER",
+        host: "jubet.bet",
+        banca: "JUBET",
         styles: "",
     });
 });
