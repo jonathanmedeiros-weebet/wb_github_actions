@@ -58,6 +58,7 @@ export class ModalControllerService {
       centered: true,
       windowClass: 'modal-460 modal-generic',
       backdrop: 'static',
+      keyboard: false,
     });
   }
 
