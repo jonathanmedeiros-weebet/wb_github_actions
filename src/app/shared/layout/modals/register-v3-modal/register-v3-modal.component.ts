@@ -260,6 +260,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             .subscribe((params) => {
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
+                    this.form.patchValue({ refId: params.refId });
                 } else {
                     const storagedRefId = localStorage.getItem('refId');
                     if (storagedRefId) {
