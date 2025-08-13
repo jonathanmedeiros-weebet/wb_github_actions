@@ -1853,3 +1853,12 @@ gulp.task('starkbet.casino', function (done) {
         styles: "",
     });
 });
+
+gulp.task('mamba.bet', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "mamba.bet",
+        banca: "MAMBA BET",
+        styles: "",
+    });
+});

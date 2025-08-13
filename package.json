@@ -198,7 +198,8 @@
     "betpix77.io": "gulp betpix77.io",
     "jubet.bet": "gulp jubet.bet",
     "cr7bet.online": "gulp cr7bet.online",
-    "starkbet.casino": "gulp starkbet.casino"
+    "starkbet.casino": "gulp starkbet.casino",
+    "mamba.bet": "gulp mamba.bet"
   },
   "private": true,
   "dependencies": {
