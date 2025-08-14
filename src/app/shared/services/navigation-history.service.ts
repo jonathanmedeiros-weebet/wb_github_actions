@@ -8,6 +8,7 @@ import { AccountVerificationGuard } from './guards/account-verification.guard';
   providedIn: 'root'
 })
 export class NavigationHistoryService {
+  private previousUrlManual: string | null = window.location.pathname;
   private previousUrl: string | null = null;
   private currentUrl: string | null = null;
   private category: string | null = null;
@@ -29,6 +30,14 @@ export class NavigationHistoryService {
 
   public getPreviousUrl() {
     return this.previousUrl;
+  }
+
+  public getPreviousUrlManual() {
+    return this.previousUrlManual;
+  }
+
+  public setPreviousUrlManual(url: string) {
+    this.previousUrlManual = url;
   }
 
   public getCategory() {

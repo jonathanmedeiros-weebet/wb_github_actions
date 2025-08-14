@@ -14,6 +14,7 @@ import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verifi
 import { TermsAcceptedComponent } from '../layout/modals/terms-accepted/terms-accepted.component';
 import { ParametrosLocaisService } from './parametros-locais.service';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 interface VerifiedSteps {
   phone: boolean;
@@ -43,6 +44,7 @@ const verifiedStepsDefault: VerifiedSteps = {
   address: false
 }
 
+const CRIPTO_SECRET = 'tD6zNn2lv1h9Q0nZr4w5ztrPZy6T5e5FjJ9bLzW8k9E=';
 export const ACCOUNT_VERIFIED = 'accountVerified';
 export const ACCOUNT_VERIFICATION_SESSION = 'av';
 
@@ -68,11 +70,10 @@ export class AccountVerificationService {
     private params : ParametrosLocaisService,
     private router : Router
   ) {
-    let accountVerificationStorage: VerificationAccountResponse | string | null = sessionStorage.getItem(ACCOUNT_VERIFICATION_SESSION);
+    const accountVerificationStorage: VerificationAccountResponse | string | null = this.getAccountVerificationDataEncrypted();
     if (Boolean(accountVerificationStorage)) {
       this.firstRequestCompleted.next(true);
 
-      accountVerificationStorage = JSON.parse(accountVerificationStorage) as VerificationAccountResponse;
       this.accountVerified.next(accountVerificationStorage.account_verified);
       this.verifiedSteps.next(accountVerificationStorage.verified_steps);
       this.newCustomer.next(accountVerificationStorage.new_customer);
@@ -85,8 +86,8 @@ export class AccountVerificationService {
     }
   }
 
-  public async getForceAccountVerificationDetail() {
-    if (!this.firstRequestCompleted.getValue()) {
+  public async getForceAccountVerificationDetail(forceRequest: boolean = true) {
+    if (forceRequest && !this.firstRequestCompleted.getValue()) {
       await this.getAccountVerificationDetail().toPromise();
     }
 
@@ -104,7 +105,7 @@ export class AccountVerificationService {
     return this.http.get(`${config.LOKI_URL}/user/account-verification`, this.headerService.getRequestOptions(true))
       .pipe(
           map((response: VerificationAccountResponse) => {
-            sessionStorage.setItem(ACCOUNT_VERIFICATION_SESSION, JSON.stringify(response));
+            this.setAccountVerificationDataEncrypted(response);
             
             this.accountVerified.next(response.account_verified);
             this.verifiedSteps.next(response.verified_steps);
@@ -146,7 +147,7 @@ export class AccountVerificationService {
 
     return modalref;
   }
-
+  
   public openModalTermsAccepd(): NgbModalRef {
     const modalref: NgbModalRef = this.modalService.open(TermsAcceptedComponent, {
       ariaLabelledBy: 'modal-basic-title',
@@ -233,5 +234,17 @@ export class AccountVerificationService {
     }
 
     this.router.navigate([routerDefault]);
+  }
+
+  private getAccountVerificationDataEncrypted(): VerificationAccountResponse | null {
+    const encrypted = localStorage.getItem(ACCOUNT_VERIFICATION_SESSION)
+    if (!encrypted) return null;
+    const value = CryptoJS.AES.decrypt(encrypted, CRIPTO_SECRET);
+    return JSON.parse(value.toString(CryptoJS.enc.Utf8)) as VerificationAccountResponse;
+  }
+
+  private setAccountVerificationDataEncrypted(data: any) {
+    if (!data) return;
+    localStorage.setItem(ACCOUNT_VERIFICATION_SESSION, CryptoJS.AES.encrypt(JSON.stringify(data), CRIPTO_SECRET).toString());
   }
 }

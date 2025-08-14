@@ -4,6 +4,7 @@ import { AccountVerificationService } from '../account-verification.service';
 import { AuthService } from '../auth/auth.service';
 import { ModalControllerService } from '../modal-controller.service';
 import { ParametrosLocaisService } from '../parametros-locais.service';
+import { NavigationHistoryService } from '../navigation-history.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class AccountVerificationGuard implements CanActivate {
     private modalControllerService: ModalControllerService,
     private router: Router,
     private authService: AuthService,
-    private paramLocais: ParametrosLocaisService
+    private paramLocais: ParametrosLocaisService,
+    private navigationHistoryService: NavigationHistoryService
   ) {}
 
   homePageUrl = {
@@ -32,7 +34,7 @@ export class AccountVerificationGuard implements CanActivate {
 
     void next;
     const nextUrl = state.url;
-    const previousUrl = window.location.pathname;
+    const previousUrl = this.navigationHistoryService.getPreviousUrlManual();
     const homePage = this.paramLocais.getOpcoes().pagina_inicial;
 
     if (this.authService.isLoggedIn() && this.authService.isCliente()) {
@@ -52,7 +54,12 @@ export class AccountVerificationGuard implements CanActivate {
           return true;
         }
 
-        this.router.navigate(['/']);
+        const { termsAccepted, addressVerified, accountVerified } = await this.accountVerificationService.getForceAccountVerificationDetail(false);
+        if (!termsAccepted || !addressVerified || !accountVerified) {
+          this.navigationHistoryService.setPreviousUrlManual(this.homePageUrl[homePage])
+          this.router.navigate([this.homePageUrl[homePage]]);
+        }
+
         return true;
 
       } else {
