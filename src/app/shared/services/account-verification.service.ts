@@ -46,7 +46,7 @@ const verifiedStepsDefault: VerifiedSteps = {
 
 const CRIPTO_SECRET = 'tD6zNn2lv1h9Q0nZr4w5ztrPZy6T5e5FjJ9bLzW8k9E=';
 export const ACCOUNT_VERIFIED = 'accountVerified';
-export const ACCOUNT_VERIFICATION_SESSION = 'account_verification';
+export const ACCOUNT_VERIFICATION_SESSION = 'av';
 
 @Injectable({
   providedIn: 'root'
