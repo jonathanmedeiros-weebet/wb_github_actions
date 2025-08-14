@@ -1,0 +1,28 @@
+name: Custom API Workflow
+
+on:
+  workflow_dispatch: # Disparo manual via API ou UI
+    inputs:
+      name:
+        description: 'Seu nome'
+        required: true
+        default: 'Jonathan'
+      force:
+        description: 'Forçar execução'
+        required: false
+        default: 'false'
+  repository_dispatch: # Disparo via API externa
+    types: [custom-api]
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exibir parâmetros recebidos
+        run: |
+          echo "Evento: ${{ github.event_name }}"
+          echo "Nome recebido: ${{ github.event.inputs.name || github.event.client_payload.name }}"
+          echo "Forçar: ${{ github.event.inputs.force || github.event.client_payload.force }}"
+      - name: Rodar script PHP
+        run: |
+          php -r "echo 'Rodando script PHP com o nome: ' . ('${{ github.event.inputs.name || github.event.client_payload.name }}') . PHP_EOL;"
