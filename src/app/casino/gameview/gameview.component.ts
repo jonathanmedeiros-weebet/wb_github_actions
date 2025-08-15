@@ -1074,7 +1074,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.renderer.setStyle(gameFrame, 'height', `calc(100% - ${newHeight}px)`);
                 });
             }
-        } else {
+        } else if (this.isHorizontalMobile) {
             this.disableHeader();
             if (gameView) {
                 this.renderer.setStyle(gameView, 'width', '100dvw');
