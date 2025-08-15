@@ -1,0 +1,18 @@
+services:
+  storybook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: weebet-storybook
+    ports:
+      - "5001:5001"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    environment:
+      NODE_ENV: development
+      HOST: 0.0.0.0
+    command: npm run dev
+
+volumes:
+  node_modules:
