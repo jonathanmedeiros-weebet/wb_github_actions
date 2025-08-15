@@ -249,6 +249,7 @@ export class AppComponent implements OnInit {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
 
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
+            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
             this.auth.openRegisterV3Modal(); 
         }
 
