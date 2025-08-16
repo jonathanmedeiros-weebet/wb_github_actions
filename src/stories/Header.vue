@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import MyButton from './Button.vue';
+import MyButton from '../components/Button/Button.vue';
 import './header.css';
 
 defineProps<{ user: { name: string } | null }>();

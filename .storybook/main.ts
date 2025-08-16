@@ -6,7 +6,9 @@ const config: StorybookConfig = {
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
   "addons": [
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
+    '@storybook/addon-styling-webpack',
+    '@storybook/addon-themes' // se quiser trocar temas
   ],
   "framework": {
     "name": "@storybook/vue3-vite",
