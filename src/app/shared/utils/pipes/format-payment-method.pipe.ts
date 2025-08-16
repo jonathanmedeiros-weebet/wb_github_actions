@@ -51,6 +51,8 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'Creditag';
             case 'modabank':
                 return 'Modabank';
+            case 'zeitbank':
+                return 'ZeitBank';
 		}
 
         return "";
