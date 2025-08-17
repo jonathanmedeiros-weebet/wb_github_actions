@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-
-import Button from '../components/Button/Button.vue';
-import type { ButtonProps } from '@/components/Button/button.interface';
 import { fn } from 'storybook/test';
+
+import Button from '@/components/Button/Button.vue';
+import type { ButtonProps } from '@/components/Button/button.interface';
+import { tenantConfigs } from '@/composables/useTenantConfig/tenantMockup.constant';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
