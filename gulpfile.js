@@ -1862,3 +1862,12 @@ gulp.task('mamba.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('nitro4.bet', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "nitro4.bet",
+        banca: "NITRO4 BET",
+        styles: "",
+    });
+});
