@@ -249,12 +249,20 @@ export class AppComponent implements OnInit {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
 
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
-            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
-            this.auth.openRegisterV3Modal(); 
+            this.router.navigate(['/'], {
+                skipLocationChange: true,
+                state: { fromRegistration: true },
+                queryParams: this.route.snapshot.queryParams
+            });
+            this.auth.openRegisterV3Modal();
         }
 
         if (this.router.url.includes('/login')) {
-            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
+            this.router.navigate(['/'], {
+                skipLocationChange: true,
+                state: { fromRegistration: true },
+                queryParams: this.route.snapshot.queryParams
+            });
 
             this.modalService.open(LoginModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
