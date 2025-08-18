@@ -6,7 +6,21 @@ export interface TenantConfig {
     name: string;
     slug: string;
     logo: string;
-    footerSection: FooterSection
+    footerSection: FooterSection;
+    modules: {
+        betby: boolean;
+        sports: boolean;
+        liveSports: boolean;
+        acumulation: boolean;
+        casino: boolean;
+        liveCasino: boolean;
+        lottery: boolean;
+        virtualSports: boolean;
+        challenge: boolean;
+
+        customerMode: boolean
+        bettingAgentMode: boolean
+    };
 }
 
 export type TenantConfigs = Record<string, TenantConfig>;

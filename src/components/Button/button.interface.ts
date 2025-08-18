@@ -1,7 +1,7 @@
 
 export interface ButtonProps {
     label: string;
-    primary?: boolean;
-    size?: 'small' | 'medium' | 'large';
-    backgroundColor?: string;
+    color?: 'primary' | 'secondary' | 'tertiary';
+    variant?: 'solid' | 'outline' | 'clear';
+    size?: 'sm' | 'md' | 'lg';
 }

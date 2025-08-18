@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/vue3'
 import { tenantConfigs } from '../src/composables/useTenantConfig/tenantMockup.constant';
 import { TenantConfig } from '../src/composables/useTenantConfig/tenantConfig.interface';
 import "../src/assets/styles/index.scss";
+import { watch } from 'vue';
 
 const preview: Preview = {
   parameters: {
@@ -14,7 +15,6 @@ const preview: Preview = {
   },
   decorators: [
     (story, context) => {
-      console.log('tenant -> ', context.globals.tenant);
       const tenantConfig = tenantConfigs[context.globals.tenant];
 
       // Remove CSS antigo do tenant

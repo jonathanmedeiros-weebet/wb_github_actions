@@ -24,6 +24,20 @@ export const tenantConfigs: TenantConfigs = {
                 { src: new URL('@/assets/images/18+.png', import.meta.url).href, alt: 'Aviso - 01' },
                 { src: new URL('@/assets/images/therapy.png', import.meta.url).href, alt: 'Aviso - 04' },
             ]
+        },
+        modules: {
+            betby: true,
+            sports: true,
+            liveSports: true,
+            acumulation: true,
+            casino: true,
+            liveCasino: true,
+            lottery: true,
+            virtualSports: true,
+            challenge: true,
+
+            customerMode: true,
+            bettingAgentMode: true
         }
     },
     naipe: {
@@ -55,6 +69,20 @@ export const tenantConfigs: TenantConfigs = {
                 { src: new URL('@/assets/images/conheça-seus-limites.png', import.meta.url).href, alt: 'Aviso - 03' },
                 { src: new URL('@/assets/images/therapy.png', import.meta.url).href, alt: 'Aviso - 04' },
             ]
+        },
+        modules: {
+            betby: false,
+            sports: true,
+            liveSports: true,
+            acumulation: false,
+            casino: true,
+            liveCasino: true,
+            lottery: false,
+            virtualSports: false,
+            challenge: false,
+
+            customerMode: false,
+            bettingAgentMode: true
         }
     }
 };

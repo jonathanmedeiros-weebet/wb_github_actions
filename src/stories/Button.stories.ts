@@ -11,13 +11,14 @@ const meta = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
-    backgroundColor: { control: 'color' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    color: { control: 'select', options: ['primary', 'secondary', 'tertiary'] },
+    variant: { control: 'select', options: ['solid', 'outlined', 'clear'] },
   },
   args: {
     label: 'Entrar',
-    primary: true,
-    size: 'medium',
+    color: 'primary',
+    size: 'md',
     onClick: fn(),
   } as ButtonProps,
 } satisfies Meta<typeof Button>;
@@ -27,33 +28,61 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    primary: true,
+    color: 'primary',
+    variant: 'solid',
+    size: 'md',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    primary: false,
+    color: 'secondary',
+    variant: 'solid',
+    size: 'md',
+  },
+};
+
+export const Solid: Story = {
+  args: {
+    color: 'primary',
+    variant: 'solid',
+    size: 'md',
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    color: 'primary',
+    variant: 'outline',
+    size: 'md',
+  },
+};
+
+export const Clear: Story = {
+  args: {
+    color: 'primary',
+    variant: 'clear',
+    size: 'md',
   },
 };
 
 export const Large: Story = {
   args: {
     label: 'Grande',
-    size: 'large',
+    size: 'lg',
   },
 };
 
 export const Medium: Story = {
   args: {
     label: 'Médio',
-    size: 'medium',
+    size: 'md',
   },
 };
 
 export const Small: Story = {
   args: {
     label: 'Pequeno',
-    size: 'small',
+    size: 'sm',
   },
 };

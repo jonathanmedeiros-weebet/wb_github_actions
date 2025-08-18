@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">
+  <button type="button" :class="classes" @click="onClick">
     {{ label }}
   </button>
 </template>
@@ -10,7 +10,11 @@ import type { ButtonProps } from './button.interface';
 
 const props = withDefaults(
   defineProps<ButtonProps>(),
-  { primary: false }
+  {
+    color: 'primary',
+    variant: 'solid',
+    size: 'md'
+  }
 );
 
 const emit = defineEmits<{
@@ -19,16 +23,13 @@ const emit = defineEmits<{
 
 const classes = computed(() => ({
   'wee-button': true,
-  'wee-button--primary': props.primary,
-  'wee-button--secondary': !props.primary,
-  [`wee-button--${props.size || 'medium'}`]: true,
+  [`wee-button--${props.color || 'primary'}`]: true,
+  [`wee-button--${props.variant || 'solid'}`]: true,
+  [`wee-button--${props.size || 'md'}`]: true,
 }));
 
 const onClick = () => emit('click', 1);
 
-const style = computed(() => ({
-  backgroundColor: props.backgroundColor || undefined
-}));
 </script>
 
 <style scoped lang="scss">
@@ -43,29 +44,48 @@ const style = computed(() => ({
   border: 1px solid transparent;
   cursor: pointer;
 
-  &--primary {
-    background-color: var(--primary);
+  &--primary.wee-button--solid {
     color: var(--secondary);
+    background-color: var(--primary);
     border-color: var(--primary);
   }
 
-  &--secondary {
-    background-color: var(--secondary);
+  &--secondary.wee-button--solid {
     color: var(--primary);
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+  }
+
+  &--primary.wee-button--outline,
+  &--primary.wee-button--clear {
+    color: var(--primary);
+    background-color: var(--secondary);
     border-color: var(--primary);
   }
 
-  &--small {
+  &--secondary.wee-button--outline,
+  &--secondary.wee-button--clear {
+    color: var(--secondary);
+    background-color: var(--primary);
+    border-color: var(--secondary);
+  }
+
+  &--clear {
+    background-color: transparent;
+    border-color: transparent !important;
+  }
+
+  &--sm {
     padding: 10px 16px;
     font-size: 12px;
   }
 
-  &--medium {
+  &--md {
     padding: 11px 20px;
     font-size: 14px;
   }
 
-  &--large {
+  &--lg {
     padding: 12px 24px;
     font-size: 16px;
   }
