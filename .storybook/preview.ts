@@ -1,8 +1,7 @@
 import type { Preview } from '@storybook/vue3'
 import { tenantConfigs } from '../src/composables/useTenantConfig/tenantMockup.constant';
-import { TenantConfig } from '../src/composables/useTenantConfig/tenantConfig.interface';
+import { setProvideTenantConfig } from '../src/composables/useTenantConfig';
 import "../src/assets/styles/index.scss";
-import { watch } from 'vue';
 
 const preview: Preview = {
   parameters: {
@@ -28,12 +27,11 @@ const preview: Preview = {
       style.href = `/src/assets/styles/${tenantConfig.slug}/_colors.scss`;
       document.head.appendChild(style);
 
+      setProvideTenantConfig(tenantConfig);
+
       return {
         setup() {
           return { args: context.args };
-        },
-        provide() {
-          return { tenantConfig};
         },
         components: { story },
         template: `<story v-bind="args" />`,
