@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/vue3'
 import { tenantConfigs } from '../src/composables/useTenantConfig/tenantMockup.constant';
-import { setProvideTenantConfig } from '../src/composables/useTenantConfig';
+import { setTenantConfig } from '../src/composables/useTenantConfig';
 import "../src/assets/styles/index.scss";
 
 const preview: Preview = {
@@ -27,7 +27,7 @@ const preview: Preview = {
       style.href = `/src/assets/styles/${tenantConfig.slug}/_colors.scss`;
       document.head.appendChild(style);
 
-      setProvideTenantConfig(tenantConfig);
+      setTenantConfig(tenantConfig);
 
       return {
         setup() {

@@ -45,29 +45,29 @@ const onClick = () => emit('click', 1);
   cursor: pointer;
 
   &--primary.wee-button--solid {
-    color: var(--secondary);
-    background-color: var(--primary);
-    border-color: var(--primary);
+    color: var(--secondary, #ffffff);
+    background-color: var(--primary, #c71f2d);
+    border-color: var(--primary, #c71f2d);
   }
 
   &--secondary.wee-button--solid {
-    color: var(--primary);
-    background-color: var(--secondary);
-    border-color: var(--secondary);
+    color: var(--primary, #c71f2d);
+    background-color: var(--secondary, #ffffff);
+    border-color: var(--secondary, #ffffff);
   }
 
   &--primary.wee-button--outline,
   &--primary.wee-button--clear {
-    color: var(--primary);
-    background-color: var(--secondary);
-    border-color: var(--primary);
+    color: var(--primary, #c71f2d);
+    background-color: var(--secondary, #ffffff);
+    border-color: var(--primary, #c71f2d);
   }
 
   &--secondary.wee-button--outline,
   &--secondary.wee-button--clear {
-    color: var(--secondary);
-    background-color: var(--primary);
-    border-color: var(--secondary);
+    color: var(--secondary, #ffffff);
+    background-color: var(--primary, #c71f2d);
+    border-color: var(--secondary, #ffffff);
   }
 
   &--clear {

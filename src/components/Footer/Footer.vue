@@ -85,9 +85,9 @@ const btnDownloadAppImage = new URL('../../assets/images/baixe-aplicativo.png', 
 
 <style lang="scss" scoped>
 .footer {
-    background: var(--background);
+    background: var(--background, #ffffff);
     font-size: 14px;
-    color: var(--foreground);
+    color: var(--foreground, #101820);
     padding: 24px 16px;
     display: flex;
     flex-direction: column;
@@ -95,7 +95,7 @@ const btnDownloadAppImage = new URL('../../assets/images/baixe-aplicativo.png', 
 
     &__separator {
         height: 3px;
-        background-color: var(--separator);
+        background-color: var(--separator, #e5e5e5);
     }
 
     &__logo img {
@@ -106,7 +106,7 @@ const btnDownloadAppImage = new URL('../../assets/images/baixe-aplicativo.png', 
     }
 
     &__description {
-        color: var(--foreground);
+        color: var(--foreground, #101820);
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -136,7 +136,7 @@ const btnDownloadAppImage = new URL('../../assets/images/baixe-aplicativo.png', 
     }
 
     &__list li a {
-        color: var(--foreground);
+        color: var(--foreground, #101820);
         text-decoration: none;
     }
 
@@ -164,7 +164,7 @@ const btnDownloadAppImage = new URL('../../assets/images/baixe-aplicativo.png', 
 
     &__copy {
         text-align: center;
-        color: var(--foreground);
+        color: var(--foreground, #101820);
         font-size: 12px;
         font-style: normal;
         font-weight: 400;

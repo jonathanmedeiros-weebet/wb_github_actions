@@ -86,7 +86,7 @@ const onRegister = () => {
     align-items: center;
     justify-content: space-between;
     padding: 0.75rem 2rem;
-    background-color: var(--background);
+    background-color: var(--background, #ffffff);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
     &__logo img {
@@ -101,17 +101,17 @@ const onRegister = () => {
 
     &__menu li a {
         text-decoration: none;
-        color: var(--foreground);
+        color: var(--foreground, #101820);
         font-weight: 500;
         transition: color 0.2s;
     }
 
     &__menu li a:hover {
-        color: var(--primary);
+        color: var(--primary, #c71f2d);
     }
 
     &__menu li.active a {
-        color: var(--primary);
+        color: var(--primary, #c71f2d);
         font-weight: 600;
     }
 
