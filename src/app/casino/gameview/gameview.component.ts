@@ -1074,15 +1074,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.renderer.setStyle(gameFrame, 'height', `calc(100% - ${newHeight}px)`);
                 });
             }
-        }
-
-        if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
-            if (headerOptions) {
-                this.renderer.setStyle(headerOptions, 'margin', '0 18px');
-            }
-        }
-
-        if (this.isHorizontalMobile) {
+        } else if (this.isHorizontalMobile) {
             this.disableHeader();
             if (gameView) {
                 this.renderer.setStyle(gameView, 'width', '100dvw');
@@ -1095,6 +1087,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.renderer.setStyle(gameFrame, 'height', 'calc(100dvh - 50px)');
             }
         }
+
+        if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
+            if (headerOptions) {
+                this.renderer.setStyle(headerOptions, 'margin', '0 18px');
+            }
+        }
+
     }
 
     private getGameList() {
