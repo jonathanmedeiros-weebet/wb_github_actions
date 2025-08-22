@@ -1,9 +1,9 @@
 name: Deploy Front - Nuxt to S3 + CloudFront
 
 on:
-  push:
-    branches:
-      - front   # ou branch que você usa para deploy
+  # push:
+  #   branches:
+  #     - front   # ou branch que você usa para deploy
   workflow_dispatch: # permite rodar manualmente pelo Actions
 
 jobs:
