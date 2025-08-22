@@ -23,7 +23,9 @@ jobs:
 
       # 3. Instalar dependências
       - name: Install dependencies
-        run: npm install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
 
       # 4. Build e Generate do Nuxt
       - name: Build Nuxt
