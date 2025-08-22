@@ -3,18 +3,21 @@ import {
     LOCALE_ID,
     APP_INITIALIZER,
     DEFAULT_CURRENCY_CODE,
-    isDevMode,
 } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { registerLocaleData } from "@angular/common";
-import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import {
+    HttpClient,
+    HTTP_INTERCEPTORS,
+    provideHttpClient,
+    withInterceptorsFromDi
+} from "@angular/common/http";
 import { environment } from "../environments/environment";
 import { NgxPaginationModule } from "ngx-pagination";
 import { SharedModule } from "./shared/shared.module";
 
 import ptBr from "@angular/common/locales/pt";
-
 registerLocaleData(ptBr);
 
 import moment from "moment";
@@ -35,7 +38,10 @@ import { ToastrModule } from "ngx-toastr";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 
 // Translation Modules
-import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import {
+    TranslateLoader,
+    TranslateModule
+} from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import {
     GoogleLoginProvider,
@@ -43,7 +49,6 @@ import {
     SocialLoginModule,
 } from "@abacritt/angularx-social-login";
 import { BetbyModule } from "./betby/betby.module";
-import { ServiceWorkerModule } from "@angular/service-worker";
 
 // Interceptors
 import { AuthInterceptor } from "./auth/auth-interceptor.service";
@@ -91,8 +96,11 @@ export function googleFactory(service: ParametrosLocaisService) {
     } as SocialAuthServiceConfig;
 }
 
-@NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+@NgModule({
+    declarations: [AppComponent],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
         BrowserAnimationsModule,
         TranslateModule.forRoot({
             loader: {
@@ -114,12 +122,8 @@ export function googleFactory(service: ParametrosLocaisService) {
         }),
         NgxPaginationModule,
         SharedModule,
-        ServiceWorkerModule.register("ngsw-worker.js", {
-            enabled: !isDevMode(),
-            // Register the ServiceWorker as soon as the application is stable
-            // or after 30 seconds (whichever comes first).
-            registrationStrategy: "registerWhenStable:30000",
-        })], providers: [
+    ],
+    providers: [
         APP_TOKENS,
         {
             provide: "SocialAuthServiceConfig",
@@ -127,8 +131,9 @@ export function googleFactory(service: ParametrosLocaisService) {
             deps: [ParametrosLocaisService],
         },
         provideHttpClient(withInterceptorsFromDi()),
-    ] })
-export class AppModule {}
+    ]
+})
+export class AppModule { }
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     return new TranslateHttpLoader(http, "./locale/i18n/", ".json");

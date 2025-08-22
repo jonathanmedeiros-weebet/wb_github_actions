@@ -34,6 +34,7 @@
                           "@angular/localize/init"
                         ],
                         "assets": [
+                          "src/ngsw-worker-minimal.js",
                           "src/assets",
                           "src/locale",
                           "src/favicon.ico",
