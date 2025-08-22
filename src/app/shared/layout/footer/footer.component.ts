@@ -1,15 +1,14 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { config } from '../../config';
-import {AuthService} from '../../services/auth/auth.service';
-import {ParametrosLocaisService} from '../../services/parametros-locais.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { CartaoCadastroModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../modals';
 import { pwaInstallHandler } from 'pwa-install-handler';
-import { ActivatedRoute, Router } from '@angular/router';
 
 declare let anj_cd823ed6_bffb_4764_9e1b_05566f369c8c: any;
 
@@ -51,7 +50,6 @@ export class FooterComponent implements OnInit, AfterViewInit {
     sharedUrl: string;
     linkYoutube;
     isToTopBtnVisible;
-    displayPwaInstallButton = false;
     hasCuracao = false;
     hasAnjouan = false;
     hasBodo = false;
@@ -64,7 +62,8 @@ export class FooterComponent implements OnInit, AfterViewInit {
     fullPage = true;
     computedStyle;
     licences = [];
-    allowDownloadCustomerApp;
+    public allowDownloadCustomerApp: boolean = false;
+    public displayPwaInstallButton: boolean = false;
 
     constructor(
         private authService: AuthService,
@@ -98,7 +97,6 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.linkInstagram = this.paramsLocais.getOpcoes().linkInstagram;
         this.linkLinkedin = this.paramsLocais.getOpcoes().linkLinkedin;
         this.linkYoutube = this.paramsLocais.getOpcoes().linkYoutube;
-
         this.hasCuracao = this.paramsLocais.getOpcoes().enable_licence_curacao;
         this.hasCuracaoTemporary = this.paramsLocais.getOpcoes().enable_licence_curacao_temporary;
         this.hasAnjouan = this.paramsLocais.getOpcoes().enable_licence_anjouan;

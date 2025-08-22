@@ -39,6 +39,7 @@ export * from './shared/services/promocoes.service';
 export * from './shared/services/cambistas/cambista.service';
 export * from './shared/services/clientes/cliente.service';
 export * from './shared/services/account-verification.service';
+export * from './shared/services/service-worker.service';
 
 /* Utils Services */
 export * from './shared/services/utils/error.service';
