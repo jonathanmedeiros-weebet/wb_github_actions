@@ -11,6 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug Secrets (sem mostrar valor)
+        run: |
+          if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ]; then
+            echo "❌ AWS_ACCESS_KEY_ID está vazio"
+          else
+            echo "✅ AWS_ACCESS_KEY_ID está definido"
+          fi
+          
       # 1. Checkout do código
       - name: Checkout repository
         uses: actions/checkout@v3
