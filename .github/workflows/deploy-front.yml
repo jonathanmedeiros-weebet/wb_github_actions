@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main   # ou branch que você usa para deploy
+  workflow_dispatch: # permite rodar manualmente pelo Actions
 
 jobs:
   deploy:
