@@ -11,14 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug Secrets (sem mostrar valor)
-        run: |
-          if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ]; then
-            echo "❌ AWS_ACCESS_KEY_ID está vazio"
-          else
-            echo "✅ AWS_ACCESS_KEY_ID está definido"
-          fi
-          
       # 1. Checkout do código
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -53,6 +45,14 @@ jobs:
       - name: Sync to S3
         run: aws s3 sync .output/public s3://${{ secrets.S3_BUCKET }}/front.weebet.tech --delete
 
+      - name: Debug CloudFront ID
+        run: echo "CloudFront ID: ${FRONT_CLOUDFRONT_DISTRIBUTION_ID:0:4}****"
+        env:
+          FRONT_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }}
+
       # 7. Invalidar cache no CloudFront
-      - name: Invalidate CloudFront
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
