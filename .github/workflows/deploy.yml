@@ -48,7 +48,7 @@ jobs:
       # 7. Invalidar cache no CloudFront
       - name: Invalidate CloudFront cache
         run: |
-          aws cloudfront create-invalidation \
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} \
             --invalidation-batch '{
               "Paths": {
@@ -56,4 +56,14 @@ jobs:
                 "Items": ["/*"]
               },
               "CallerReference": "'"$(date +%s)"'"
-            }'
+            }' \
+            --query 'Invalidation.Id' \
+            --output text)
+
+          echo "Aguardando invalidação concluir... ID=$INVALIDATION_ID"
+
+          aws cloudfront wait invalidation-completed \
+            --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --id $INVALIDATION_ID
+
+          echo "✅ Invalidação concluída com sucesso!"
