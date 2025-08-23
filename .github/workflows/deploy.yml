@@ -42,6 +42,12 @@ jobs:
       - name: Sync to S3
         run: aws s3 sync .output/public s3://${{ secrets.S3_BUCKET }}/front.weebet.tech --delete
 
+      - name: Debug CloudFront Command
+        run: echo "aws cloudfront create-invalidation --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} --paths /*"
+
       # 7. Invalidar cache no CloudFront
       - name: Invalidate CloudFront cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --invalidation-batch "{\"Paths\":{\"Quantity\":1,\"Items\":[\"/*\"]},\"CallerReference\":\"$(date +%s)\"}"
