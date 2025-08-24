@@ -1,4 +1,4 @@
-name: Deploy Front - Nuxt to S3 + CloudFront
+name: Deploy Front - Storybook/Vue3 to S3 + CloudFront
 
 on:
   workflow_dispatch: # permite rodar manualmente pelo Actions
@@ -24,11 +24,9 @@ jobs:
           rm -rf node_modules package-lock.json
           npm install --legacy-peer-deps
 
-      # 4. Build e Generate do Nuxt
-      - name: Build Nuxt
-        run: |
-          npm run build
-          npm run generate
+      # 4. Build e Generate do Storybook
+      - name: Build Storybook
+        run: npm run storybook:build
 
       # 5. Configurar credenciais da AWS
       - name: Configure AWS credentials
@@ -40,16 +38,13 @@ jobs:
 
       # 6. Deploy para S3
       - name: Sync to S3
-        run: aws s3 sync .output/public s3://${{ secrets.S3_BUCKET }}/front.weebet.tech --delete
-
-      - name: Debug CloudFront Command
-        run: echo "aws cloudfront create-invalidation --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} --paths /*"
+        run: aws s3 sync ./storybook-static s3://${{ secrets.S3_BUCKET }}/storybook.weebet.tech --delete
 
       # 7. Invalidar cache no CloudFront
       - name: Invalidate CloudFront cache
         run: |
           INVALIDATION_ID=$(aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id ${{ secrets.STORYBOOK_CLOUDFRONT_DISTRIBUTION_ID }} \
             --invalidation-batch '{
               "Paths": {
                 "Quantity": 1,
@@ -63,7 +58,7 @@ jobs:
           echo "Aguardando invalidação concluir... ID=$INVALIDATION_ID"
 
           aws cloudfront wait invalidation-completed \
-            --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id ${{ secrets.STORYBOOK_CLOUDFRONT_DISTRIBUTION_ID }} \
             --id $INVALIDATION_ID
 
           echo "✅ Invalidação concluída com sucesso!"
