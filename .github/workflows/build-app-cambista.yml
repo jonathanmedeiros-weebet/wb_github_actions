@@ -75,6 +75,12 @@ jobs:
 
       - name: Prepare build
         run: gulp prepare-build
+        env:
+          APP_ID: ${{ github.event.inputs.APP_ID }}
+          CLIENT_CENTER_URL: ${{ github.event.inputs.CLIENT_CENTER_URL }}
+          CLIENT_NAME: ${{ github.event.inputs.CLIENT_NAME }}
+          APP_SLUG: ${{ github.event.inputs.APP_SLUG }}
+          APP_SPLASH_COLOR: ${{ github.event.inputs.APP_SPLASH_COLOR }}
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
