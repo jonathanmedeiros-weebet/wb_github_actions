@@ -40,7 +40,7 @@ jobs:
 
       # 6. Deploy para S3
       - name: Sync to S3
-        run: aws s3 sync .output/public s3://${{ secrets.S3_BUCKET }}/front.weebet.tech --delete
+        run: aws s3 sync .output/public s3://${{ secrets.S3_BUCKET }}/front.weebet.tech --delete --acl public-read
 
       - name: Debug CloudFront Command
         run: echo "aws cloudfront create-invalidation --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} --paths /*"

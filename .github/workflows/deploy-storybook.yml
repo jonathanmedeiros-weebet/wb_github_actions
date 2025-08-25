@@ -38,7 +38,7 @@ jobs:
 
       # 6. Deploy para S3
       - name: Sync to S3
-        run: aws s3 sync ./storybook-static s3://${{ secrets.S3_BUCKET }}/storybook.weebet.tech --delete
+        run: aws s3 sync ./storybook-static s3://${{ secrets.S3_BUCKET }}/storybook.weebet.tech --delete --acl public-read
 
       # 7. Invalidar cache no CloudFront
       - name: Invalidate CloudFront cache

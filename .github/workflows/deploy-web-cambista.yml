@@ -24,8 +24,8 @@ jobs:
           rm -rf node_modules package-lock.json
           npm install --legacy-peer-deps
 
-      # 4. Build e Generate do Nuxt
-      - name: Build Nuxt
+      # 4. Build e Generate do Vue
+      - name: Build Vue
         run: npm run build:s3
 
       # 5. Configurar credenciais da AWS
@@ -38,7 +38,7 @@ jobs:
 
       # 6. Deploy para S3
       - name: Sync to S3
-        run: aws s3 sync ./dist s3://${{ secrets.S3_BUCKET }}/app-sandbox.weebet.tech --delete
+        run: aws s3 sync ./dist s3://${{ secrets.S3_BUCKET }}/app-sandbox.weebet.tech --delete --acl public-read
 
       # 7. Invalidar cache no CloudFront
       - name: Invalidate CloudFront cache
