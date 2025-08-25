@@ -3,10 +3,6 @@ name: Build/Generate App
 on:
   workflow_dispatch:
     inputs:
-      BRANCH:
-        description: 'Branch to build'
-        required: true
-        default: 'main'
       APP_ID:
         description: 'Application ID'
         required: true
