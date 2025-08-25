@@ -1,0 +1,69 @@
+name: Deploy Front - Nuxt to S3 + CloudFront
+
+on:
+  workflow_dispatch: # permite rodar manualmente pelo Actions
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout do código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configurar Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.19.0
+
+      # 3. Instalar dependências
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
+
+      # 4. Build e Generate do Nuxt
+      - name: Build Nuxt
+        run: |
+          npm run build
+          npm run generate
+
+      # 5. Configurar credenciais da AWS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # 6. Deploy para S3
+      - name: Sync to S3
+        run: aws s3 sync .output/public s3://${{ secrets.S3_BUCKET }}/front.weebet.tech --delete
+
+      - name: Debug CloudFront Command
+        run: echo "aws cloudfront create-invalidation --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} --paths /*"
+
+      # 7. Invalidar cache no CloudFront
+      - name: Invalidate CloudFront cache
+        run: |
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --invalidation-batch '{
+              "Paths": {
+                "Quantity": 1,
+                "Items": ["/*"]
+              },
+              "CallerReference": "'"$(date +%s)"'"
+            }' \
+            --query 'Invalidation.Id' \
+            --output text)
+
+          echo "Aguardando invalidação concluir... ID=$INVALIDATION_ID"
+
+          aws cloudfront wait invalidation-completed \
+            --distribution-id ${{ secrets.FRONT_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --id $INVALIDATION_ID
+
+          echo "✅ Invalidação concluída com sucesso!"
