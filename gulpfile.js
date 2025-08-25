@@ -1862,3 +1862,12 @@ gulp.task('nitro4.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cassinopro.bet', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "cassinopro.bet",
+        banca: "CASSINO PRO",
+        styles: "",
+    });
+});

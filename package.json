@@ -199,7 +199,8 @@
     "cr7bet.online": "gulp cr7bet.online",
     "starkbet.casino": "gulp starkbet.casino",
     "mamba.bet": "gulp mamba.bet",
-    "nitro4.bet": "gulp nitro4.bet"
+    "nitro4.bet": "gulp nitro4.bet",
+    "cassinopro.bet": "gulp cassinopro.bet"
   },
   "private": true,
   "dependencies": {
