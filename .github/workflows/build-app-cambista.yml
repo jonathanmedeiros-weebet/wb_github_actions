@@ -1,0 +1,105 @@
+name: Build/Generate App
+
+on:
+  workflow_dispatch:
+    inputs:
+      APP_ID:
+        description: 'Application ID'
+        required: true
+      CLIENT_CENTER_URL:
+        description: 'Client Center URL'
+        required: true
+      CLIENT_NAME:
+        description: 'Client Name'
+        required: true
+      APP_SLUG:
+        description: 'App Slug'
+        required: true
+      APP_SPLASH_COLOR:
+        description: 'App Splash Color'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:stable
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Cache Android SDK
+        uses: actions/cache@v3
+        with:
+          path: /opt/android-sdk
+          key: ${{ runner.os }}-androidsdk
+          restore-keys: |
+            ${{ runner.os }}-androidsdk
+
+      - name: Prepare build
+        run: gulp prepare-build
+        env:
+          APP_ID: ${{ github.event.inputs.APP_ID }}
+          CLIENT_CENTER_URL: ${{ github.event.inputs.CLIENT_CENTER_URL }}
+          CLIENT_NAME: ${{ github.event.inputs.CLIENT_NAME }}
+          APP_SLUG: ${{ github.event.inputs.APP_SLUG }}
+          APP_SPLASH_COLOR: ${{ github.event.inputs.APP_SPLASH_COLOR }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.10'
+
+      - name: Get Flutter dependencies
+        run: flutter pub get
+
+      - name: Generate launcher icons
+        run: flutter pub run flutter_launcher_icons:main
+
+      - name: Generate native splash screen
+        run: flutter pub run flutter_native_splash:create
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Rename APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app.apk -f
+
+      - name: Upload to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: aws s3 cp ./build/app/outputs/flutter-apk/app.apk ${{ secrets.S3_BUCKET }}/apk.weebet.tech/app.apk --acl public-read
