@@ -85,10 +85,16 @@ function tasks(done, config) {
         environment = config.environment;
     }
 
-    gulp.src(['/'])
-        .pipe(exec(`ng build --configuration ${environment}`, options))
-        .pipe(exec('cd dist/browser && tar -czf tosend.tar * && scp -r -i ~/.keystore/weebet.pem tosend.tar ubuntu@' + config.server + ':/var/www/prod/bets/' + config.host + '/ && ssh -i ~/.keystore/weebet.pem ubuntu@' + config.server + ' sh /var/www/prod/bets/update_frontend.sh ' + config.host, options))
-        .pipe(exec.reporter(reportOptions));
+    if (config.server && config.server != 's3') {
+        gulp.src(['/'])
+            .pipe(exec(`ng build --configuration ${environment}`, options))
+            .pipe(exec('cd dist/browser && tar -czf tosend.tar * && scp -r -i ~/.keystore/weebet.pem tosend.tar ubuntu@' + config.server + ':/var/www/prod/bets/' + config.host + '/ && ssh -i ~/.keystore/weebet.pem ubuntu@' + config.server + ' sh /var/www/prod/bets/update_frontend.sh ' + config.host, options))
+            .pipe(exec.reporter(reportOptions));
+    } else {
+        gulp.src(['/'])
+            .pipe(exec(`ng build --configuration ${environment}`, options))
+            .pipe(exec.reporter(reportOptions));
+    }
 
     done();
 }
@@ -1352,6 +1358,15 @@ gulp.task('pinbet.bet', function (done) {
         banca: "PINBET",
         styles: "",
         xtremepush_sdk: "l5zlJi7majbIVZTxwtIgEYppdmK4KazO"
+    });
+});
+
+gulp.task('pin.bet.br', function (done) {
+    tasks(done, {
+        server: "s3",
+        host: "pin.bet.br",
+        banca: "PINBET",
+        styles: "",
     });
 });
 
